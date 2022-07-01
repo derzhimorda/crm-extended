@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LayoutService } from '../../core/layout.service';
 import {NgbDropdownConfig} from "@ng-bootstrap/ng-bootstrap";
+import {Observable, Subscription} from "rxjs";
+import {AuthService, UserType} from "../../../../modules/auth";
 
 @Component({
   selector: 'app-topbar',
@@ -14,10 +16,17 @@ export class TopbarComponent implements OnInit {
   toolbarUserAvatarHeightClass = 'symbol-30px symbol-md-40px';
   toolbarButtonIconSizeClass = 'svg-icon-1';
   headerLeft: string = 'menu';
+  user$: Observable<UserType>;
+  private unsubscribe: Subscription[] = [];
 
-  constructor(private layout: LayoutService) {}
+  constructor(private layout: LayoutService, private auth: AuthService,) {}
 
   ngOnInit(): void {
+    this.user$ = this.auth.currentUserSubject.asObservable();
     this.headerLeft = this.layout.getProp('header.left') as string;
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
 }

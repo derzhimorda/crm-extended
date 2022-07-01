@@ -103,24 +103,26 @@
 <!--</div>-->
 
 <!-- begin::User -->
-<div
-  class="d-flex align-items-center"
-  [ngClass]="toolbarButtonMarginClass"
-  id="kt_header_user_menu_toggle"
->
-  <!-- begin::Toggle -->
+<ng-container *ngIf="user$ | async as _user">
   <div
-    class="cursor-pointer symbol"
-    [ngClass]="toolbarUserAvatarHeightClass"
-    ngbDropdown
+    class="d-flex align-items-center"
+    [ngClass]="toolbarButtonMarginClass"
+    id="kt_header_user_menu_toggle"
   >
-    <img src="./assets/media/avatars/300-1.jpg" alt="metronic" ngbDropdownToggle id="dropdownUserMenu"/>
-    <div ngbDropdownMenu aria-labelledby="dropdownUserMenu">
-      <app-user-inner></app-user-inner>
+    <!-- begin::Toggle -->
+    <div
+      class="cursor-pointer symbol"
+      [ngClass]="toolbarUserAvatarHeightClass"
+      ngbDropdown
+    >
+      <img src="{{_user.pic}}" alt="metronic" ngbDropdownToggle id="dropdownUserMenu"/>
+      <div ngbDropdownMenu aria-labelledby="dropdownUserMenu">
+        <app-user-inner></app-user-inner>
+      </div>
     </div>
+    <!-- end::Toggle  -->
   </div>
-  <!-- end::Toggle  -->
-</div>
+</ng-container>
 <!-- end::User -->
 
 <ng-container *ngIf="headerLeft === 'menu'">

@@ -4,7 +4,7 @@
       <div class="d-flex flex-wrap flex-sm-nowrap mb-3">
         <div class="me-7 mb-4">
           <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-            <img src="./assets/media/avatars/300-1.jpg" alt="Metronic" />
+            <img src="{{_user.pic}}" alt="Profile avatar" />
             <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
           </div>
         </div>
@@ -53,14 +53,15 @@
                   data-bs-toggle="modal"
                   data-bs-target="#kt_modal_upgrade_plan"
                 >
-                  Логистика
+                  Полный доступ
                 </a>
               </div>
 
               <div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
                 <a class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2 cursor-pointer">
                   <span [inlineSVG]="'./assets/media/icons/duotune/communication/com006.svg'" class="svg-icon svg-icon-4 me-1"></span>
-                    <ng-container *ngIf="_user.roles[0] == 1">Менеджер</ng-container>
+                    <ng-container *ngIf="_user.roles[0] == 1">Админ</ng-container>
+                    <ng-container *ngIf="_user.roles[0] == 4">Менеджер</ng-container>
                   </a>
                 <a *ngIf="_user.address?.city" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2 cursor-pointer">
                    <span [inlineSVG]="'./assets/media/icons/duotune/general/gen018.svg'" class="svg-icon svg-icon-4 me-1"></span>
@@ -230,7 +231,7 @@
           <li class="nav-item">
             <a
               class="nav-link text-active-primary me-6"
-              routerLink="/crafted/pages/profile/overview"
+              routerLink="/users/{{_user.id}}/overview"
               routerLinkActive="active"
             >
               Информация
@@ -239,7 +240,7 @@
           <li class="nav-item">
             <a
               class="nav-link text-active-primary me-6"
-              routerLink="/crafted/pages/profile/projects"
+              routerLink="/users/{{_user.id}}/settings"
               routerLinkActive="active"
             >
               Настройки
@@ -277,3 +278,5 @@
     </div>
   </div>
 </ng-container>
+
+<router-outlet></router-outlet>
