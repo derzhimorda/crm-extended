@@ -43,10 +43,10 @@ export class UsersTable {
         phone: false,
       },
       address: {
-        addressLine: 'L-12-20 Vertex, Cybersquare',
-        city: 'San Francisco',
-        state: 'California',
-        postCode: '45000',
+        addressLine: 'Wienzierler Str 33-6, 4560 Kirchdorf',
+        city: 'Kirchdorf',
+        state: 'OberOstereich',
+        postCode: '4560',
       },
       socialNetworks: {
         linkedIn: 'https://linkedin.com/admin',
