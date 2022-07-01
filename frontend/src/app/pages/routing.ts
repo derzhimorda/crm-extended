@@ -54,11 +54,6 @@ const Routing: Routes = [
       import('./documents/invoices/invoices.module').then((m) => m.InvoicesModule),
   },
   {
-    path: 'invoices/:id',
-    loadChildren: () =>
-      import('./documents/invoices/invoice/invoice.module').then((m) => m.InvoiceModule),
-  },
-  {
     path: 'users',
     loadChildren: () =>
       import('./users/users.module').then((m) => m.UsersModule),
