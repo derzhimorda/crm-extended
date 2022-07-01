@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { LayoutService } from '../../core/layout.service';
+import {NgbDropdownConfig} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-topbar',
   templateUrl: './topbar.component.html',
   styleUrls: ['./topbar.component.scss'],
+  providers: [NgbDropdownConfig]
 })
 export class TopbarComponent implements OnInit {
   toolbarButtonMarginClass = 'ms-1 ms-lg-3';

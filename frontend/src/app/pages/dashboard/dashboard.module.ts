@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { WidgetsModule } from '../../_metronic/partials';
+import {NgbDropdownModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -15,6 +16,7 @@ import { WidgetsModule } from '../../_metronic/partials';
       },
     ]),
     WidgetsModule,
+    NgbDropdownModule,
   ],
 })
 export class DashboardModule {}

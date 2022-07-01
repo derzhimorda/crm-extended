@@ -1,0 +1,1395 @@
+<div class="row g-7">
+  <div class="col-lg-12 col-xl-8">
+    <!--begin::Contacts-->
+    <div class="card">
+      <!--begin::Card header-->
+      <div class="card-header border-0 pt-6">
+        <!--begin::Card title-->
+        <div class="card-title">
+          <!--begin::Search-->
+          <div class="d-flex align-items-center position-relative my-1">
+            <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+            <span class="svg-icon svg-icon-1 position-absolute ms-6">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor"></rect>
+                <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor"></path>
+              </svg>
+            </span>
+            <!--end::Svg Icon-->
+            <input [formControl]="filter" type="text" data-kt-customer-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="{{'CLIENTS.SEARCH_CUSTOMERS' | translate}}">
+          </div>
+          <!--end::Search-->
+        </div>
+        <!--begin::Card title-->
+        <!--begin::Card toolbar-->
+        <div class="card-toolbar">
+          <!--begin::Toolbar-->
+          <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
+
+            <div ngbDropdown>
+              <!--begin::Filter-->
+              <button type="button" class="btn btn-light-primary me-3" ngbDropdownToggle >
+                <!--begin::Svg Icon-->
+                <span class="svg-icon svg-icon-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="currentColor"></path>
+                    </svg>
+                  </span>
+                <!--end::Svg Icon-->
+                {{'GENERAL.FILTER' | translate}}
+              </button>
+              <!--begin::Menu 1-->
+              <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" id="kt-toolbar-filter" ngbDropdownMenu aria-labelledby="dropdownConfig">
+                <!--begin::Header-->
+                <div class="px-7 py-5">
+                  <div class="fs-4 text-dark fw-bolder">Опции фильтра</div>
+                </div>
+                <!--end::Header-->
+                <!--begin::Separator-->
+                <div class="separator border-gray-200"></div>
+                <!--end::Separator-->
+                <!--begin::Content-->
+                <div class="px-7 py-5">
+                  <!--begin::Input group-->
+                  <div class="mb-10">
+                    <!--begin::Label-->
+                    <label class="form-label fs-5 fw-bold mb-3">Статус:</label>
+                    <!--end::Label-->
+                    <!--begin::Input-->
+                    <ng-select [items]="statuses"
+                     bindLabel="label"
+                     bindValue="id"
+                     [formControl]="filterStatus"
+                               (change)="filterOptions($event)"
+                    #filterClients>
+                    </ng-select>
+                    <!--end::Input-->
+                  </div>
+                  <!--end::Input group-->
+                  <!--begin::Actions-->
+<!--                  <div class="d-flex justify-content-end">-->
+<!--                    <button type="reset" class="btn btn-light btn-active-light-primary me-2">Сбросить</button>-->
+<!--                    <button type="submit" class="btn btn-primary" (click)="filterClientApply()">Применить</button>-->
+<!--                  </div>-->
+                  <!--end::Actions-->
+                </div>
+                <!--end::Content-->
+              </div>
+              <!--end::Menu 1-->
+            </div>
+
+
+            <!--end::Filter-->
+            <!--begin::Export-->
+<!--            <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_customers_export_modal">-->
+<!--              &lt;!&ndash;begin::Svg Icon | path: icons/duotune/arrows/arr078.svg&ndash;&gt;-->
+<!--              <span class="svg-icon svg-icon-2">-->
+<!--                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">-->
+<!--                  <rect opacity="0.3" x="12.75" y="4.25" width="12" height="2" rx="1" transform="rotate(90 12.75 4.25)" fill="currentColor"></rect>-->
+<!--                  <path d="M12.0573 6.11875L13.5203 7.87435C13.9121 8.34457 14.6232 8.37683 15.056 7.94401C15.4457 7.5543 15.4641 6.92836 15.0979 6.51643L12.4974 3.59084C12.0996 3.14332 11.4004 3.14332 11.0026 3.59084L8.40206 6.51643C8.0359 6.92836 8.0543 7.5543 8.44401 7.94401C8.87683 8.37683 9.58785 8.34458 9.9797 7.87435L11.4427 6.11875C11.6026 5.92684 11.8974 5.92684 12.0573 6.11875Z" fill="currentColor"></path>-->
+<!--                  <path d="M18.75 8.25H17.75C17.1977 8.25 16.75 8.69772 16.75 9.25C16.75 9.80228 17.1977 10.25 17.75 10.25C18.3023 10.25 18.75 10.6977 18.75 11.25V18.25C18.75 18.8023 18.3023 19.25 17.75 19.25H5.75C5.19772 19.25 4.75 18.8023 4.75 18.25V11.25C4.75 10.6977 5.19771 10.25 5.75 10.25C6.30229 10.25 6.75 9.80228 6.75 9.25C6.75 8.69772 6.30229 8.25 5.75 8.25H4.75C3.64543 8.25 2.75 9.14543 2.75 10.25V19.25C2.75 20.3546 3.64543 21.25 4.75 21.25H18.75C19.8546 21.25 20.75 20.3546 20.75 19.25V10.25C20.75 9.14543 19.8546 8.25 18.75 8.25Z" fill="#C4C4C4"></path>-->
+<!--                </svg>-->
+<!--              </span>-->
+<!--              &lt;!&ndash;end::Svg Icon&ndash;&gt;-->
+<!--              {{'GENERAL.EXPORT' | translate}}-->
+<!--            </button>-->
+            <!--end::Export-->
+            <!--begin::Add customer-->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">{{'CLIENTS.ADD_CUSTOMER' | translate}}</button>
+            <div class="modal fade" id="kt_modal_add_customer" tabindex="-1" aria-hidden="true">
+              <!--begin::Modal dialog-->
+              <div class="modal-dialog modal-dialog-centered mw-650px">
+                <!--begin::Modal content-->
+                <div class="modal-content">
+                  <!--begin::Form-->
+                  <form class="form fv-plugins-bootstrap5 fv-plugins-framework" action="#" id="kt_modal_add_customer_form" [formGroup]="clientForm">
+                    <!--begin::Modal header-->
+                    <div class="modal-header" id="kt_modal_add_customer_header">
+                      <!--begin::Modal title-->
+                      <h2 class="fw-bolder">Добавление / редактирование клиента</h2>
+                      <!--end::Modal title-->
+                      <!--begin::Close-->
+                      <div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal" aria-label="Закрыть">
+                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                        <span class="svg-icon svg-icon-1">
+															<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor"></rect>
+																<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor"></rect>
+															</svg>
+														</span>
+                        <!--end::Svg Icon-->
+                      </div>
+                      <!--end::Close-->
+                    </div>
+                    <!--end::Modal header-->
+                    <!--begin::Modal body-->
+                    <div class="modal-body py-10 px-lg-17">
+                      <!--begin::Scroll-->
+                      <div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px" style="max-height: 205px;">
+                        <div class="mb-7">
+                          <!--begin::Label-->
+                          <label class="fs-6 fw-bold mb-2">
+                            <span>Фото/Аватар</span>
+                          </label>
+                          <!--end::Label-->
+                          <!--begin::Image input wrapper-->
+                          <div class="mt-1">
+                            <!--begin::Image input-->
+                            <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('/assets/media/svg/avatars/blank.svg')">
+                              <!--begin::Preview existing avatar-->
+                              <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{miscAvatar}})"></div>
+                              <!--end::Preview existing avatar-->
+                              <!--begin::Edit-->
+                              <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="Change avatar">
+                                <i class="bi bi-pencil-fill fs-7"></i>
+                                <!--begin::Inputs-->
+                                <input type="file" accept=".png, .jpg, .jpeg" (change)="loadFile($event)" name="files[]">
+                                <input type="hidden" name="avatar_remove">
+                                <!--end::Inputs-->
+                              </label>
+                              <!--end::Edit-->
+                              <!--begin::Cancel-->
+                              <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="Cancel avatar">
+                                <i class="bi bi-x fs-2"></i>
+                              </span>
+                              <!--end::Cancel-->
+                              <!--begin::Remove-->
+                              <span (click)="getRandProfileImage()" class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="Remove avatar">
+                                <i class="bi bi-x fs-2"></i>
+                              </span>
+                              <!--end::Remove-->
+                            </div>
+                            <!--end::Image input-->
+                          </div>
+                          <!--end::Image input wrapper-->
+                        </div>
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7 fv-plugins-icon-container">
+                          <!--begin::Label-->
+                          <label class="required fs-6 fw-bold mb-2">Имя Фамилия</label>
+                          <!--end::Label-->
+                          <!--begin::Input-->
+                          <input type="text" class="form-control form-control-solid" placeholder="" name="name" formControlName="client_name">
+                          <!--end::Input-->
+                          <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7 fv-plugins-icon-container">
+                          <!--begin::Label-->
+                          <label class="fs-6 fw-bold mb-2">
+                            <span class="required">E-mail</span>
+                          </label>
+                          <!--end::Label-->
+                          <!--begin::Input-->
+                          <input type="email" class="form-control form-control-solid" placeholder="" name="email" formControlName="email">
+                          <!--end::Input-->
+                          <div class="fv-plugins-message-container invalid-feedback"></div>
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7 fv-plugins-icon-container">
+                          <!--begin::Label-->
+                          <label class="fs-6 fw-bold mb-2 required">Номер телефона</label>
+                          <!--end::Label-->
+                          <!--begin::Input-->
+                          <input type="text" class="form-control form-control-solid" placeholder="" name="" formControlName="mobile">
+                          <!--end::Input-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7 fv-plugins-icon-container">
+                          <!--begin::Label-->
+                          <label class="fs-6 fw-bold mb-2">Дополнительный номер</label>
+                          <!--end::Label-->
+                          <!--begin::Input-->
+                          <input type="text" class="form-control form-control-solid" placeholder="" name="" formControlName="add_mobile">
+                          <!--end::Input-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7 fv-plugins-icon-container">
+                          <!--begin::Label-->
+                          <label class="fs-6 fw-bold mb-2">Компания</label>
+                          <!--end::Label-->
+                          <!--begin::Input-->
+                          <input type="text" class="form-control form-control-solid" placeholder="" name="" formControlName="company">
+                          <!--end::Input-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Billing toggle-->
+                        <div class="fw-bolder fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_add_customer_billing_info" role="button" aria-expanded="false" aria-controls="kt_customer_view_details">
+                          Социальные сети / Дополнительные ссылки
+                          <span class="ms-2 rotate-180">
+															<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+															<span class="svg-icon svg-icon-3">
+																<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																	<path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor"></path>
+																</svg>
+															</span>
+                            <!--end::Svg Icon-->
+														</span>
+                        </div>
+                        <!--end::Billing toggle-->
+                        <!--begin::Billing form-->
+                        <div id="kt_modal_add_customer_billing_info" class="collapse">
+                          <!--begin::Input group-->
+                          <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container">
+                            <!--begin::Label-->
+                            <label class="required fs-6 fw-bold mb-2">ySell</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input class="form-control form-control-solid" placeholder="" name="" formControlName="ySell">
+                            <!--end::Input-->
+                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                          </div>
+                          <!--end::Input group-->
+                          <!--begin::Input group-->
+                          <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container">
+                            <!--begin::Label-->
+                            <label class="required fs-6 fw-bold mb-2">Facebook</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input class="form-control form-control-solid" placeholder="" name="" formControlName="fb_link">
+                            <!--end::Input-->
+                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                          </div>
+                          <!--end::Input group-->
+                          <!--begin::Input group-->
+                          <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container">
+                            <!--begin::Label-->
+                            <label class="required fs-6 fw-bold mb-2">Google документы</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input class="form-control form-control-solid" placeholder="" name="" formControlName="google_link">
+                            <!--end::Input-->
+                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                          </div>
+                          <!--end::Input group-->
+                          <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                            <!--begin::Label-->
+                            <label class="fs-6 fw-bold mb-2">
+                              <span>Ответственный</span>
+                            </label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+<!--                            <select2 [data]="managers" styleMode="noStyle" formControlName="adviser_id" [value]="1"></select2>-->
+                            <ng-select [items]="managers"
+                             bindLabel="label"
+                             bindValue="id"
+                             formControlName="adviser_id">
+                            </ng-select>
+                            <!--end::Input-->
+                          </div>
+                          <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                            <!--begin::Label-->
+                            <label class="fs-6 fw-bold mb-2">
+                              <span>Менеджер</span>
+                            </label>
+                            <ng-select [items]="managers"
+                             bindLabel="label"
+                             bindValue="id"
+                             formControlName="adviser_id">
+                            </ng-select>
+                          </div>
+                          <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                            <!--begin::Label-->
+                            <label class="fs-6 fw-bold mb-2">
+                              <span>Статус работы</span>
+                            </label>
+                            <ng-select [items]="statuses"
+                             bindLabel="label"
+                             bindValue="id"
+                             formControlName="adviser_id">
+                            </ng-select>
+                          </div>
+                          <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                            <!--begin::Label-->
+                            <label class="fs-6 fw-bold mb-2">
+                              <span>FB статус</span>
+                            </label>
+                            <ng-select [items]="fb_status"
+                             bindLabel="label"
+                             bindValue="id"
+                             formControlName="adviser_id">
+                            </ng-select>
+                          </div>
+                          <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                            <!--begin::Label-->
+                            <label class="fs-6 fw-bold mb-2">
+                              <span>Откуда пришел</span>
+                            </label>
+                            <ng-select [items]="afilate_types"
+                             bindLabel="label"
+                             bindValue="id"
+                             formControlName="adviser_id">
+                            </ng-select>
+                          </div>
+                          <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                            <!--begin::Label-->
+                            <label class="fs-6 fw-bold mb-2">
+                              <span>С кем возит</span>
+                            </label>
+                            <ng-select [items]="delivery"
+                             bindLabel="label"
+                             bindValue="id"
+                             formControlName="adviser_id">
+                            </ng-select>
+                          </div>
+                          <div class="fv-row mb-7">
+                            <!--begin::Wrapper-->
+                            <div class="d-flex flex-stack">
+                              <!--begin::Label-->
+                              <div class="me-5">
+                                <!--begin::Label-->
+                                <label class="fs-6 fw-bold">Партнер FB</label>
+                                <!--end::Label-->
+                              </div>
+                              <!--end::Label-->
+                              <!--begin::Switch-->
+                              <label class="form-check form-switch form-check-custom form-check-solid">
+                                <span class="form-check-label fw-bold text-muted me-2" for="kt_modal_fb_partner">Нет</span>
+                                <!--begin::Input-->
+                                <input class="form-check-input" name="billing" type="checkbox" value="1" id="kt_modal_fb_partner">
+                                <!--end::Input-->
+                                <!--begin::Label-->
+                                <span class="form-check-label fw-bold text-muted" for="kt_modal_fb_partner">Да</span>
+                                <!--end::Label-->
+                              </label>
+                              <!--end::Switch-->
+                            </div>
+                            <!--begin::Wrapper-->
+                          </div>
+                        </div>
+                        <!--end::Billing form-->
+                      </div>
+                      <!--end::Scroll-->
+                    </div>
+                    <!--end::Modal body-->
+                    <!--begin::Modal footer-->
+                    <div class="modal-footer flex-center">
+                      <!--begin::Button-->
+                      <button type="reset" id="kt_modal_add_customer_cancel" class="btn btn-light me-3" data-bs-dismiss="modal">Отменить</button>
+                      <!--end::Button-->
+                      <!--begin::Button-->
+                      <button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary" (click)="newClient()">
+                        <span class="indicator-label">Сохранить</span>
+                        <span class="indicator-progress">Пожалуйста подождите...
+														<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                      </button>
+                      <!--end::Button-->
+                    </div>
+                    <!--end::Modal footer-->
+                    <div></div></form>
+                  <!--end::Form-->
+                </div>
+              </div>
+            </div>
+            <!--end::Add customer-->
+          </div>
+          <!--end::Toolbar-->
+          <!--begin::Group actions-->
+          <div class="d-flex justify-content-end align-items-center d-none" data-kt-customer-table-toolbar="selected">
+            <div class="fw-bolder me-5">
+              <span class="me-2" data-kt-customer-table-select="selected_count"></span>Selected</div>
+            <button type="button" class="btn btn-danger" data-kt-customer-table-select="delete_selected">Delete Selected</button>
+          </div>
+          <!--end::Group actions-->
+        </div>
+        <!--end::Card toolbar-->
+      </div>
+      <!--end::Card header-->
+      <!--begin::Card body-->
+      <div class="card-body pt-0">
+        <!--begin::Table-->
+        <div id="kt_customers_table_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+          <div class="table-responsive">
+           <table class="table align-middle table-row-dashed table-hover fs-6 gy-5 dataTable no-footer" id="kt_customers_table">
+          <!--begin::Table head-->
+          <thead>
+          <!--begin::Table row-->
+          <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0"><th class="w-10px pe-2 sorting_disabled" rowspan="1" colspan="1" aria-label="" style="width: 29.25px;">
+            <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+              <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="1">
+            </div>
+          </th>
+            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Customer Name: activate to sort column ascending">{{'CLIENTS.CUSTOMER_NAME' | translate}}</th>
+            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending">{{'CLIENTS.CUSTOMER_PHONE' | translate}}</th>
+            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Company: activate to sort column ascending">{{'CLIENTS.CUSTOMER_EMAIL' | translate}}</th>
+            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Payment Method: activate to sort column ascending">{{'CLIENTS.CUSTOMER_COMPANY' | translate}}</th>
+            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Created Date: activate to sort column ascending">{{'CLIENTS.CUSTOMER_STATUS' | translate}}</th>
+          </tr>
+          <!--end::Table row-->
+          </thead>
+          <!--end::Table head-->
+          <!--begin::Table body-->
+          <tbody class="fw-bold text-gray-600">
+          <ng-container *ngFor="let client of clients$ | async">
+            <tr class="odd" (click)="openClientCard(client.id)">
+              <!--begin::Checkbox-->
+              <td>
+                <div class="form-check form-check-sm form-check-custom form-check-solid">
+                  <input class="form-check-input" type="checkbox" value="1">
+                </div>
+              </td>
+              <!--end::Checkbox-->
+              <!--begin::Name=-->
+              <td>
+                <div class="d-flex align-items-center">
+                  <!--begin::Wrapper-->
+                  <div class="me-5 position-relative">
+                    <!--begin::Avatar-->
+                    <div class="symbol symbol-35px symbol-circle">
+                      <img alt="Pic" src="{{client.profile_avatar}}">
+                    </div>
+                    <!--end::Avatar-->
+                  </div>
+                  <!--end::Wrapper-->
+                  <!--begin::Info-->
+                  <div class="d-flex flex-column justify-content-center">
+                    {{client.client_name}}
+                  </div>
+                  <!--end::Info-->
+                </div>
+              </td>
+              <!--end::Name=-->
+              <!--begin::Email=-->
+              <td>
+                {{client.mobile}}
+              </td>
+              <!--end::Email=-->
+              <!--begin::Company=-->
+              <td>{{client.email}}</td>
+              <!--end::Company=-->
+              <!--begin::Payment method=-->
+              <td>
+                {{client.company}}
+              </td>
+              <!--end::Payment method=-->
+              <!--begin::Date=-->
+              <td data-order="2020-12-14T20:43:00+01:00">
+                <span *ngIf="client.work_status_id == 1" class="badge badge-light-success">{{getStatusNameById(client.work_status_id)}}</span>
+                <span *ngIf="client.work_status_id == 2" class="badge badge-light-primary">{{getStatusNameById(client.work_status_id)}}</span>
+                <span *ngIf="client.work_status_id == 3" class="badge badge-light-info">{{getStatusNameById(client.work_status_id)}}</span>
+                <span *ngIf="client.work_status_id == 4" class="badge badge-light-dark">{{getStatusNameById(client.work_status_id)}}</span>
+              </td>
+              <!--end::Date=-->
+            </tr>
+          </ng-container>
+          </tbody>
+          <!--end::Table body-->
+        </table>
+          </div>
+          <div class="row">
+            <!--Start::Page limits-->
+            <div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
+              <div class="dataTables_length" id="kt_customers_table_length">
+                <label>
+<!--                  <select name="kt_customers_table_length" aria-controls="kt_customers_table" class="form-select form-select-sm form-select-solid" [(ngModel)]="pageSize" >-->
+<!--                    <option [ngValue]="10">10</option>-->
+<!--                    <option [ngValue]="25">25</option>-->
+<!--                    <option [ngValue]="50">50</option>-->
+<!--                    <option [ngValue]="100">100</option>-->
+<!--                  </select>-->
+                </label>
+              </div>
+            </div>
+            <!--Start::Page limits-->
+            <!--Start::Pages-->
+            <div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
+              <div class="dataTables_paginate paging_simple_numbers" id="kt_customers_table_paginate">
+                <ul class="pagination">
+                  <li class="paginate_button page-item previous disabled" id="kt_customers_table_previous">
+                    <a href="#" aria-controls="kt_customers_table" data-dt-idx="0" tabindex="0" class="page-link"><i class="previous"></i></a>
+                  </li>
+                  <li class="paginate_button page-item active">
+                    <a href="#" aria-controls="kt_customers_table" data-dt-idx="1" tabindex="0" class="page-link">1</a>
+                  </li>
+                  <li class="paginate_button page-item ">
+                    <a href="#" aria-controls="kt_customers_table" data-dt-idx="2" tabindex="0" class="page-link">2</a>
+                  </li>
+                  <li class="paginate_button page-item ">
+                    <a href="#" aria-controls="kt_customers_table" data-dt-idx="3" tabindex="0" class="page-link">3</a>
+                  </li>
+                  <li class="paginate_button page-item ">
+                    <a href="#" aria-controls="kt_customers_table" data-dt-idx="4" tabindex="0" class="page-link">4</a>
+                  </li>
+                  <li class="paginate_button page-item next" id="kt_customers_table_next">
+                    <a href="#" aria-controls="kt_customers_table" data-dt-idx="5" tabindex="0" class="page-link"><i class="next"></i></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!--end::Pages-->
+          </div>
+        </div>
+        <!--end::Table-->
+      </div>
+      <!--end::Card body-->
+    </div>
+    <!--end::Contacts-->
+  </div>
+  <div class="col-xl-4 col-lg-12">
+    <!--begin::Contacts-->
+    <div class="card card-flush h-lg-100 card-replace" [class.active]="cardActive" id="kt_contacts_main">
+      <!--begin::Card header-->
+      <div class="card-header pt-7" id="kt_chat_contacts_header">
+        <!--begin::Card title-->
+        <div class="card-title">
+          <!--begin::Svg Icon | path: icons/duotune/communication/com005.svg-->
+          <span class="svg-icon svg-icon-1 me-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M20 14H18V10H20C20.6 10 21 10.4 21 11V13C21 13.6 20.6 14 20 14ZM21 19V17C21 16.4 20.6 16 20 16H18V20H20C20.6 20 21 19.6 21 19ZM21 7V5C21 4.4 20.6 4 20 4H18V8H20C20.6 8 21 7.6 21 7Z" fill="currentColor"></path>
+                <path opacity="0.3" d="M17 22H3C2.4 22 2 21.6 2 21V3C2 2.4 2.4 2 3 2H17C17.6 2 18 2.4 18 3V21C18 21.6 17.6 22 17 22ZM10 7C8.9 7 8 7.9 8 9C8 10.1 8.9 11 10 11C11.1 11 12 10.1 12 9C12 7.9 11.1 7 10 7ZM13.3 16C14 16 14.5 15.3 14.3 14.7C13.7 13.2 12 12 10.1 12C8.10001 12 6.49999 13.1 5.89999 14.7C5.59999 15.3 6.19999 16 7.39999 16H13.3Z" fill="currentColor"></path>
+              </svg>
+            </span>
+          <!--end::Svg Icon-->
+          <h2>{{'CLIENTS.CUSTOMER_DETAIL' | translate}}</h2>
+        </div>
+        <!--end::Card title-->
+        <!--begin::Card toolbar-->
+        <div class="card-toolbar gap-3">
+          <!--begin::Add Deal-->
+          <a href="" class="btn btn-sm btn-light btn-active-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_deal">
+            <!--begin::Svg Icon | path: assets/media/icons/duotune/ecommerce/ecm006.svg-->
+            <span class="svg-icon svg-icon-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M20 8H16C15.4 8 15 8.4 15 9V16H10V17C10 17.6 10.4 18 11 18H16C16 16.9 16.9 16 18 16C19.1 16 20 16.9 20 18H21C21.6 18 22 17.6 22 17V13L20 8Z" fill="currentColor"/>
+                <path opacity="0.3" d="M20 18C20 19.1 19.1 20 18 20C16.9 20 16 19.1 16 18C16 16.9 16.9 16 18 16C19.1 16 20 16.9 20 18ZM15 4C15 3.4 14.6 3 14 3H3C2.4 3 2 3.4 2 4V13C2 13.6 2.4 14 3 14H15V4ZM6 16C4.9 16 4 16.9 4 18C4 19.1 4.9 20 6 20C7.1 20 8 19.1 8 18C8 16.9 7.1 16 6 16Z" fill="currentColor"/>
+              </svg>
+            </span>
+            <!--end::Svg Icon-->
+            {{'CLIENTS.CUSTOMER_ADD_DEAL' | translate}}
+          </a>
+          <!--end::Add Deal-->
+          <!--begin::Deal modal-->
+          <div class="modal fade" id="kt_modal_add_deal" tabindex="-1" aria-hidden="true">
+            <!--begin::Modal dialog-->
+            <div class="modal-dialog modal-dialog-centered mw-650px">
+              <!--begin::Modal content-->
+              <div class="modal-content">
+                <!--begin::Form-->
+                <form class="form fv-plugins-bootstrap5 fv-plugins-framework" action="#" id="kt_modal_add_deal_form" [formGroup]="dealForm">
+                  <!--begin::Modal header-->
+                  <div class="modal-header" id="kt_modal_add_deal_header">
+                    <!--begin::Modal title-->
+                    <h2 class="fw-bolder">Новая сделка</h2>
+                    <!--end::Modal title-->
+                    <!--begin::Close-->
+                    <div id="kt_modal_add_deal_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal" aria-label="Закрыть">
+                      <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                      <span class="svg-icon svg-icon-1">
+															<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor"></rect>
+																<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor"></rect>
+															</svg>
+														</span>
+                      <!--end::Svg Icon-->
+                    </div>
+                    <!--end::Close-->
+                  </div>
+                  <!--end::Modal header-->
+                  <!--begin::Modal body-->
+                  <div class="modal-body py-10 px-lg-17">
+                    <!--begin::Scroll-->
+                    <div class="scroll-y me-n7 pe-7" id="kt_modal_add_deal_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_deal_header" data-kt-scroll-wrappers="#kt_modal_add_deal_scroll" data-kt-scroll-offset="300px" style="max-height: 205px;">
+                      <!--begin::Input group-->
+                      <div class="fv-row mb-7 fv-plugins-icon-container">
+                        <!--begin::Label-->
+                        <label class="fs-6 fw-bold mb-2">Имя сделки</label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <input type="text" class="form-control form-control-solid" placeholder="" formControlName="name">
+                        <!--end::Input-->
+                        <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                      <!--end::Input group-->
+                      <!--begin::Input group-->
+                      <div class="fv-row mb-7 fv-plugins-icon-container">
+                        <!--begin::Label-->
+                        <label class="fs-6 fw-bold mb-2">Бюджет</label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <input type="text" class="form-control form-control-solid" placeholder="" formControlName="budget" value="0">
+                        <!--end::Input-->
+                        <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                      <!--end::Input group-->
+                      <!--begin::Input group-->
+                      <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                        <!--begin::Label-->
+                        <label class="fs-6 fw-bold mb-2 required">
+                          <span>Статус сделки</span>
+                        </label>
+                        <ng-select [items]="deal_statuses"
+                         bindLabel="label"
+                         bindValue="id"
+                         formControlName="deal_statuses_id">
+                        </ng-select>
+                      </div>
+
+                      <!--begin::Deal additional info-->
+                      <div class="fw-bolder fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_add_deal_info" role="button" aria-expanded="false" aria-controls="kt_deal_details">
+                        Детали сделки
+                        <span class="ms-2 rotate-180">
+															<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+															<span class="svg-icon svg-icon-3">
+																<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																	<path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor"></path>
+																</svg>
+															</span>
+                          <!--end::Svg Icon-->
+														</span>
+                      </div>
+                      <!--end::Deal additional info-->
+                      <!--begin::Deal additional collapse-->
+                      <div id="kt_modal_add_deal_info" class="collapse">
+                        <!--begin::Input group-->
+                        <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                          <!--begin::Label-->
+                          <label class="fs-6 fw-bold mb-2">
+                            <span>Менеджер</span>
+                          </label>
+                          <!--end::Label-->
+                          <ng-select [items]="managers"
+                           bindLabel="label"
+                           bindValue="id"
+                           formControlName="manager_id">
+                          </ng-select>
+                        </div>
+                        <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                          <!--begin::Label-->
+                          <label class="fs-6 fw-bold mb-2">
+                            <span>Ответственный</span>
+                          </label>
+                          <!--end::Label-->
+                          <ng-select [items]="managers"
+                           bindLabel="label"
+                           bindValue="id"
+                           formControlName="adviser_id">
+                          </ng-select>
+                        </div>
+                        <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                          <!--begin::Label-->
+                          <label class="fs-6 fw-bold mb-2">
+                            <span>Направление</span>
+                          </label>
+                          <!--end::Label-->
+                          <ng-select [items]="delivery_ways"
+                           bindLabel="label"
+                           bindValue="id"
+                           formControlName="delivery_ways_id">
+                          </ng-select>
+                        </div>
+                        <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                          <!--begin::Label-->
+                          <label class="fs-6 fw-bold mb-2">
+                            <span>Тип доставки</span>
+                          </label>
+                          <!--end::Label-->
+                          <ng-select [items]="delivery_types"
+                           bindLabel="label"
+                           bindValue="id"
+                           formControlName="delivery_types_id">
+                          </ng-select>
+                        </div>
+                        <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                          <!--begin::Label-->
+                          <label class="fs-6 fw-bold mb-2">
+                            <span>Забор груза</span>
+                          </label>
+                          <!--end::Label-->
+                          <ng-select [items]="pickup_types"
+                           bindLabel="label"
+                           bindValue="id"
+                           formControlName="pickup_types_id">
+                          </ng-select>
+                        </div>
+                        <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                          <!--begin::Label-->
+                          <label class="fs-6 fw-bold mb-2">
+                            <span>Тип оплаты</span>
+                          </label>
+                          <!--end::Label-->
+                          <ng-select [items]="pay_types"
+                           bindLabel="label"
+                           bindValue="id"
+                           formControlName="pay_types_id">
+                          </ng-select>
+                        </div>
+                        <div class="fv-row mb-7">
+                          <!--begin::Wrapper-->
+                          <div class="d-flex flex-stack">
+                            <!--begin::Label-->
+                            <div class="me-5">
+                              <!--begin::Label-->
+                              <label class="fs-6 fw-bold">Инспекция</label>
+                              <!--end::Label-->
+                            </div>
+                            <!--end::Label-->
+                            <!--begin::Switch-->
+                            <label class="form-check form-switch form-check-custom form-check-solid">
+                              <span class="form-check-label fw-bold text-muted me-2" for="kt_modal_deal_inspection">Нет</span>
+                              <!--begin::Input-->
+                              <input class="form-check-input" name="billing" type="checkbox" value="1" id="kt_modal_deal_inspection">
+                              <!--end::Input-->
+                              <!--begin::Label-->
+                              <span class="form-check-label fw-bold text-muted" for="kt_modal_deal_inspection">Да</span>
+                              <!--end::Label-->
+                            </label>
+                            <!--end::Switch-->
+                          </div>
+                          <!--begin::Wrapper-->
+                        </div>
+                        <!--end::Input group-->
+                      </div>
+                      <!--end::Deal additional collapse-->
+                    </div>
+                    <!--end::Scroll-->
+                  </div>
+                  <!--end::Modal body-->
+                  <!--begin::Modal footer-->
+                  <div class="modal-footer flex-center">
+                    <!--begin::Button-->
+                    <button type="reset" id="kt_modal_add_deal_cancel" class="btn btn-light me-3" data-bs-dismiss="modal">Отменить</button>
+                    <!--end::Button-->
+                    <!--begin::Button-->
+                    <button type="submit" id="kt_modal_add_deal_submit" class="btn btn-primary" (click)="newDeal()">
+                      <span class="indicator-label">Создать</span>
+                      <span class="indicator-progress">Пожалуйста подождите...
+														<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                    </button>
+                    <!--end::Button-->
+                  </div>
+                  <!--end::Modal footer-->
+                  <div></div></form>
+                <!--end::Form-->
+              </div>
+            </div>
+          </div>
+          <!--end::Deal modal-->
+          <div ngbDropdown>
+            <!--begin::Action menu-->
+            <a class="btn btn-sm btn-icon btn-light btn-active-light-primary" ngbDropdownToggle id="dropdownConfig">
+              <!--begin::Svg Icon | path: icons/duotune/general/gen052.svg-->
+              <span class="svg-icon svg-icon-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect x="10" y="10" width="4" height="4" rx="2" fill="currentColor"></rect>
+                <rect x="17" y="10" width="4" height="4" rx="2" fill="currentColor"></rect>
+                <rect x="3" y="10" width="4" height="4" rx="2" fill="currentColor"></rect>
+              </svg>
+            </span>
+              <!--end::Svg Icon-->
+            </a>
+            <!--begin::Menu-->
+            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" ngbDropdownMenu aria-labelledby="dropdownConfig">
+              <!--begin::Menu item-->
+              <div class="menu-item px-3" ngbDropdownItem>
+                <a href="" class="menu-link px-3" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer" (click)="editClient(client.id)">{{'GENERAL.EDIT' | translate}}</a>
+              </div>
+              <!--end::Menu item-->
+              <!--begin::Menu item-->
+              <div class="menu-item px-3" ngbDropdownItem>
+                <a class="menu-link px-3" id="kt_contact_delete" (click)="removeClient($event)">{{'GENERAL.DELETE' | translate}}</a>
+              </div>
+              <!--end::Menu item-->
+            </div>
+            <!--end::Menu-->
+            <!--end::Action menu-->
+          </div>
+        </div>
+        <!--end::Card toolbar-->
+      </div>
+      <!--end::Card header-->
+      <!--begin::Card body-->
+      <div class="card-body pt-5">
+        <!--begin::Profile-->
+        <div class="d-flex gap-7 align-items-center">
+          <!--begin::Avatar-->
+          <div class="symbol symbol-circle symbol-100px">
+            <img src="{{client.profile_avatar}}" alt="avatar">
+          </div>
+          <!--end::Avatar-->
+          <!--begin::Contact details-->
+          <div class="d-flex flex-column gap-2">
+            <!--begin::Name-->
+            <h3 class="mb-0">{{client.client_name}}</h3>
+            <!--end::Name-->
+            <!--begin::Email-->
+            <div class="d-flex align-items-center gap-2">
+              <!--begin::Svg Icon | path: icons/duotune/communication/com011.svg-->
+              <span class="svg-icon svg-icon-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path opacity="0.3" d="M21 19H3C2.4 19 2 18.6 2 18V6C2 5.4 2.4 5 3 5H21C21.6 5 22 5.4 22 6V18C22 18.6 21.6 19 21 19Z" fill="currentColor"></path>
+                  <path d="M21 5H2.99999C2.69999 5 2.49999 5.10005 2.29999 5.30005L11.2 13.3C11.7 13.7 12.4 13.7 12.8 13.3L21.7 5.30005C21.5 5.10005 21.3 5 21 5Z" fill="currentColor"></path>
+                </svg>
+              </span>
+              <!--end::Svg Icon-->
+              <a href="mailto:anna_lebed@gmail.com" class="text-muted text-hover-primary">{{client.email}}</a>
+            </div>
+            <!--end::Email-->
+            <!--begin::Phone-->
+            <div class="d-flex align-items-center gap-2">
+              <!--begin::Svg Icon | path: icons/duotune/electronics/elc003.svg-->
+              <span class="svg-icon svg-icon-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M5 20H19V21C19 21.6 18.6 22 18 22H6C5.4 22 5 21.6 5 21V20ZM19 3C19 2.4 18.6 2 18 2H6C5.4 2 5 2.4 5 3V4H19V3Z" fill="currentColor"></path>
+                  <path opacity="0.3" d="M19 4H5V20H19V4Z" fill="currentColor"></path>
+                </svg>
+              </span>
+              <!--end::Svg Icon-->
+              <a href="tel:{{client.mobile}}" class="text-muted text-hover-primary">{{client.mobile}}</a>
+            </div>
+            <!--end::Phone-->
+            <!--begin::Facebook-->
+            <div class="d-flex align-items-center gap-2" *ngIf="client.fb_link">
+              <!--begin::Svg Icon | path: assets/media/icons/duotune/social/soc004.svg-->
+              <span class="svg-icon svg-icon-2" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path opacity="0.3" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="currentColor"/>
+                <path d="M13.643 9.36206C13.6427 9.05034 13.7663 8.75122 13.9864 8.53052C14.2065 8.30982 14.5053 8.18559 14.817 8.18506H15.992V5.23999H13.643C13.1796 5.24052 12.7209 5.33229 12.293 5.51013C11.8651 5.68798 11.4764 5.94841 11.1491 6.27649C10.8219 6.60457 10.5625 6.99389 10.3857 7.42224C10.209 7.85059 10.1183 8.30956 10.119 8.77295V11.718H7.769V14.663H10.119V21.817C11.2812 22.0479 12.4762 22.0604 13.643 21.854V14.663H15.992L17.167 11.718H13.643V9.36206Z" fill="currentColor"/>
+                </svg>
+              </span>
+              <!--end::Svg Icon-->
+              <a href="{{client.fb_link}}" target="_blank" class="text-muted text-hover-primary">Facebook</a>
+            </div>
+            <div class="d-flex align-items-center gap-2" *ngIf="client.ySell">
+              <!--begin::Svg Icon | path: assets/media/icons/duotune/ecommerce/ecm001.svg-->
+              <span class="svg-icon svg-icon-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path opacity="0.3" d="M18.041 22.041C18.5932 22.041 19.041 21.5932 19.041 21.041C19.041 20.4887 18.5932 20.041 18.041 20.041C17.4887 20.041 17.041 20.4887 17.041 21.041C17.041 21.5932 17.4887 22.041 18.041 22.041Z" fill="currentColor"/>
+                <path opacity="0.3" d="M6.04095 22.041C6.59324 22.041 7.04095 21.5932 7.04095 21.041C7.04095 20.4887 6.59324 20.041 6.04095 20.041C5.48867 20.041 5.04095 20.4887 5.04095 21.041C5.04095 21.5932 5.48867 22.041 6.04095 22.041Z" fill="currentColor"/>
+                <path opacity="0.3" d="M7.04095 16.041L19.1409 15.1409C19.7409 15.1409 20.141 14.7409 20.341 14.1409L21.7409 8.34094C21.9409 7.64094 21.4409 7.04095 20.7409 7.04095H5.44095L7.04095 16.041Z" fill="currentColor"/>
+                <path d="M19.041 20.041H5.04096C4.74096 20.041 4.34095 19.841 4.14095 19.541C3.94095 19.241 3.94095 18.841 4.14095 18.541L6.04096 14.841L4.14095 4.64095L2.54096 3.84096C2.04096 3.64096 1.84095 3.04097 2.14095 2.54097C2.34095 2.04097 2.94096 1.84095 3.44096 2.14095L5.44096 3.14095C5.74096 3.24095 5.94096 3.54096 5.94096 3.84096L7.94096 14.841C7.94096 15.041 7.94095 15.241 7.84095 15.441L6.54096 18.041H19.041C19.641 18.041 20.041 18.441 20.041 19.041C20.041 19.641 19.641 20.041 19.041 20.041Z" fill="currentColor"/>
+                </svg>
+              </span>
+              <!--end::Svg Icon-->
+              <a href="{{client.ySell}}" target="_blank" class="text-muted text-hover-primary">YSell</a>
+            </div>
+            <div class="d-flex align-items-center gap-2" *ngIf="client.google_link">
+              <!--begin::Svg Icon | path: assets/media/icons/duotune/social/soc004.svg-->
+              <!--begin::Svg Icon | path: assets/media/icons/duotune/files/fil020.svg-->
+              <span class="svg-icon svg-icon-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path opacity="0.3" d="M19 18C20.7 18 22 16.7 22 15C22 13.3 20.7 12 19 12C18.9 12 18.9 12 18.8 12C18.9 11.7 19 11.3 19 11C19 9.3 17.7 8 16 8C15.4 8 14.8 8.2 14.3 8.5C13.4 7 11.8 6 10 6C7.2 6 5 8.2 5 11C5 11.3 5.00001 11.7 5.10001 12H5C3.3 12 2 13.3 2 15C2 16.7 3.3 18 5 18H19Z" fill="currentColor"/>
+                </svg>
+              </span>
+              <!--end::Svg Icon-->
+              <a href="{{client.google_link}}" target="_blank" class="text-muted text-hover-primary">Google docs</a>
+            </div>
+            <!--end::Facebook-->
+          </div>
+          <!--end::Contact details-->
+        </div>
+        <!--end::Profile-->
+        <!--begin:::Tabs-->
+        <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x fs-6 fw-bold mt-6 mb-8">
+          <!--begin:::Tab item-->
+          <li class="nav-item">
+            <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_contact_view_general">
+              <!--begin::Svg Icon | path: icons/duotune/general/gen001.svg-->
+              <span class="svg-icon svg-icon-4 me-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M11 2.375L2 9.575V20.575C2 21.175 2.4 21.575 3 21.575H9C9.6 21.575 10 21.175 10 20.575V14.575C10 13.975 10.4 13.575 11 13.575H13C13.6 13.575 14 13.975 14 14.575V20.575C14 21.175 14.4 21.575 15 21.575H21C21.6 21.575 22 21.175 22 20.575V9.575L13 2.375C12.4 1.875 11.6 1.875 11 2.375Z" fill="currentColor"></path>
+                </svg>
+              </span>
+              <!--end::Svg Icon-->
+              {{'CLIENTS.CUSTOMER_INFO_TAB' | translate}}
+            </a>
+          </li>
+          <!--end:::Tab item-->
+          <!--begin:::Tab item-->
+          <li class="nav-item">
+            <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_contact_view_meetings">
+              <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
+              <span class="svg-icon svg-icon-4 me-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path opacity="0.3" d="M21 22H3C2.4 22 2 21.6 2 21V5C2 4.4 2.4 4 3 4H21C21.6 4 22 4.4 22 5V21C22 21.6 21.6 22 21 22Z" fill="currentColor"></path>
+                  <path d="M6 6C5.4 6 5 5.6 5 5V3C5 2.4 5.4 2 6 2C6.6 2 7 2.4 7 3V5C7 5.6 6.6 6 6 6ZM11 5V3C11 2.4 10.6 2 10 2C9.4 2 9 2.4 9 3V5C9 5.6 9.4 6 10 6C10.6 6 11 5.6 11 5ZM15 5V3C15 2.4 14.6 2 14 2C13.4 2 13 2.4 13 3V5C13 5.6 13.4 6 14 6C14.6 6 15 5.6 15 5ZM19 5V3C19 2.4 18.6 2 18 2C17.4 2 17 2.4 17 3V5C17 5.6 17.4 6 18 6C18.6 6 19 5.6 19 5Z" fill="currentColor"></path>
+                  <path d="M8.8 13.1C9.2 13.1 9.5 13 9.7 12.8C9.9 12.6 10.1 12.3 10.1 11.9C10.1 11.6 10 11.3 9.8 11.1C9.6 10.9 9.3 10.8 9 10.8C8.8 10.8 8.59999 10.8 8.39999 10.9C8.19999 11 8.1 11.1 8 11.2C7.9 11.3 7.8 11.4 7.7 11.6C7.6 11.8 7.5 11.9 7.5 12.1C7.5 12.2 7.4 12.2 7.3 12.3C7.2 12.4 7.09999 12.4 6.89999 12.4C6.69999 12.4 6.6 12.3 6.5 12.2C6.4 12.1 6.3 11.9 6.3 11.7C6.3 11.5 6.4 11.3 6.5 11.1C6.6 10.9 6.8 10.7 7 10.5C7.2 10.3 7.49999 10.1 7.89999 10C8.29999 9.90003 8.60001 9.80003 9.10001 9.80003C9.50001 9.80003 9.80001 9.90003 10.1 10C10.4 10.1 10.7 10.3 10.9 10.4C11.1 10.5 11.3 10.8 11.4 11.1C11.5 11.4 11.6 11.6 11.6 11.9C11.6 12.3 11.5 12.6 11.3 12.9C11.1 13.2 10.9 13.5 10.6 13.7C10.9 13.9 11.2 14.1 11.4 14.3C11.6 14.5 11.8 14.7 11.9 15C12 15.3 12.1 15.5 12.1 15.8C12.1 16.2 12 16.5 11.9 16.8C11.8 17.1 11.5 17.4 11.3 17.7C11.1 18 10.7 18.2 10.3 18.3C9.9 18.4 9.5 18.5 9 18.5C8.5 18.5 8.1 18.4 7.7 18.2C7.3 18 7 17.8 6.8 17.6C6.6 17.4 6.4 17.1 6.3 16.8C6.2 16.5 6.10001 16.3 6.10001 16.1C6.10001 15.9 6.2 15.7 6.3 15.6C6.4 15.5 6.6 15.4 6.8 15.4C6.9 15.4 7.00001 15.4 7.10001 15.5C7.20001 15.6 7.3 15.6 7.3 15.7C7.5 16.2 7.7 16.6 8 16.9C8.3 17.2 8.6 17.3 9 17.3C9.2 17.3 9.5 17.2 9.7 17.1C9.9 17 10.1 16.8 10.3 16.6C10.5 16.4 10.5 16.1 10.5 15.8C10.5 15.3 10.4 15 10.1 14.7C9.80001 14.4 9.50001 14.3 9.10001 14.3C9.00001 14.3 8.9 14.3 8.7 14.3C8.5 14.3 8.39999 14.3 8.39999 14.3C8.19999 14.3 7.99999 14.2 7.89999 14.1C7.79999 14 7.7 13.8 7.7 13.7C7.7 13.5 7.79999 13.4 7.89999 13.2C7.99999 13 8.2 13 8.5 13H8.8V13.1ZM15.3 17.5V12.2C14.3 13 13.6 13.3 13.3 13.3C13.1 13.3 13 13.2 12.9 13.1C12.8 13 12.7 12.8 12.7 12.6C12.7 12.4 12.8 12.3 12.9 12.2C13 12.1 13.2 12 13.6 11.8C14.1 11.6 14.5 11.3 14.7 11.1C14.9 10.9 15.2 10.6 15.5 10.3C15.8 10 15.9 9.80003 15.9 9.70003C15.9 9.60003 16.1 9.60004 16.3 9.60004C16.5 9.60004 16.7 9.70003 16.8 9.80003C16.9 9.90003 17 10.2 17 10.5V17.2C17 18 16.7 18.4 16.2 18.4C16 18.4 15.8 18.3 15.6 18.2C15.4 18.1 15.3 17.8 15.3 17.5Z" fill="currentColor"></path>
+                </svg>
+              </span>
+              <!--end::Svg Icon-->
+              {{'CLIENTS.CUSTOMER_DEALS_TAB' | translate}}
+            </a>
+          </li>
+          <!--end:::Tab item-->
+          <!--begin:::Tab item-->
+<!--          <li class="nav-item">-->
+<!--            <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_contact_view_activity">-->
+<!--              &lt;!&ndash;begin::Svg Icon | path: icons/duotune/general/gen056.svg&ndash;&gt;-->
+<!--              <span class="svg-icon svg-icon-4 me-1">-->
+<!--                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">-->
+<!--                  <path d="M16.0077 19.2901L12.9293 17.5311C12.3487 17.1993 11.6407 17.1796 11.0426 17.4787L6.89443 19.5528C5.56462 20.2177 4 19.2507 4 17.7639V5C4 3.89543 4.89543 3 6 3H17C18.1046 3 19 3.89543 19 5V17.5536C19 19.0893 17.341 20.052 16.0077 19.2901Z" fill="currentColor"></path>-->
+<!--                </svg>-->
+<!--              </span>-->
+<!--              &lt;!&ndash;end::Svg Icon&ndash;&gt;-->
+<!--              {{'CLIENTS.CUSTOMER_ACTIVITY_TAB' | translate}}-->
+<!--            </a>-->
+<!--          </li>-->
+          <!--end:::Tab item-->
+        </ul>
+        <!--end:::Tabs-->
+        <!--begin::Tab content-->
+        <div class="tab-content" id="">
+          <!--begin:::Tab pane-->
+          <div class="tab-pane fade show active" id="kt_contact_view_general" role="tabpanel">
+            <!--begin::Additional details-->
+              <div class="row gap-5 mt-7">
+                <!--begin::Company name-->
+                <div class="col gap-1">
+                  <div class="text-muted">Ответственный</div>
+                  <div class="fs-5">Евгений</div>
+                </div>
+                <!--end::Company name-->
+                <!--begin::City-->
+                <div class="col gap-1">
+                  <div class="text-muted">Менеджер</div>
+                  <div class="fs-5">Евгений</div>
+                </div>
+                <!--end::City-->
+              </div>
+              <div class="row gap-5 mt-7">
+                <!--begin::Country-->
+                <div class="col gap-1">
+                  <div class="text-muted">Статус работы</div>
+                  <div class="fs-5">Работает с Ardi</div>
+                </div>
+                <!--end::Country-->
+                <!--begin::Country-->
+                <div class="col gap-1">
+                  <div class="text-muted">Откуда пришел</div>
+                  <div class="fs-5">Нашел нас в FB</div>
+                </div>
+                <!--end::Country-->
+              </div>
+              <div class="row gap-5 mt-7">
+                <!--begin::Country-->
+                <div class="col gap-1">
+                  <div class="text-muted">FB статус</div>
+                  <div class="fs-5">Друзья</div>
+                </div>
+                <!--end::Country-->
+                <!--begin::Country-->
+                <div class="col gap-1">
+                  <div class="text-muted">С кем возит</div>
+                  <div class="fs-5">Поставщик</div>
+                </div>
+                <!--end::Country-->
+              </div>
+            <div class="row gap-5 mt-7">
+              <!--begin::Country-->
+              <div class="col gap-1">
+                <div class="text-muted">Должность</div>
+                <div class="fs-5">Анна Лебедева</div>
+              </div>
+              <!--end::Country-->
+              <!--begin::Country-->
+              <div class="col gap-1">
+                <div class="text-muted">Партнер FB</div>
+                <div class="fs-5">Да</div>
+              </div>
+              <!--end::Country-->
+            </div>
+            <!--end::Additional details-->
+          </div>
+          <!--end:::Tab pane-->
+          <!--begin:::Tab pane-->
+          <div class="tab-pane fade" id="kt_contact_view_meetings" role="tabpanel">
+              <!--begin::Day-->
+              <div id="kt_deals_block" class="" style="max-height:540px; overflow: auto;">
+                <!--begin::Time-->
+                <div class="d-flex flex-stack position-relative">
+                  <!--begin::Bar-->
+                  <div class="position-absolute h-100 w-4px bg-primary rounded top-0 start-0"></div>
+                  <!--end::Bar-->
+                  <!--begin::Info-->
+                  <div class="fw-bold ms-5 text-gray-600">
+                    <!--begin::Time-->
+                    <div class="fs-5">
+                      <span class="fs-7 text-gray-400 text-uppercase">09 Апрель, 2022</span>
+                    </div>
+                    <!--end::Time-->
+                    <!--begin::Title-->
+                    <a href="#" class="fs-5 fw-bolder text-gray-800 text-hover-primary mb-2">Сделка #235338687</a>
+                    <!--end::Title-->
+                    <!--begin::User-->
+                    <div class="text-gray-400">
+                      <span class="badge badge-light me-2">Логистика</span>
+                      <span class="text-success">$5600</span>
+                    </div>
+                    <!--end::User-->
+                  </div>
+                  <!--end::Info-->
+                </div>
+                <!--end::Time-->
+                <!--begin::Time-->
+                <div class="d-flex flex-stack position-relative mt-8">
+                  <!--begin::Bar-->
+                  <div class="position-absolute h-100 w-4px bg-warning-second rounded top-0 start-0"></div>
+                  <!--end::Bar-->
+                  <!--begin::Info-->
+                  <div class="fw-bold ms-5 text-gray-600">
+                    <!--begin::Time-->
+                    <div class="fs-5">
+                      <span class="fs-7 text-gray-400 text-uppercase">09 Апрель, 2022</span>
+                    </div>
+                    <!--end::Time-->
+                    <!--begin::Title-->
+                    <a href="#" class="fs-5 fw-bolder text-gray-800 text-hover-primary mb-2">27 boxesDelivery to Amazon- PHL6</a>
+                    <!--end::Title-->
+                    <!--begin::User-->
+                    <div class="text-gray-400">
+                      <span class="badge badge-light me-2">Логистика</span>
+                      <span class="text-success">$5600</span>
+                    </div>
+                    <!--end::User-->
+                  </div>
+                  <!--end::Info-->
+                </div>
+                <!--end::Time-->
+                <!--begin::Time-->
+                <div class="d-flex flex-stack position-relative mt-8">
+                  <!--begin::Bar-->
+                  <div class="position-absolute h-100 w-4px bg-danger rounded top-0 start-0"></div>
+                  <!--end::Bar-->
+                  <!--begin::Info-->
+                  <div class="fw-bold ms-5 text-gray-600">
+                    <!--begin::Time-->
+                    <div class="fs-5">
+                      <span class="fs-7 text-gray-400 text-uppercase">09 Апрель, 2022</span>
+                    </div>
+                    <!--end::Time-->
+                    <!--begin::Title-->
+                    <a href="#" class="fs-5 fw-bolder text-gray-800 text-hover-primary mb-2">27 boxesDelivery to Amazon- PHL6
+                      47 boxes-Delivery to Amazon- ICT2
+                      26 boxes-Delivery to Amazon- HSV1</a>
+                    <!--end::Title-->
+                    <!--begin::User-->
+                    <div class="text-gray-400">
+                      <span class="badge badge-light me-2">Склад</span>
+                      <span class="text-success">$5600</span>
+                    </div>
+                    <!--end::User-->
+                  </div>
+                  <!--end::Info-->
+                </div>
+                <!--end::Time-->
+                <!--begin::Time-->
+                <div class="d-flex flex-stack position-relative mt-8">
+                  <!--begin::Bar-->
+                  <div class="position-absolute h-100 w-4px bg-info rounded top-0 start-0"></div>
+                  <!--end::Bar-->
+                  <!--begin::Info-->
+                  <div class="fw-bold ms-5 text-gray-600">
+                    <!--begin::Time-->
+                    <div class="fs-5">
+                      <span class="fs-7 text-gray-400 text-uppercase">09 Апрель, 2022</span>
+                    </div>
+                    <!--end::Time-->
+                    <!--begin::Title-->
+                    <a href="#" class="fs-5 fw-bolder text-gray-800 text-hover-primary mb-2">Сделка #235338687</a>
+                    <!--end::Title-->
+                    <!--begin::User-->
+                    <div class="text-gray-400">
+                      <span class="badge badge-light me-2">Склад</span>
+                      <span class="text-success">$5600</span>
+                    </div>
+                    <!--end::User-->
+                  </div>
+                  <!--end::Info-->
+                </div>
+                <!--end::Time-->
+                <!--begin::Time-->
+                <div class="d-flex flex-stack position-relative mt-8">
+                  <!--begin::Bar-->
+                  <div class="position-absolute h-100 w-4px bg-success-second rounded top-0 start-0"></div>
+                  <!--end::Bar-->
+                  <!--begin::Info-->
+                  <div class="fw-bold ms-5 text-gray-600">
+                    <!--begin::Time-->
+                    <div class="fs-5">
+                      <span class="fs-7 text-gray-400 text-uppercase">09 Апрель, 2022</span>
+                    </div>
+                    <!--end::Time-->
+                    <!--begin::Title-->
+                    <a href="#" class="fs-5 fw-bolder text-gray-800 text-hover-primary mb-2">Сделка #235338687</a>
+                    <!--end::Title-->
+                    <!--begin::User-->
+                    <div class="text-gray-400">
+                      <span class="badge badge-light me-2">Склад</span>
+                      <span class="text-success">$5600</span>
+                    </div>
+                    <!--end::User-->
+                  </div>
+                  <!--end::Info-->
+                </div>
+                <!--end::Time-->
+                <!--begin::Time-->
+                <div class="d-flex flex-stack position-relative mt-8">
+                  <!--begin::Bar-->
+                  <div class="position-absolute h-100 w-4px bg-warning rounded top-0 start-0"></div>
+                  <!--end::Bar-->
+                  <!--begin::Info-->
+                  <div class="fw-bold ms-5 text-gray-600">
+                    <!--begin::Time-->
+                    <div class="fs-5">
+                      <span class="fs-7 text-gray-400 text-uppercase">09 Апрель, 2022</span>
+                    </div>
+                    <!--end::Time-->
+                    <!--begin::Title-->
+                    <a href="#" class="fs-5 fw-bolder text-gray-800 text-hover-primary mb-2">Сделка #235338687</a>
+                    <!--end::Title-->
+                    <!--begin::User-->
+                    <div class="text-gray-400">
+                      <span class="badge badge-light me-2">Склад</span>
+                      <span class="text-success">$5600</span>
+                    </div>
+                    <!--end::User-->
+                  </div>
+                  <!--end::Info-->
+                </div>
+                <!--end::Time-->
+                <!--begin::Time-->
+                <div class="d-flex flex-stack position-relative mt-8">
+                  <!--begin::Bar-->
+                  <div class="position-absolute h-100 w-4px bg-light-danger rounded top-0 start-0"></div>
+                  <!--end::Bar-->
+                  <!--begin::Info-->
+                  <div class="fw-bold ms-5 text-gray-600">
+                    <!--begin::Time-->
+                    <div class="fs-5">
+                      <span class="fs-7 text-gray-400 text-uppercase">09 Апрель, 2022</span>
+                    </div>
+                    <!--end::Time-->
+                    <!--begin::Title-->
+                    <a href="#" class="fs-5 fw-bolder text-gray-800 text-hover-primary mb-2">Сделка #235338687</a>
+                    <!--end::Title-->
+                    <!--begin::User-->
+                    <div class="text-gray-400">
+                      <span class="badge badge-light me-2">Склад</span>
+                      <span class="text-success">$5600</span>
+                    </div>
+                    <!--end::User-->
+                  </div>
+                  <!--end::Info-->
+                </div>
+                <!--end::Time-->
+                <!--begin::Time-->
+                <div class="d-flex flex-stack position-relative mt-8">
+                  <!--begin::Bar-->
+                  <div class="position-absolute h-100 w-4px bg-info-second rounded top-0 start-0"></div>
+                  <!--end::Bar-->
+                  <!--begin::Info-->
+                  <div class="fw-bold ms-5 text-gray-600">
+                    <!--begin::Time-->
+                    <div class="fs-5">
+                      <span class="fs-7 text-gray-400 text-uppercase">09 Апрель, 2022</span>
+                    </div>
+                    <!--end::Time-->
+                    <!--begin::Title-->
+                    <a href="#" class="fs-5 fw-bolder text-gray-800 text-hover-primary mb-2">Сделка #235338687</a>
+                    <!--end::Title-->
+                    <!--begin::User-->
+                    <div class="text-gray-400">
+                      <span class="badge badge-light me-2">Склад</span>
+                      <span class="text-success">$5600</span>
+                    </div>
+                    <!--end::User-->
+                  </div>
+                  <!--end::Info-->
+                </div>
+                <!--end::Time-->
+                <!--begin::Time-->
+                <div class="d-flex flex-stack position-relative mt-8">
+                  <!--begin::Bar-->
+                  <div class="position-absolute h-100 w-4px bg-success-super rounded top-0 start-0"></div>
+                  <!--end::Bar-->
+                  <!--begin::Info-->
+                  <div class="fw-bold ms-5 text-gray-600">
+                    <!--begin::Time-->
+                    <div class="fs-5">
+                      <span class="fs-7 text-gray-400 text-uppercase">09 Апрель, 2022</span>
+                    </div>
+                    <!--end::Time-->
+                    <!--begin::Title-->
+                    <a href="#" class="fs-5 fw-bolder text-gray-800 text-hover-primary mb-2">Сделка #235338687</a>
+                    <!--end::Title-->
+                    <!--begin::User-->
+                    <div class="text-gray-400">
+                      <span class="badge badge-light me-2">Склад</span>
+                      <span class="text-success">$5600</span>
+                    </div>
+                    <!--end::User-->
+                  </div>
+                  <!--end::Info-->
+                </div>
+                <!--end::Time-->
+                <!--begin::Time-->
+                <div class="d-flex flex-stack position-relative mt-8">
+                  <!--begin::Bar-->
+                  <div class="position-absolute h-100 w-4px bg-default-gray rounded top-0 start-0"></div>
+                  <!--end::Bar-->
+                  <!--begin::Info-->
+                  <div class="fw-bold ms-5 text-gray-600">
+                    <!--begin::Time-->
+                    <div class="fs-5">
+                      <span class="fs-7 text-gray-400 text-uppercase">09 Апрель, 2022</span>
+                    </div>
+                    <!--end::Time-->
+                    <!--begin::Title-->
+                    <a href="#" class="fs-5 fw-bolder text-gray-800 text-hover-primary mb-2">Сделка #235338687</a>
+                    <!--end::Title-->
+                    <!--begin::User-->
+                    <div class="text-gray-400">
+                      <span class="badge badge-light me-2">Склад</span>
+                      <span class="text-success">$5600</span>
+                    </div>
+                    <!--end::User-->
+                  </div>
+                  <!--end::Info-->
+                </div>
+                <!--end::Time-->
+              </div>
+              <!--end::Day-->
+
+          </div>
+          <!--end:::Tab pane-->
+          <!--begin:::Tab pane-->
+          <div class="tab-pane fade" id="kt_contact_view_activity" role="tabpanel">
+            <!--begin::Timeline-->
+            <div class="timeline-label">
+              <!--begin::Item-->
+              <div class="timeline-item">
+                <!--begin::Label-->
+                <div class="timeline-label fw-bolder text-gray-800 fs-6">08:42</div>
+                <!--end::Label-->
+                <!--begin::Badge-->
+                <div class="timeline-badge">
+                  <i class="fa fa-genderless text-warning fs-1"></i>
+                </div>
+                <!--end::Badge-->
+                <!--begin::Text-->
+                <div class="fw-mormal timeline-content text-muted ps-3">Outlines keep you honest. And keep structure</div>
+                <!--end::Text-->
+              </div>
+              <!--end::Item-->
+              <!--begin::Item-->
+              <div class="timeline-item">
+                <!--begin::Label-->
+                <div class="timeline-label fw-bolder text-gray-800 fs-6">10:00</div>
+                <!--end::Label-->
+                <!--begin::Badge-->
+                <div class="timeline-badge">
+                  <i class="fa fa-genderless text-success fs-1"></i>
+                </div>
+                <!--end::Badge-->
+                <!--begin::Content-->
+                <div class="timeline-content d-flex">
+                  <span class="fw-bolder text-gray-800 ps-3">AEOL meeting</span>
+                </div>
+                <!--end::Content-->
+              </div>
+              <!--end::Item-->
+              <!--begin::Item-->
+              <div class="timeline-item">
+                <!--begin::Label-->
+                <div class="timeline-label fw-bolder text-gray-800 fs-6">14:37</div>
+                <!--end::Label-->
+                <!--begin::Badge-->
+                <div class="timeline-badge">
+                  <i class="fa fa-genderless text-danger fs-1"></i>
+                </div>
+                <!--end::Badge-->
+                <!--begin::Desc-->
+                <div class="timeline-content fw-bolder text-gray-800 ps-3">Make deposit
+                  <a href="#" class="text-primary">USD 700</a>. to ESL</div>
+                <!--end::Desc-->
+              </div>
+              <!--end::Item-->
+              <!--begin::Item-->
+              <div class="timeline-item">
+                <!--begin::Label-->
+                <div class="timeline-label fw-bolder text-gray-800 fs-6">16:50</div>
+                <!--end::Label-->
+                <!--begin::Badge-->
+                <div class="timeline-badge">
+                  <i class="fa fa-genderless text-primary fs-1"></i>
+                </div>
+                <!--end::Badge-->
+                <!--begin::Text-->
+                <div class="timeline-content fw-mormal text-muted ps-3">Indulging in poorly driving and keep structure keep great</div>
+                <!--end::Text-->
+              </div>
+              <!--end::Item-->
+              <!--begin::Item-->
+              <div class="timeline-item">
+                <!--begin::Label-->
+                <div class="timeline-label fw-bolder text-gray-800 fs-6">21:03</div>
+                <!--end::Label-->
+                <!--begin::Badge-->
+                <div class="timeline-badge">
+                  <i class="fa fa-genderless text-danger fs-1"></i>
+                </div>
+                <!--end::Badge-->
+                <!--begin::Desc-->
+                <div class="timeline-content fw-bold text-gray-800 ps-3">New order placed
+                  <a href="#" class="text-primary">#XF-2356</a>.</div>
+                <!--end::Desc-->
+              </div>
+              <!--end::Item-->
+              <!--begin::Item-->
+              <div class="timeline-item">
+                <!--begin::Label-->
+                <div class="timeline-label fw-bolder text-gray-800 fs-6">16:50</div>
+                <!--end::Label-->
+                <!--begin::Badge-->
+                <div class="timeline-badge">
+                  <i class="fa fa-genderless text-primary fs-1"></i>
+                </div>
+                <!--end::Badge-->
+                <!--begin::Text-->
+                <div class="timeline-content fw-mormal text-muted ps-3">Indulging in poorly driving and keep structure keep great</div>
+                <!--end::Text-->
+              </div>
+              <!--end::Item-->
+              <!--begin::Item-->
+              <div class="timeline-item">
+                <!--begin::Label-->
+                <div class="timeline-label fw-bolder text-gray-800 fs-6">21:03</div>
+                <!--end::Label-->
+                <!--begin::Badge-->
+                <div class="timeline-badge">
+                  <i class="fa fa-genderless text-danger fs-1"></i>
+                </div>
+                <!--end::Badge-->
+                <!--begin::Desc-->
+                <div class="timeline-content fw-bold text-gray-800 ps-3">New order placed
+                  <a href="#" class="text-primary">#XF-2356</a>.</div>
+                <!--end::Desc-->
+              </div>
+              <!--end::Item-->
+              <!--begin::Item-->
+              <div class="timeline-item">
+                <!--begin::Label-->
+                <div class="timeline-label fw-bolder text-gray-800 fs-6">10:30</div>
+                <!--end::Label-->
+                <!--begin::Badge-->
+                <div class="timeline-badge">
+                  <i class="fa fa-genderless text-success fs-1"></i>
+                </div>
+                <!--end::Badge-->
+                <!--begin::Text-->
+                <div class="timeline-content fw-mormal text-muted ps-3">Finance KPI Mobile app launch preparion meeting</div>
+                <!--end::Text-->
+              </div>
+              <!--end::Item-->
+            </div>
+            <!--end::Timeline-->
+          </div>
+          <!--end:::Tab pane-->
+        </div>
+        <!--end::Tab content-->
+      </div>
+      <!--end::Card body-->
+    </div>
+    <!--end::Contacts-->
+  </div>
+</div>

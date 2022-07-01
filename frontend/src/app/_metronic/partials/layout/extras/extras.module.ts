@@ -8,7 +8,7 @@ import {UserInnerComponent} from './dropdown-inner/user-inner/user-inner.compone
 import {LayoutScrollTopComponent} from './scroll-top/scroll-top.component';
 import {TranslationModule} from '../../../../modules/i18n';
 import {SearchResultInnerComponent} from "./dropdown-inner/search-result-inner/search-result-inner.component";
-import {NgbTooltipModule} from "@ng-bootstrap/ng-bootstrap";
+import {NgbDropdownModule, NgbTooltipModule} from "@ng-bootstrap/ng-bootstrap";
 import {FormsModule} from "@angular/forms";
 
 @NgModule({
@@ -19,7 +19,7 @@ import {FormsModule} from "@angular/forms";
     UserInnerComponent,
     LayoutScrollTopComponent,
   ],
-  imports: [CommonModule, FormsModule, InlineSVGModule, RouterModule, TranslationModule, NgbTooltipModule],
+    imports: [CommonModule, FormsModule, InlineSVGModule, RouterModule, TranslationModule, NgbTooltipModule, NgbDropdownModule],
   exports: [
     NotificationsInnerComponent,
     QuickLinksInnerComponent,

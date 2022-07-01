@@ -2,14 +2,16 @@ import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { TranslationService } from '../../../../../../modules/i18n';
 import { AuthService, UserType } from '../../../../../../modules/auth';
+import {NgbDropdownConfig} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-user-inner',
   templateUrl: './user-inner.component.html',
+  providers: [NgbDropdownConfig]
 })
 export class UserInnerComponent implements OnInit, OnDestroy {
   @HostBinding('class')
-  class = `menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px`;
+  class = `menu-column menu-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px`;
   @HostBinding('attr.data-kt-menu') dataKtMenu = 'true';
 
   language: LanguageFlag;
@@ -68,28 +70,13 @@ const languages = [
     flag: './assets/media/flags/united-states.svg',
   },
   {
-    lang: 'zh',
-    name: 'Mandarin',
-    flag: './assets/media/flags/china.svg',
+    lang: 'ru',
+    name: 'Russian',
+    flag: './assets/media/flags/russia.svg',
   },
   {
-    lang: 'es',
-    name: 'Spanish',
-    flag: './assets/media/flags/spain.svg',
-  },
-  {
-    lang: 'ja',
-    name: 'Japanese',
-    flag: './assets/media/flags/japan.svg',
-  },
-  {
-    lang: 'de',
-    name: 'German',
-    flag: './assets/media/flags/germany.svg',
-  },
-  {
-    lang: 'fr',
-    name: 'French',
-    flag: './assets/media/flags/france.svg',
+    lang: 'ua',
+    name: 'Ukraine',
+    flag: './assets/media/flags/ukraine.svg',
   },
 ];

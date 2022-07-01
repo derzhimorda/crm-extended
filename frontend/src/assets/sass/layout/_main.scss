@@ -73,3 +73,64 @@ body {
 		}
 	}
 }
+//Custom styles
+.dropdown-toggle::after{
+  display: none;
+}
+.dropdown-item:hover, .dropdown-item:focus{
+  background: none!important;
+}
+.ng-select.ng-select-opened>.ng-select-container, .ng-select .ng-select-container{
+  background: #F5F8FA;
+  border-color: #F5F8FA;
+}
+.ng-dropdown-panel.ng-select-bottom{
+  border: none;
+  box-shadow: 4px 15px 10px -10px rgb(82 63 105 / 15%);
+}
+.ng-select.ng-select-single .ng-select-container{
+  height:43px;
+  border: none;
+}
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected, .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
+  color: #fff;
+  background-color: #009EF7;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 11'%3e%3cpath fill='%23FFFFFF' d='M4.89557 6.49823L2.79487 4.26513C2.26967 3.70683 1.38251 3.70683 0.857309 4.26513C0.375593 4.77721 0.375593 5.57574 0.857309 6.08781L4.74989 10.2257C5.14476 10.6455 5.81176 10.6455 6.20663 10.2257L13.1427 2.85252C13.6244 2.34044 13.6244 1.54191 13.1427 1.02984C12.6175 0.471537 11.7303 0.471536 11.2051 1.02984L6.06096 6.49823C5.74506 6.83403 5.21146 6.83403 4.89557 6.49823Z'/%3e%3c/svg%3e");
+  background-size: 0.8rem;
+  background-position: center right 1.25rem;
+  background-repeat: no-repeat;
+}
+.ng-select.ng-select-focused:not(.ng-select-opened)>.ng-select-container{
+  border-color:transparent!important;
+  box-shadow: none!important;
+}
+//.ng-select.ng-select-single .ng-select-container .ng-value-container .ng-value{
+//  color: #5E6278;
+//  font-size: 1.1rem;
+//  font-weight: 600;
+//}
+.ng-option .ng-option-label, .ng-select.ng-select-single .ng-select-container
+.ng-value-container .ng-value{
+  color: #5E6278;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.ng-dropdown-panel .ng-option-label{
+  transition: all .3s ease;
+}
+.ng-option-selected .ng-option-label{
+  color:#ffffff!important;
+}
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked{
+  background-color: #F1FAFF;
+}
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked .ng-option-label{
+  color: #009EF7;
+}
+.ng-select .ng-select-container{
+  width: 99%;
+  margin-left: 2px;
+}
+.cdk-overlay-container{
+  z-index: 99999;
+}

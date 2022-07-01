@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import {TestComponent} from "./test/test.component";
 
 const Routing: Routes = [
   {
@@ -39,11 +38,46 @@ const Routing: Routes = [
     loadChildren: () =>
       import('../modules/apps/chat/chat.module').then((m) => m.ChatModule),
   },
-
   {
-    path: 'my-page', // <= Page URL
-    component: TestComponent // <= Page component registration
-},
+    path: 'clients',
+    loadChildren: () =>
+      import('./clients/clients.module').then((m) => m.ClientsModule),
+  },
+  {
+    path: 'deals',
+    loadChildren: () =>
+      import('./deals/deals.module').then((m) => m.DealsModule),
+  },
+  {
+    path: 'invoices',
+    loadChildren: () =>
+      import('./documents/invoices/invoices.module').then((m) => m.InvoicesModule),
+  },
+  {
+    path: 'invoices/:id',
+    loadChildren: () =>
+      import('./documents/invoices/invoice/invoice.module').then((m) => m.InvoiceModule),
+  },
+  {
+    path: 'users',
+    loadChildren: () =>
+      import('./users/users.module').then((m) => m.UsersModule),
+  },
+  {
+    path: 'roles',
+    loadChildren: () =>
+      import('./roles/roles.module').then((m) => m.RolesModule),
+  },
+  {
+    path: 'settings',
+    loadChildren: () =>
+      import('./settings/settings.module').then((m) => m.SettingsModule),
+  },
+  {
+    path: 'tasks',
+    loadChildren: () =>
+      import('./tasks/tasks.module').then((m) => m.TasksModule),
+  },
   {
     path: '',
     redirectTo: '/dashboard',

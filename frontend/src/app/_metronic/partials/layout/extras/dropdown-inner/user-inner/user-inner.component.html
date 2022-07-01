@@ -1,5 +1,5 @@
 <ng-container *ngIf="user$ | async as _user">
-  <div class="menu-item px-3">
+  <div class="menu-item px-3" ngbDropdownItem>
     <div class="menu-content d-flex align-items-center px-3">
       <div class="symbol symbol-50px me-5">
         <img alt="Logo" [src]="_user.pic" />
@@ -21,92 +21,93 @@
 
   <div class="separator my-2"></div>
 
-  <div class="menu-item px-5">
+  <div class="menu-item px-5" ngbDropdownItem>
     <a routerLink="/crafted/pages/profile" class="menu-link px-5">
-      My Profile
+      Профиль
     </a>
   </div>
 
-  <div class="menu-item px-5">
+  <div class="menu-item px-5" ngbDropdownItem>
     <a class="menu-link px-5 cursor-pointer" placement="top-start" ngbTooltip="Coming soon">
-      <span class="menu-text">My Projects</span>
+      <span class="menu-text">Мои сделки</span>
       <span class="menu-badge">
         <span class="badge badge-light-danger badge-circle fw-bolder fs-7">3</span>
       </span>
     </a>
   </div>
 
-  <div
-    class="menu-item px-5"
-    data-kt-menu-trigger="hover"
-    data-kt-menu-placement="left-start"
-    data-kt-menu-flip="bottom"
-  >
-    <a class="menu-link px-5 cursor-pointer">
-      <span class="menu-title">My Subscription</span>
-      <span class="menu-arrow"></span>
-    </a>
+<!--  <div-->
+<!--    class="menu-item px-5"-->
+<!--    data-kt-menu-trigger="hover"-->
+<!--    data-kt-menu-placement="left-start"-->
+<!--    data-kt-menu-flip="bottom"-->
+<!--  >-->
+<!--    <a class="menu-link px-5 cursor-pointer">-->
+<!--      <span class="menu-title">My Subscription</span>-->
+<!--      <span class="menu-arrow"></span>-->
+<!--    </a>-->
 
-    <div class="menu-sub menu-sub-dropdown w-175px py-4">
-      <div class="menu-item px-3">
-        <a class="menu-link px-5 cursor-pointer" placement="top-start" ngbTooltip="Coming soon">Referrals</a>
-      </div>
+<!--    <div class="menu-sub menu-sub-dropdown w-175px py-4">-->
+<!--      <div class="menu-item px-3">-->
+<!--        <a class="menu-link px-5 cursor-pointer" placement="top-start" ngbTooltip="Coming soon">Referrals</a>-->
+<!--      </div>-->
 
-      <div class="menu-item px-3">
-        <a class="menu-link px-5 cursor-pointer" placement="top-start" ngbTooltip="Coming soon">Billing</a>
-      </div>
+<!--      <div class="menu-item px-3">-->
+<!--        <a class="menu-link px-5 cursor-pointer" placement="top-start" ngbTooltip="Coming soon">Billing</a>-->
+<!--      </div>-->
 
-      <div class="menu-item px-3">
-        <a class="menu-link px-5 cursor-pointer" placement="top-start" ngbTooltip="Coming soon">Payments</a>
-      </div>
+<!--      <div class="menu-item px-3">-->
+<!--        <a class="menu-link px-5 cursor-pointer" placement="top-start" ngbTooltip="Coming soon">Payments</a>-->
+<!--      </div>-->
 
-      <div class="menu-item px-3">
-        <a class="menu-link d-flex flex-stack px-5 cursor-pointer" placement="top-start" ngbTooltip="Coming soon">
-          Statements
-          <i
-            class="fas fa-exclamation-circle ms-2 fs-7"
-            data-bs-toggle="tooltip"
-            title="View your statements"
-          ></i>
-        </a>
-      </div>
+<!--      <div class="menu-item px-3">-->
+<!--        <a class="menu-link d-flex flex-stack px-5 cursor-pointer" placement="top-start" ngbTooltip="Coming soon">-->
+<!--          Statements-->
+<!--          <i-->
+<!--            class="fas fa-exclamation-circle ms-2 fs-7"-->
+<!--            data-bs-toggle="tooltip"-->
+<!--            title="View your statements"-->
+<!--          ></i>-->
+<!--        </a>-->
+<!--      </div>-->
 
-      <div class="separator my-2"></div>
+<!--      <div class="separator my-2"></div>-->
 
-      <div class="menu-item px-3">
-        <div class="menu-content px-3">
-          <label
-            class="form-check form-switch form-check-custom form-check-solid"
-          >
-            <input
-              class="form-check-input w-30px h-20px"
-              type="checkbox"
-              value="1"
-              defaultChecked="{true}"
-              name="notifications"
-            />
-            <span class="form-check-label text-muted fs-7">Notifications</span>
-          </label>
-        </div>
-      </div>
-    </div>
-  </div>
+<!--      <div class="menu-item px-3">-->
+<!--        <div class="menu-content px-3">-->
+<!--          <label-->
+<!--            class="form-check form-switch form-check-custom form-check-solid"-->
+<!--          >-->
+<!--            <input-->
+<!--              class="form-check-input w-30px h-20px"-->
+<!--              type="checkbox"-->
+<!--              value="1"-->
+<!--              defaultChecked="{true}"-->
+<!--              name="notifications"-->
+<!--            />-->
+<!--            <span class="form-check-label text-muted fs-7">Notifications</span>-->
+<!--          </label>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
 
-  <div class="menu-item px-5">
-    <a class="menu-link px-5 cursor-pointer" placement="top-start" ngbTooltip="Coming soon">My Statements</a>
+  <div class="menu-item px-5" ngbDropdownItem>
+    <a class="menu-link px-5 cursor-pointer" placement="top-start" ngbTooltip="Coming soon">Моя статистика</a>
   </div>
 
   <div class="separator my-2"></div>
 
   <div
     class="menu-item px-5"
-    data-kt-menu-trigger="hover"
+    data-kt-menu-trigger="click"
     data-kt-menu-placement="left-start"
     data-kt-menu-flip="bottom"
+    data-kt-menu="true"
   >
     <a class="menu-link px-5 cursor-pointer">
       <span class="menu-title position-relative">
-        Language
+        Язык
         <span
           class="
             fs-8
@@ -124,13 +125,13 @@
           <img
             class="w-15px h-15px rounded-1 ms-2"
             [src]="language.flag"
-            alt="metronic"
+            alt="{{language.name}}"
           />
         </span>
       </span>
     </a>
 
-    <div class="menu-sub menu-sub-dropdown w-175px py-4">
+    <div class="menu-sub menu-sub-dropdown w-175px py-4" data-kt-menu="true">
       <div
         *ngFor="let l of langs"
         class="menu-item px-3 cursor-pointer"
@@ -149,13 +150,13 @@
     </div>
   </div>
 
-  <div class="menu-item px-5 my-1">
+  <div class="menu-item px-5 my-1" ngbDropdownItem>
     <a routerLink="/crafted/account/settings" class="menu-link px-5">
-      Account Settings
+      Настройки аккаунта
     </a>
   </div>
 
-  <div class="menu-item px-5">
-    <a (click)="logout()" class="menu-link px-5 cursor-pointer"> Sign Out </a>
+  <div class="menu-item px-5" ngbDropdownItem>
+    <a (click)="logout()" class="menu-link px-5 cursor-pointer">Выйти</a>
   </div>
 </ng-container>
