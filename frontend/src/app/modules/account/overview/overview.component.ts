@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-overview',
+  selector: 'app-user-overview',
   templateUrl: './overview.component.html',
 })
 export class OverviewComponent implements OnInit {

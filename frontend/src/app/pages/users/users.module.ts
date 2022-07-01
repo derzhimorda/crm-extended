@@ -9,11 +9,18 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {NgSelectModule} from "@ng-select/ng-select";
 import { UserComponent } from './user/user.component';
 import {InlineSVGModule} from "ng-inline-svg-2";
+import {UserOverviewComponent} from "./user/user-overview/user-overview.component";
+import { UserSettingsComponent } from './user/user-settings/user-settings.component';
 
 
 
 @NgModule({
-  declarations: [UsersComponent, UserComponent],
+  declarations: [
+    UsersComponent,
+    UserComponent,
+    UserOverviewComponent,
+    UserSettingsComponent
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -24,7 +31,17 @@ import {InlineSVGModule} from "ng-inline-svg-2";
       {
         path: ':id',
         component: UserComponent,
-      },
+        children: [
+          {
+            path: 'overview',
+            component: UserOverviewComponent
+          },
+          {
+            path: 'settings',
+            component: UserSettingsComponent
+          }
+        ]
+      }
     ]),
     TranslateModule,
     NgbDropdownModule,
