@@ -1,1 +1,217 @@
-<p>user-settings works!</p>
+<ng-container *ngIf="user$ | async as _user">
+  <div class="card mb-5 mb-xl-10">
+    <form [formGroup]="userSettingForm">
+      <!--begin::Card header-->
+      <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
+        <!--begin::Card title-->
+        <div class="card-title m-0">
+          <h3 class="fw-bolder m-0">Настройки профиля</h3>
+        </div>
+        <!--end::Card title-->
+      </div>
+      <!--begin::Card header-->
+      <!--begin::Content-->
+      <div id="kt_account_settings_profile_details" class="collapse show">
+        <!--begin::Form-->
+        <form id="kt_account_profile_details_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
+          <!--begin::Card body-->
+          <div class="card-body border-top p-9">
+            <!--begin::Input group-->
+            <div class="row mb-6">
+              <!--begin::Label-->
+              <label class="col-lg-4 col-form-label fw-bold fs-6">Аватар</label>
+              <!--end::Label-->
+              <!--begin::Col-->
+              <div class="col-lg-8">
+                <!--begin::Image input-->
+                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('/assets/media/svg/avatars/blank.svg')">
+                  <!--begin::Preview existing avatar-->
+                  <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{_user.pic}})"></div>
+                  <!--end::Preview existing avatar-->
+                  <!--begin::Label-->
+                  <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="Change avatar">
+                    <i class="bi bi-pencil-fill fs-7"></i>
+                    <!--begin::Inputs-->
+                    <input type="file" name="avatar" accept=".png, .jpg, .jpeg">
+                    <input type="hidden" name="avatar_remove">
+                    <!--end::Inputs-->
+                  </label>
+                  <!--end::Label-->
+                  <!--begin::Cancel-->
+                  <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="Cancel avatar">
+                  <i class="bi bi-x fs-2"></i>
+                </span>
+                  <!--end::Cancel-->
+                  <!--begin::Remove-->
+                  <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="Remove avatar">
+                  <i class="bi bi-x fs-2"></i>
+                </span>
+                  <!--end::Remove-->
+                </div>
+                <!--end::Image input-->
+                <!--begin::Hint-->
+                <div class="form-text">Доступные типы: png, jpg, jpeg.</div>
+                <!--end::Hint-->
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="row mb-6">
+              <!--begin::Label-->
+              <label class="col-lg-4 col-form-label required fw-bold fs-6">Имя Фамилия</label>
+              <!--end::Label-->
+              <!--begin::Col-->
+              <div class="col-lg-8">
+                <!--begin::Row-->
+                <div class="row">
+                  <!--begin::Col-->
+                  <div class="col-lg-6 fv-row fv-plugins-icon-container">
+                    <input type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Имя" value="{{_user.firstname}}">
+                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-lg-6 fv-row fv-plugins-icon-container">
+                    <input type="text" name="lname" class="form-control form-control-lg form-control-solid" placeholder="Фамилия" value="{{_user.lastname}}">
+                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                  <!--end::Col-->
+                </div>
+                <!--end::Row-->
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="row mb-6">
+              <!--begin::Label-->
+              <label class="col-lg-4 col-form-label fw-bold fs-6">Компания</label>
+              <!--end::Label-->
+              <!--begin::Col-->
+              <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                <input type="text" name="company" class="form-control form-control-lg form-control-solid" placeholder="Компания" value="{{_user.companyName}}">
+                <div class="fv-plugins-message-container invalid-feedback"></div></div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="row mb-6">
+              <!--begin::Label-->
+              <label class="col-lg-4 col-form-label fw-bold fs-6">
+                <span class="required">Контактный номер</span>
+              </label>
+              <!--end::Label-->
+              <!--begin::Col-->
+              <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                <input type="tel" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Контактный номер" value="{{_user.phone}}">
+                <div class="fv-plugins-message-container invalid-feedback"></div></div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="row mb-6">
+              <!--begin::Label-->
+              <label class="col-lg-4 col-form-label fw-bold fs-6">
+                <span class="required">E-mail</span>
+              </label>
+              <!--end::Label-->
+              <!--begin::Col-->
+              <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                <input type="tel" name="phone" class="form-control form-control-lg form-control-solid" placeholder="E-mail" value="{{_user.email}}">
+                <div class="fv-plugins-message-container invalid-feedback"></div></div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="row mb-6">
+              <!--begin::Label-->
+              <label class="col-lg-4 col-form-label fw-bold fs-6">Адрес</label>
+              <!--end::Label-->
+              <!--begin::Col-->
+              <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                <input type="tel" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Адрес" value="{{_user.address?.addressLine}}">
+                <div class="fv-plugins-message-container invalid-feedback"></div></div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="row mb-6">
+              <!--begin::Label-->
+              <label class="col-lg-4 col-form-label fw-bold fs-6">Сайт компании</label>
+              <!--end::Label-->
+              <!--begin::Col-->
+              <div class="col-lg-8 fv-row">
+                <input type="text" name="website" class="form-control form-control-lg form-control-solid" placeholder="Company website" value="{{_user.website}}">
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="row mb-6">
+              <!--begin::Label-->
+              <label class="col-lg-4 col-form-label fw-bold fs-6">Платежная информация</label>
+              <!--end::Label-->
+              <!--begin::Col-->
+              <div class="col-lg-8 fv-row">
+                <textarea class="form-control form-control-solid" rows="3" name="target_details" placeholder="Платежные данные"></textarea>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+
+            <!--begin::Input group-->
+            <div class="row mb-6">
+              <!--begin::Label-->
+              <label class="col-lg-4 col-form-label required fw-bold fs-6">Коммуникация</label>
+              <!--end::Label-->
+              <!--begin::Col-->
+              <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                <!--begin::Options-->
+                <div class="d-flex align-items-center mt-3">
+                  <!--begin::Option-->
+                  <label class="form-check form-check-inline form-check-solid me-5">
+                    <input class="form-check-input" name="communication[]" type="checkbox" value="1" [checked]="_user.communication?.email">
+                    <span class="fw-bold ps-2 fs-6">Email</span>
+                  </label>
+                  <!--end::Option-->
+                  <!--begin::Option-->
+                  <label class="form-check form-check-inline form-check-solid">
+                    <input class="form-check-input" name="communication[]" type="checkbox" value="2" [checked]="_user.communication?.phone">
+                    <span class="fw-bold ps-2 fs-6">Телефон</span>
+                  </label>
+                  <!--end::Option-->
+                </div>
+                <!--end::Options-->
+                <div class="fv-plugins-message-container invalid-feedback"></div></div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+  <!--          <div class="row mb-0">-->
+  <!--            &lt;!&ndash;begin::Label&ndash;&gt;-->
+  <!--            <label class="col-lg-4 col-form-label fw-bold fs-6">Allow Marketing</label>-->
+  <!--            &lt;!&ndash;begin::Label&ndash;&gt;-->
+  <!--            &lt;!&ndash;begin::Label&ndash;&gt;-->
+  <!--            <div class="col-lg-8 d-flex align-items-center">-->
+  <!--              <div class="form-check form-check-solid form-switch fv-row">-->
+  <!--                <input class="form-check-input w-45px h-30px" type="checkbox" id="allowmarketing" checked="checked">-->
+  <!--                <label class="form-check-label" for="allowmarketing"></label>-->
+  <!--              </div>-->
+  <!--            </div>-->
+  <!--            &lt;!&ndash;begin::Label&ndash;&gt;-->
+  <!--          </div>-->
+            <!--end::Input group-->
+          </div>
+          <!--end::Card body-->
+          <!--begin::Actions-->
+          <div class="card-footer d-flex justify-content-end py-6 px-9">
+            <button type="reset" class="btn btn-light btn-active-light-primary me-2">Отменить</button>
+            <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Сохранить</button>
+          </div>
+          <!--end::Actions-->
+          <input type="hidden"><div></div></form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </form>
+  </div>
+</ng-container>

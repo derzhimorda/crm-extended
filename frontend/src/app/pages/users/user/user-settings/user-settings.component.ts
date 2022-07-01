@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Observable, Subscription} from "rxjs";
+import {AuthService, UserType} from "../../../../modules/auth";
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-user-settings',
@@ -6,10 +9,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-settings.component.scss']
 })
 export class UserSettingsComponent implements OnInit {
+  user$: Observable<UserType>;
+  private unsubscribe: Subscription[] = [];
+  userSettingForm = new FormGroup({
 
-  constructor() { }
+  });
+
+  constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
+    this.user$ = this.auth.currentUserSubject.asObservable();
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
 
 }

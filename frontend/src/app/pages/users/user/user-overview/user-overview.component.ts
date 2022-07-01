@@ -11,7 +11,7 @@ export class UserOverviewComponent implements OnInit {
   user$: Observable<UserType>;
   private unsubscribe: Subscription[] = [];
 
-  constructor(private auth: AuthService,) { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
     this.user$ = this.auth.currentUserSubject.asObservable();

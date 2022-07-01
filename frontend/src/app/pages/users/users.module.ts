@@ -11,6 +11,7 @@ import { UserComponent } from './user/user.component';
 import {InlineSVGModule} from "ng-inline-svg-2";
 import {UserOverviewComponent} from "./user/user-overview/user-overview.component";
 import { UserSettingsComponent } from './user/user-settings/user-settings.component';
+import { UserDealsComponent } from './user/user-deals/user-deals.component';
 
 
 
@@ -19,7 +20,8 @@ import { UserSettingsComponent } from './user/user-settings/user-settings.compon
     UsersComponent,
     UserComponent,
     UserOverviewComponent,
-    UserSettingsComponent
+    UserSettingsComponent,
+    UserDealsComponent
   ],
   imports: [
     CommonModule,
