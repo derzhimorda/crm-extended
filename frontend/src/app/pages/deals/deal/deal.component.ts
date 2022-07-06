@@ -3,7 +3,7 @@ import {IContent, ILayout} from "../../../_metronic/layout/core/default-layout.c
 import {LayoutService} from "../../../_metronic/layout";
 import {FormControl, FormGroup} from "@angular/forms";
 import {Deal} from "../deals.component";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-deal',
@@ -228,7 +228,7 @@ export class DealComponent implements OnInit {
   clientDeals: any;
   clientJobs: any;
 
-  constructor(private layout: LayoutService, private route: ActivatedRoute) { }
+  constructor(private layout: LayoutService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.layoutPage = this.layout.getConfig();
@@ -291,5 +291,9 @@ export class DealComponent implements OnInit {
 
   removeJob(id:number){
 
+  }
+
+  link(id: number) {
+    this.router.navigateByUrl(`/invoices/${id}`);
   }
 }
