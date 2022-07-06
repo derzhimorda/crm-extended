@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   hasError: boolean;
   returnUrl: string;
   isLoading$: Observable<boolean>;
+  isDev: true;
 
   // private fields
   private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
@@ -65,7 +66,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.defaultAuth.password,
         Validators.compose([
           Validators.required,
-          Validators.minLength(3),
+          Validators.minLength(6),
           Validators.maxLength(100),
         ]),
       ],
@@ -76,6 +77,20 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.hasError = false;
     const loginSubscr = this.authService
       .login(this.f.email.value, this.f.password.value)
+      .pipe(first())
+      .subscribe((user: UserModel | undefined) => {
+        if (user) {
+          this.router.navigate([this.returnUrl]);
+        } else {
+          this.hasError = true;
+        }
+      });
+    this.unsubscribe.push(loginSubscr);
+  }
+
+  guestLogin(){
+    const loginSubscr = this.authService
+      .login('welcome@demo.com', 'demo12334')
       .pipe(first())
       .subscribe((user: UserModel | undefined) => {
         if (user) {

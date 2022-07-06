@@ -69,12 +69,12 @@ export class AuthService implements OnDestroy {
 
   getUserByToken(): Observable<UserType> {
     const auth = this.getAuthFromLocalStorage();
-    if (!auth || !auth.authToken) {
+    if (!auth || !auth.token) {
       return of(undefined);
     }
 
     this.isLoadingSubject.next(true);
-    return this.authHttpService.getUserByToken(auth.authToken).pipe(
+    return this.authHttpService.getUserByToken(auth.token).pipe(
       map((user: UserType) => {
         if (user) {
           this.currentUserSubject.next(user);
@@ -112,8 +112,8 @@ export class AuthService implements OnDestroy {
 
   // private methods
   private setAuthFromLocalStorage(auth: AuthModel): boolean {
-    // store auth authToken/refreshToken/epiresIn in local storage to keep user logged in between page refreshes
-    if (auth && auth.authToken) {
+    // store auth token/refreshToken/epiresIn in local storage to keep user logged in between page refreshes
+    if (auth && auth.token) {
       localStorage.setItem(this.authLocalStorageToken, JSON.stringify(auth));
       return true;
     }
@@ -121,6 +121,21 @@ export class AuthService implements OnDestroy {
   }
 
   private getAuthFromLocalStorage(): AuthModel | undefined {
+    try {
+      const lsValue = localStorage.getItem(this.authLocalStorageToken);
+      if (!lsValue) {
+        return undefined;
+      }
+
+      const authData = JSON.parse(lsValue);
+      return authData;
+    } catch (error) {
+      console.error(error);
+      return undefined;
+    }
+  }
+
+  public getAuthLocal(): AuthModel | undefined {
     try {
       const lsValue = localStorage.getItem(this.authLocalStorageToken);
       if (!lsValue) {

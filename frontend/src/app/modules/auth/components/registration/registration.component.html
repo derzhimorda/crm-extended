@@ -7,32 +7,35 @@
 >
   <!--begin::Heading-->
   <div class="mb-10 text-center">
-    <h1 class="text-dark mb-3">Create an Account</h1>
+    <a routerLink="/" class="mb-12">
+      <img alt="Logo" src="./assets/media/logos/logo-1.svg" class="h-100px"/>
+    </a>
+    <h1 class="text-dark mb-3">Создать аккаунт</h1>
     <div class="text-gray-400 fw-bold fs-4">
-      Already have an account?
+      Уже есть аккаунт?
       <a
         routerLink="/auth/login"
         class="link-primary fw-bolder"
         [style.margin-left]="'5px'"
-        >Sign in?</a
+        >Войти?</a
       >
     </div>
   </div>
   <!--end::Heading-->
 
-  <button type="button" class="btn btn-light-primary fw-bolder w-100 mb-10">
-    <img
-      alt="Logo"
-      src="./assets/media/svg/brand-logos/google-icon.svg"
-      class="h-20px me-3"
-    />Sign in with Google
-  </button>
+<!--  <button type="button" class="btn btn-light-primary fw-bolder w-100 mb-10">-->
+<!--  <img-->
+<!--    alt="Logo"-->
+<!--    src="./assets/media/svg/brand-logos/google-icon.svg"-->
+<!--    class="h-20px me-3"-->
+<!--  />Sign in with Google-->
+<!--</button>-->
 
-  <div class="d-flex align-items-center mb-10">
-    <div class="border-bottom border-gray-300 mw-50 w-100"></div>
-    <span class="fw-bold text-gray-400 fs-7 mx-2">OR</span>
-    <div class="border-bottom border-gray-300 mw-50 w-100"></div>
-  </div>
+<!--  <div class="d-flex align-items-center mb-10">-->
+<!--    <div class="border-bottom border-gray-300 mw-50 w-100"></div>-->
+<!--    <span class="fw-bold text-gray-400 fs-7 mx-2">OR</span>-->
+<!--    <div class="border-bottom border-gray-300 mw-50 w-100"></div>-->
+<!--  </div>-->
 
   <!-- begin::Alert error-->
   <ng-container *ngIf="hasError">
@@ -46,13 +49,13 @@
 
   <!--begin::Form group-->
   <div class="row fv-row mb-7">
-    <label class="form-label fw-bolder text-dark fs-6">Fullname</label>
+    <label class="form-label fw-bolder text-dark fs-6">Имя Фамилия</label>
     <input
       class="form-control form-control-lg form-control-solid"
       type="text"
       name="fullname"
       formControlName="fullname"
-      placeholder="Fullname"
+      placeholder="Имя Фамилия"
       autocomplete="off"
       [ngClass]="{
         'is-invalid': registrationForm.controls['fullname'].invalid,
@@ -88,11 +91,11 @@
 
   <!--begin::Form group-->
   <div class="fv-row mb-7">
-    <label class="form-label fw-bolder text-dark fs-6">Email</label>
+    <label class="form-label fw-bolder text-dark fs-6">E-mail</label>
     <input
       class="form-control form-control-lg form-control-solid"
       type="email"
-      placeholder="Email"
+      placeholder="E-mail"
       name="email"
       formControlName="email"
       autocomplete="off"
@@ -138,11 +141,11 @@
 
   <!--begin::Form group-->
   <div class="mb-10 fv-row">
-    <label class="form-label fw-bolder text-dark fs-6">Password</label>
+    <label class="form-label fw-bolder text-dark fs-6">Пароль</label>
     <input
       class="form-control form-control-lg form-control-solid"
       type="password"
-      placeholder="Password"
+      placeholder="Пароль"
       name="password"
       formControlName="password"
       autocomplete="off"
@@ -180,11 +183,11 @@
 
   <!--begin::Form group-->
   <div class="fv-row mb-5">
-    <label class="form-label fw-bolder text-dark fs-6">Confirm Password</label>
+    <label class="form-label fw-bolder text-dark fs-6">Подтвердить пароль</label>
     <input
       class="form-control form-control-lg form-control-solid"
       type="password"
-      placeholder="Confirm password"
+      placeholder="Подтвердить пароль"
       name="cPassword"
       autocomplete="off"
       formControlName="cPassword"
@@ -225,7 +228,7 @@
     >
       <div class="fv-plugins-message-container">
         <div class="fv-help-block">
-          'Passsword' and 'Confirm Password' didn't match.
+          'Пароль' и 'Подтвердить пароль' не совпадают.
         </div>
       </div>
     </ng-container>
@@ -233,29 +236,29 @@
   <!--end::Form group-->
 
   <!--begin::Form group-->
-  <div class="fv-row mb-10">
-    <div class="form-check form-check-custom form-check-solid">
-      <input
-        id="kt_login_toc_agree"
-        type="checkbox"
-        formControlName="agree"
-        name="agree"
-        class="form-check-input"
-      />
+<!--  <div class="fv-row mb-10">-->
+<!--    <div class="form-check form-check-custom form-check-solid">-->
+<!--      <input-->
+<!--        id="kt_login_toc_agree"-->
+<!--        type="checkbox"-->
+<!--        formControlName="agree"-->
+<!--        name="agree"-->
+<!--        class="form-check-input"-->
+<!--      />-->
 
-      <label
-        for="kt_login_toc_agree"
-        class="form-check-label fw-bold text-gray-700 fs-6"
-      >
-        I Agree the&nbsp;<a
-          href="https://keenthemes.com/metronic/?page=faq"
-          target="_blank"
-          class="ms-1 link-primary"
-          >terms and conditions</a
-        >.
-      </label>
-    </div>
-  </div>
+<!--      <label-->
+<!--        for="kt_login_toc_agree"-->
+<!--        class="form-check-label fw-bold text-gray-700 fs-6"-->
+<!--      >-->
+<!--        I Agree the&nbsp;<a-->
+<!--          href="https://keenthemes.com/metronic/?page=faq"-->
+<!--          target="_blank"-->
+<!--          class="ms-1 link-primary"-->
+<!--          >terms and conditions</a-->
+<!--        >.-->
+<!--      </label>-->
+<!--    </div>-->
+<!--  </div>-->
   <!--end::Form group-->
 
   <!--begin::Form group-->
@@ -269,11 +272,11 @@
       class="btn btn-lg btn-primary w-100 mb-5"
     >
       <ng-container *ngIf="(isLoading$ | async) === false">
-        <span class="indicator-label">Submit</span>
+        <span class="indicator-label">Зарегистрироваться</span>
       </ng-container>
       <ng-container *ngIf="isLoading$ | async">
         <span class="indicator-progress" [style.display]="'block'">
-          Please wait...
+          Пожалуйста подождите...
           <span
             class="spinner-border spinner-border-sm align-middle ms-2"
           ></span>
@@ -286,7 +289,7 @@
       id="kt_login_signup_form_cancel_button"
       class="btn btn-lg btn-light-primary w-100 mb-5"
     >
-      Cancel
+      Отмена
     </a>
   </div>
   <!--end::Form group-->
