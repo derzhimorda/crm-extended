@@ -14,8 +14,10 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.0",
+        "laravel/sanctum": "^2.15",
         "laravel/telescope": "^4.9",
         "laravel/tinker": "^2.0",
+        "laravel/ui": "^3.4",
         "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {

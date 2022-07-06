@@ -2,90 +2,86 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SignUpRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+
 
 class AuthController extends Controller
 {
-    /**
-     * Create a new AuthController instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function register(Request $request)
     {
-        $this->middleware('auth:api', ['except' => ['login', 'signup']]);
+        $fields = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|string|unique:users,email',
+            'password' => 'required|string|confirmed'
+        ]);
+
+        $user = User::create([
+            'name' => $fields['name'],
+            'email' => $fields['email'],
+            'password' => bcrypt($fields['password'])
+        ]);
+
+        $token = $user->createToken('myapptoken')->plainTextToken;
+
+        $response = [
+            'user' => $user,
+            'token' => $token
+        ];
+
+        return response($response, 201);
     }
 
-    /**
-     * Get a JWT via given credentials.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function login()
-    {
-        $credentials = request(['email', 'password']);
-
-        if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'E-mail или пароль не верный'], 401);
-        }
-
-        return $this->respondWithToken($token);
-    }
-
-    /**
-     * Get the authenticated User.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function me()
-    {
-        return response()->json(auth()->user());
-    }
-
-    /**
-     * Log the user out (Invalidate the token).
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function logout()
     {
-        auth()->logout();
+        auth()->user()->tokens()->delete();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return [
+            'message' => 'Logged out.'
+        ];
     }
 
-    /**
-     * Refresh a token.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function refresh()
+    public function me(Request $request)
     {
-        return $this->respondWithToken(auth()->refresh());
+        $user = $request->user();
+        if($user){
+            $user['roles'] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+//            foreach (User::find($user->id)->roles as $key => $value){
+//               $user['roles'][$key] = $value['role_id'];
+//            }
+        }
+//        $user['roles'] = User::find($user->id)->roles[0]['role_id'];
+
+        return response($user, 200);
     }
 
-    /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function respondWithToken($token)
+    public function login(Request $request)
     {
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => auth()->user()
+        $fields = $request->validate([
+            'email' => 'required|string',
+            'password' => 'required|string'
         ]);
-    }
 
-    public function signup(SignUpRequest $request){
-        $user = User::create($request->all());
-        return $this->login($request);
+        $user = User::where('email', $fields['email'])->first();
+
+        if(!$user || !Hash::check($fields['password'], $user->password)){
+            return response([
+                'message' => 'Неверные данные для входа'
+            ], 401);
+        }
+
+        $token = $user->createToken('myapptoken')->plainTextToken;
+
+        $user['token'] = $token;
+
+//        $response = [
+//            'user' => $user,
+//            'token' => $token
+//        ];
+
+        return response($user, 201);
     }
 }

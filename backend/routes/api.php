@@ -1,34 +1,39 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 //Auth routs
-Route::group([
-    'middleware' => 'api',
-], function ($router) {
-    Route::post('login', [\App\Http\Controllers\AuthController::class, 'login']);
-    Route::post('signup', [\App\Http\Controllers\AuthController::class, 'signup']);
+Route::group(['middleware' => ['auth:sanctum']], function (){
+    Route::get('/all', [\App\Http\Controllers\Api\Users\UsersController::class, 'getUsers']);
+    Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
     Route::get('me', [\App\Http\Controllers\AuthController::class, 'me']);
-    Route::post('send-password-reset-link', [\App\Http\Controllers\ResetPasswordController::class, 'sendEmail']);
-    Route::post('reset-password', [\App\Http\Controllers\ChangePasswordController::class, 'process']);
 });
+Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
+Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
+//todo
+Route::post('send-password-reset-link', [\App\Http\Controllers\ResetPasswordController::class, 'sendEmail']);
+Route::post('reset-password', [\App\Http\Controllers\ChangePasswordController::class, 'process']);
 
 //User routs
 Route::group([
-    'middleware' => 'api',
+    'middleware' => ['auth:sanctum'],
     'prefix' => 'users'
 ], function ($router) {
-    Route::get('all', [\App\Http\Controllers\Api\Users\UsersController::class, 'getUsers']);
-    Route::get('roles/all', [\App\Http\Controllers\Api\Users\UsersController::class, 'getAllRoles']);
+    Route::get('/all', [\App\Http\Controllers\Api\Users\UsersController::class, 'getUsers']);
+    Route::get('/roles/all', [\App\Http\Controllers\Api\Users\UsersController::class, 'getAllRoles']);
     Route::get('/{id}', [\App\Http\Controllers\Api\Users\UsersController::class, 'getUserById']);
     Route::get('/{id}/remove', [\App\Http\Controllers\Api\Users\UsersController::class, 'removeUser']);
     Route::post('/new', [\App\Http\Controllers\Api\Users\UsersController::class, 'newUser']);
 });
 
+//Services and helping routes
+Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'settings'], function (){
+    Route::get('/all', [\App\Http\Controllers\Api\OptionsController::class, 'getAllOptions']);
+});
+
 //Client routs
 Route::group([
-    'middleware' => 'api',
+    'middleware' => ['auth:sanctum'],
     'prefix' => 'clients'
 ], function ($router){
     Route::get('/', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'all']);
@@ -41,7 +46,7 @@ Route::group([
 
 //Deal routs
 Route::group([
-    'middleware' => 'api',
+    'middleware' => ['auth:sanctum'],
     'prefix' => 'deals'
 ], function ($router){
     Route::get('/', [\App\Http\Controllers\Api\Deals\DealsController::class, 'all']);
@@ -62,6 +67,5 @@ Route::group([
     Route::post('/complete_job/{id}', [\App\Http\Controllers\Api\Deals\JobsDealController::class, 'completeJob']);
     Route::post('/new_job', [\App\Http\Controllers\Api\Deals\JobsDealController::class, 'newJob']);
 });
-
 
 
