@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { ILayout } from './default-layout.config';
 import { LayoutService } from './layout.service';
+import {SettingsService} from "./settings.service";
 
 @Injectable({
   providedIn: 'root',
 })
 export class LayoutInitService {
-  constructor(private layout: LayoutService) {}
+  constructor(private layout: LayoutService, private settings: SettingsService) {}
 
   init() {
     this.layout.initConfig();
+    this.settings.initSettings();
 
     // init base layout
     this.initLayout();

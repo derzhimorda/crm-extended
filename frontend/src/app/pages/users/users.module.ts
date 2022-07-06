@@ -41,6 +41,10 @@ import { UserDealsComponent } from './user/user-deals/user-deals.component';
           {
             path: 'settings',
             component: UserSettingsComponent
+          },
+          {
+            path: 'deals',
+            component: UserDealsComponent
           }
         ]
       }

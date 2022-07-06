@@ -11,6 +11,7 @@ import {TranslationService} from "../../../modules/i18n";
 export class UserComponent implements OnInit {
   user$: Observable<UserType>;
   private unsubscribe: Subscription[] = [];
+
   constructor(
     private auth: AuthService,
     private translationService: TranslationService

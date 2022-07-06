@@ -163,7 +163,62 @@ export class UsersTable {
         instagram: 'https://instagram.com/guest',
       },
     },
+    {
+      id: 6,
+      username: 'guest',
+      password: 'demo12334',
+      email: 'welcome@demo.com',
+      authToken: 'auth-token-d2dff7b82f784de584b60964abbe45b8',
+      refreshToken: 'auth-token-c999ccfe74aa40d0aa1a64c5e620c1a8',
+      roles: [9], // Guest
+      pic: './assets/media/stock/600x400/img-38.jpg',
+      fullname: 'Manu G',
+      firstname: 'Привет',
+      lastname: 'Гость',
+      occupation: 'CFO',
+      companyName: 'Keenthemes',
+      phone: '456669067892',
+      language: 'en',
+      timeZone: 'International Date Line West',
+      communication: {
+        email: true,
+        sms: true,
+        phone: false,
+      },
+      emailSettings: {
+        emailNotification: true,
+        sendCopyToPersonalEmail: false,
+        activityRelatesEmail: {
+          youHaveNewNotifications: false,
+          youAreSentADirectMessage: false,
+          someoneAddsYouAsAsAConnection: true,
+          uponNewOrder: false,
+          newMembershipApproval: false,
+          memberRegistration: true,
+        },
+        updatesFromKeenthemes: {
+          newsAboutKeenthemesProductsAndFeatureUpdates: false,
+          tipsOnGettingMoreOutOfKeen: false,
+          thingsYouMissedSindeYouLastLoggedIntoKeen: true,
+          newsAboutMetronicOnPartnerProductsAndOtherServices: true,
+          tipsOnMetronicBusinessProducts: true,
+        },
+      },
+      address: {
+        addressLine: '1467  Griffin Street',
+        city: 'Phoenix',
+        state: 'Arizona',
+        postCode: '85012',
+      },
+      socialNetworks: {
+        linkedIn: 'https://linkedin.com/guest',
+        facebook: 'https://facebook.com/guest',
+        twitter: 'https://twitter.com/guest',
+        instagram: 'https://instagram.com/guest',
+      },
+    },
   ];
+
 
   public static tokens: any = [
     {

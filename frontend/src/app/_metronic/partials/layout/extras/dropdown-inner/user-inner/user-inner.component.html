@@ -8,11 +8,9 @@
       <div class="d-flex flex-column">
         <div class="fw-bolder d-flex align-items-center fs-5">
           {{ _user.firstname }} {{ _user.lastname }}
-          <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2"
-            >Pro</span
-          >
+          <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2" >Pro</span>
         </div>
-        <a class="fw-bold text-muted text-hover-primary fs-7 cursor-pointer">
+        <a class="fw-bold text-muted text-hover-primary fs-7 cursor-pointer" >
           {{ _user.email }}
         </a>
       </div>
@@ -21,14 +19,14 @@
 
   <div class="separator my-2"></div>
 
-  <div class="menu-item px-5" ngbDropdownItem>
-    <a routerLink="/users/{{_user.id}}/overview" class="menu-link px-5">
+  <div class="menu-item px-5" ngbDropdownItem >
+    <a routerLink="/users/{{_user.id}}/overview" class="menu-link px-5" >
       Профиль
     </a>
   </div>
 
-  <div class="menu-item px-5" ngbDropdownItem>
-    <a class="menu-link px-5 cursor-pointer">
+  <div class="menu-item px-5" ngbDropdownItem >
+    <a class="menu-link px-5 cursor-pointer" routerLink="/users/1/deals">
       <span class="menu-text">Мои сделки</span>
       <span class="menu-badge">
         <span class="badge badge-light-danger badge-circle fw-bolder fs-7">3</span>
@@ -92,11 +90,11 @@
 <!--    </div>-->
 <!--  </div>-->
 
-  <div class="menu-item px-5" ngbDropdownItem>
+  <div class="menu-item px-5" ngbDropdownItem >
     <a class="menu-link px-5 cursor-pointer">Моя статистика</a>
   </div>
 
-  <div class="separator my-2"></div>
+  <div class="separator my-2" ></div>
 
   <div
     class="menu-item px-5"
@@ -148,7 +146,7 @@
     </div>
   </div>
 
-  <div class="menu-item px-5 my-1" ngbDropdownItem>
+  <div class="menu-item px-5 my-1" ngbDropdownItem >
     <a routerLink="/crafted/account/settings" class="menu-link px-5">
       Настройки аккаунта
     </a>

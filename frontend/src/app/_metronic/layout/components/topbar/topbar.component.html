@@ -1,5 +1,6 @@
 <!-- Search toolbar -->
-<div class="d-flex align-items-center" [ngClass]="toolbarButtonMarginClass">
+<ng-container *ngIf="user$ | async as _user">
+  <div class="d-flex align-items-center" [ngClass]="toolbarButtonMarginClass">
   <div
     class="btn btn-icon btn-active-light-primary position-relative"
     [ngClass]="toolbarButtonHeightClass"
@@ -16,7 +17,7 @@
   </div>
   <app-search-result-inner></app-search-result-inner>
 </div>
-
+</ng-container>
 <!-- Activities -->
 <!--<div class="d-flex align-items-center" [ngClass]="toolbarButtonMarginClass">-->
 <!--  &lt;!&ndash; begin::Drawer toggle &ndash;&gt;-->
@@ -54,34 +55,19 @@
 <!--</div>-->
 
 <!-- CHAT -->
-<!--<div class="d-flex align-items-center" [ngClass]="toolbarButtonMarginClass">-->
-<!--  &lt;!&ndash; begin::Menu wrapper &ndash;&gt;-->
-<!--  <div-->
-<!--    class="btn btn-icon btn-active-light-primary position-relative"-->
-<!--    [ngClass]="toolbarButtonHeightClass"-->
-<!--    id="kt_drawer_chat_toggle"-->
-<!--  >-->
-<!--    <span-->
-<!--      [inlineSVG]="'./assets/media/icons/duotune/communication/com012.svg'"-->
-<!--      class="svg-icon"-->
-<!--      [ngClass]="toolbarButtonIconSizeClass"-->
-<!--    ></span>-->
-<!--    <span-->
-<!--      class="-->
-<!--        bullet bullet-dot-->
-<!--        bg-success-->
-<!--        h-6px-->
-<!--        w-6px-->
-<!--        position-absolute-->
-<!--        translate-middle-->
-<!--        top-0-->
-<!--        start-50-->
-<!--        animation-blink-->
-<!--      "-->
-<!--    ></span>-->
-<!--  </div>-->
-<!--  &lt;!&ndash; end::Menu wrapper &ndash;&gt;-->
-<!--</div>-->
+<ng-container *ngIf="user$ | async as _user">
+  <div class="d-flex align-items-center" [ngClass]="toolbarButtonMarginClass">
+    <!-- begin::Menu wrapper -->
+    <div
+      class="btn btn-icon btn-active-light-primary position-relative"
+      [ngClass]="toolbarButtonHeightClass"
+      id="kt_drawer_tasks_toggle">
+      <span [inlineSVG]="'./assets/media/icons/duotune/general/gen007.svg'" class="svg-icon" [ngClass]="toolbarButtonIconSizeClass"></span>
+      <span class=" bullet bullet-dot bg-success h-6px w-6px position-absolute translate-middle top-0 start-50 animation-blink"></span>
+    </div>
+    <!-- end::Menu wrapper -->
+  </div>
+</ng-container>
 
 <!-- Quick links -->
 <!--<div class="d-flex align-items-center" [ngClass]="toolbarButtonMarginClass">-->

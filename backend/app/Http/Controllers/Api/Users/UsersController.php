@@ -32,7 +32,7 @@ class UsersController extends Controller
 
     public function getAllRoles()
     {
-        return Roles::all();
+        return response(['roles' => Roles::all()], 201);
     }
 
     public function newUser(Request $request):JsonResponse
