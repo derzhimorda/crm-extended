@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/demo1",
+            "outputPath": "dist/ardi-crm-prod",
             "allowedCommonJsDependencies": [
               "object-path",
               "apexcharts",
