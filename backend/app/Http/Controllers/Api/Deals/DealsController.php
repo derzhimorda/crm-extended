@@ -15,7 +15,7 @@ class DealsController extends Controller
 {
     public function all()
     {
-        return Deals::all();
+        return Deals::orderBy('created_at', 'DESC')->get();
     }
 
     public function deal($deal_id)

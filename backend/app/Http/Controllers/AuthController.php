@@ -21,7 +21,7 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $fields['name'],
             'email' => $fields['email'],
-            'password' => bcrypt($fields['password'])
+            'password' => Hash::make($fields['password'])
         ]);
 
         $token = $user->createToken('myapptoken')->plainTextToken;
@@ -76,11 +76,6 @@ class AuthController extends Controller
         $token = $user->createToken('myapptoken')->plainTextToken;
 
         $user['token'] = $token;
-
-//        $response = [
-//            'user' => $user,
-//            'token' => $token
-//        ];
 
         return response($user, 201);
     }

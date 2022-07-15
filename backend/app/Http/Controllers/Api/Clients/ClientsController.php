@@ -21,6 +21,13 @@ class ClientsController extends Controller
         return UserProfiles::where('user_id', $client_id)->first();
     }
 
+    public function getClients()
+    {
+        return User::whereRelation('roles', 'role_id', '=', 6)->with('roles')
+            ->leftJoin('user_profiles', 'users.id', '=', 'user_profiles.user_id')
+            ->get(['user_profiles.*', 'users.*']);
+    }
+
     public function update(Request $request)
     {
         $client = UserProfiles::where('user_id', $request->user_id);

@@ -7,6 +7,8 @@ import {TranslationModule} from "../../modules/i18n";
 import {NgbDropdownModule, NgbTypeaheadModule} from "@ng-bootstrap/ng-bootstrap";
 import {ReactiveFormsModule} from "@angular/forms";
 import {NgSelectModule} from "@ng-select/ng-select";
+import {ClientsResolver} from "./clients.resolver";
+import {UsersResolver} from "../users/users.resolver";
 
 
 @NgModule({
@@ -17,6 +19,7 @@ import {NgSelectModule} from "@ng-select/ng-select";
       {
         path: '',
         component: ClientsComponent,
+        resolve: {users: UsersResolver}
       },
     ]),
     WidgetsModule,

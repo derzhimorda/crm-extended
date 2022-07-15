@@ -1,21 +1,32 @@
 import {DefaultLayoutConfig} from "./default-layout.config";
 
 export interface ISettings{
-  roles: IRoles;
+  deal_statuses: [];
+  deal_types: [];
+  delivery_types: [];
+  delivery_ways: [];
+  job_types: [];
+  pay_types: [];
+  pickup_types: [];
+  roles: [];
+  user_statuses: [];
 }
 
-export interface IRoles{
-  id:number;
-  name: string;
-  name_en: string;
-  description: string;
-}
+// export interface IRoles{
+//   id:number;
+//   name: string;
+//   name_en: string;
+//   description: string;
+// }
 
 export const DefaultSettings: ISettings = {
-  roles: {
-    id: 0,
-    name: '',
-    name_en: '',
-    description: ''
-  }
+  deal_statuses: [],
+  deal_types: [],
+  delivery_types: [],
+  delivery_ways: [],
+  job_types: [],
+  pay_types: [],
+  pickup_types: [],
+  roles: [],
+  user_statuses: []
 }

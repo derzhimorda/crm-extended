@@ -5,15 +5,20 @@ namespace App\Http\Controllers\Api\Users;
 use App\Http\Controllers\Controller;
 use App\Models\Roles;
 use App\Models\User;
+use App\Models\UserProfiles;
 use App\Models\UsersRole;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
     public function all()
     {
-        return User::with('roles')->get();
+        return User::with(['roles', 'deals'])
+            ->leftJoin('user_profiles', 'users.id', '=', 'user_profiles.user_id')
+            ->get(['user_profiles.*', 'users.*']);
+
     }
 
     public function getUsers()
@@ -40,7 +45,28 @@ class UsersController extends Controller
         $user = User::create($request->all());
 
         if($user){
-            UsersRole::create(['user_id' => $user->id, 'role_id' => $request->role]);
+            if($request->role){
+                foreach ($request->role as $role){
+                    if(!is_null($role)){
+                        UsersRole::create([
+                            'user_id' => $user->id,
+                            'role_id' => $role
+                        ]);
+                    }
+                }
+            }
+
+            $randomStr =
+
+            UserProfiles::create([
+                'user_id' => $user->id,
+                'name' => $request->name,
+                'email' => $request->email,
+                'mobile' => $request->mobile,
+                'profile_avatar' => $request->profile_avatar ? $request->profile_avatar : ''
+            ]);
+
+            //TODO Send email to new user after register with her credentials.
 
             return response()->json([
                 'data' => 'Пользователь создан',

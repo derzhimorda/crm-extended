@@ -13,6 +13,10 @@ import {
   OwlDateTimeModule,
   OwlNativeDateTimeModule
 } from "@danielmoncada/angular-datetime-picker";
+import {DealsResolver} from "./deals.resolver";
+import {ClientsResolver} from "../clients/clients.resolver";
+import {UsersResolver} from "../users/users.resolver";
+import {DealResolver} from "./deal/deal.resolver";
 
 export const MY_NATIVE_FORMATS = {
   fullPickerInput: {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'},
@@ -31,10 +35,12 @@ export const MY_NATIVE_FORMATS = {
       {
         path: '',
         component: DealsComponent,
+        resolve: {deals: DealsResolver, clients: ClientsResolver, users: UsersResolver}
       },
       {
         path: ':id',
         component: DealComponent,
+        resolve: {deal: DealResolver}
       }
     ]),
     WidgetsModule,

@@ -20,7 +20,10 @@ class OptionsController extends Controller
         $options['pay_types'] = DB::table('pay_types')->where('status', 1)->get() ?? null;
         $options['pickup_types'] = DB::table('pickup_types')->where('status', 1)->get() ?? null;
         $options['job_types'] = DB::table('job_types')->get() ?? null;
-        $options['user_statuses'] = DB::table('user_statuses')->get() ?? null;
+        $options['user_statuses'] = DB::table('user_statuses')->where('status', 1)->get() ?? null;
+        $options['client_fb_statuses'] = DB::table('client_fb_statuses')->where('status', 1)->get() ?? null;
+        $options['client_deliveries'] = DB::table('client_deliveries')->where('status', 1)->get() ?? null;
+        $options['client_ref_statuses'] = DB::table('client_ref_statuses')->where('status', 1)->get() ?? null;
 
         return response($options, 201);
     }

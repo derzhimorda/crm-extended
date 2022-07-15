@@ -19,7 +19,7 @@ Route::group([
     'middleware' => ['auth:sanctum'],
     'prefix' => 'users'
 ], function ($router) {
-    Route::get('/all', [\App\Http\Controllers\Api\Users\UsersController::class, 'getUsers']);
+    Route::get('/all', [\App\Http\Controllers\Api\Users\UsersController::class, 'all']);
     Route::get('/roles/all', [\App\Http\Controllers\Api\Users\UsersController::class, 'getAllRoles']);
     Route::get('/{id}', [\App\Http\Controllers\Api\Users\UsersController::class, 'getUserById']);
     Route::get('/{id}/remove', [\App\Http\Controllers\Api\Users\UsersController::class, 'removeUser']);
@@ -36,7 +36,7 @@ Route::group([
     'middleware' => ['auth:sanctum'],
     'prefix' => 'clients'
 ], function ($router){
-    Route::get('/', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'all']);
+    Route::get('/all', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'getClients']);
     Route::get('/{id}', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'client']);
     Route::get('/authUser', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'authUser']);
     Route::post('/update', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'update']);
@@ -49,7 +49,7 @@ Route::group([
     'middleware' => ['auth:sanctum'],
     'prefix' => 'deals'
 ], function ($router){
-    Route::get('/', [\App\Http\Controllers\Api\Deals\DealsController::class, 'all']);
+    Route::get('/all', [\App\Http\Controllers\Api\Deals\DealsController::class, 'all']);
     Route::get('/{id}', [\App\Http\Controllers\Api\Deals\DealsController::class, 'deal']);
     Route::get('/{id}/remove', [\App\Http\Controllers\Api\Deals\DealsController::class, 'removeDeal']);
     Route::get('/options/get', [\App\Http\Controllers\Api\Deals\DealsController::class, 'options']);

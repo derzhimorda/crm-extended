@@ -1,0 +1,57 @@
+import { Injectable } from '@angular/core';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {AuthService} from "../modules/auth";
+import {Observable, of} from "rxjs";
+import {ISettings} from "../_metronic/layout/core/default-settings.config";
+import {environment} from "../../environments/environment";
+import {Client} from "../pages/clients/clients.component";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UsersService {
+  private httpHeaders: HttpHeaders;
+
+  constructor(private http: HttpClient, private auth: AuthService) {
+    this.initService();
+  }
+
+  initService() {
+    const authData = this.auth.getAuthLocal();
+    if (!authData || !authData.token) {
+      return of(undefined);
+    }
+
+    this.httpHeaders = new HttpHeaders({
+      Authorization: `Bearer ${authData.token}`,
+    });
+  }
+
+  getAllClients(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/clients/all`, {
+      headers: this.httpHeaders,
+    });
+  }
+
+  getAllUsers(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/users/all`, {
+      headers: this.httpHeaders,
+    });
+  }
+
+  makeNewUser(data:any): Observable<any>{
+    return this.http.post(`${environment.apiUrl}/users/new`, data, {
+      headers: this.httpHeaders,
+    });
+  }
+
+  // editUser(data:any): Observable<any>{
+  //   return;
+  // }
+
+  removeUser(id:number){
+    return this.http.get(`${environment.apiUrl}/users/${id}/remove`, {
+      headers: this.httpHeaders,
+    });
+  }
+}

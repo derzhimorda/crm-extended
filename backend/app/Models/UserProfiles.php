@@ -10,7 +10,7 @@ class UserProfiles extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'client_name',
+        'user_id', 'name',
         'mobile', 'add_mobile',
         'email', 'ySell',
         'adviser_id', 'manager_id',
@@ -18,6 +18,7 @@ class UserProfiles extends Model
         'ref_option_id', 'delivery_id',
         'fb_link', 'tg_link',
         'vb_link', 'profile_avatar',
-        'company'
+        'company', 'partner_fb',
+        'position'
     ];
 }

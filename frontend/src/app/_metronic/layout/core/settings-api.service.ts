@@ -3,25 +3,32 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
 import {AuthService} from "../../../modules/auth";
 import {Observable, of} from "rxjs";
-import {IRoles, ISettings} from "./default-settings.config";
+import {ISettings} from "./default-settings.config";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SettingsApiService {
+  private httpHeaders:any;
 
-  constructor(private http: HttpClient, private auth: AuthService) { }
+  constructor(private http: HttpClient, private auth: AuthService) {
+    this.initService();
+  }
 
-  getSettings(): Observable<any>{
-    const auth = this.auth.getAuthLocal();
-    if (!auth || !auth.token) {
+  initService() {
+    const authData = this.auth.getAuthLocal();
+    if (!authData || !authData.token) {
       return of(undefined);
     }
-    const httpHeaders = new HttpHeaders({
-      Authorization: `Bearer ${auth.token}`,
+
+    this.httpHeaders = new HttpHeaders({
+      Authorization: `Bearer ${authData.token}`,
     });
+  }
+
+  getSettings(): Observable<any>{
     return this.http.get<ISettings>(`${environment.apiUrl}/settings/all`, {
-      headers: httpHeaders,
+      headers: this.httpHeaders,
     });
   }
 }

@@ -16,7 +16,7 @@
               </svg>
             </span>
             <!--end::Svg Icon-->
-            <input [formControl]="filter" type="text" data-kt-customer-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="{{'CLIENTS.SEARCH_CUSTOMERS' | translate}}">
+            <input type="text" (input)="search($event.target)" class="form-control form-control-solid w-250px ps-15" placeholder="{{'CLIENTS.SEARCH_CUSTOMERS' | translate}}">
           </div>
           <!--end::Search-->
         </div>
@@ -57,10 +57,9 @@
                     <!--end::Label-->
                     <!--begin::Input-->
                     <ng-select [items]="statuses"
-                     bindLabel="label"
+                     bindLabel="name"
                      bindValue="id"
                      [formControl]="filterStatus"
-                               (change)="filterOptions($event)"
                     #filterClients>
                     </ng-select>
                     <!--end::Input-->
@@ -137,7 +136,7 @@
                             <!--begin::Image input-->
                             <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('/assets/media/svg/avatars/blank.svg')">
                               <!--begin::Preview existing avatar-->
-                              <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{miscAvatar}})"></div>
+                              <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{getRandProfileImage()}})"></div>
                               <!--end::Preview existing avatar-->
                               <!--begin::Edit-->
                               <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="Change avatar">
@@ -265,72 +264,71 @@
                             <div class="fv-plugins-message-container invalid-feedback"></div>
                           </div>
                           <!--end::Input group-->
-                          <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                          <div class="d-flex flex-column mb-7 fv-row">
                             <!--begin::Label-->
                             <label class="fs-6 fw-bold mb-2">
                               <span>Ответственный</span>
                             </label>
                             <!--end::Label-->
                             <!--begin::Input-->
-<!--                            <select2 [data]="managers" styleMode="noStyle" formControlName="adviser_id" [value]="1"></select2>-->
-                            <ng-select [items]="managers"
-                             bindLabel="label"
+                            <ng-select [items]="advisers"
+                             bindLabel="name"
                              bindValue="id"
                              formControlName="adviser_id">
                             </ng-select>
                             <!--end::Input-->
                           </div>
-                          <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                          <div class="d-flex flex-column mb-7 fv-row">
                             <!--begin::Label-->
                             <label class="fs-6 fw-bold mb-2">
                               <span>Менеджер</span>
                             </label>
                             <ng-select [items]="managers"
-                             bindLabel="label"
+                             bindLabel="name"
                              bindValue="id"
                              formControlName="adviser_id">
                             </ng-select>
                           </div>
-                          <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                          <div class="d-flex flex-column mb-7 fv-row">
                             <!--begin::Label-->
                             <label class="fs-6 fw-bold mb-2">
                               <span>Статус работы</span>
                             </label>
                             <ng-select [items]="statuses"
-                             bindLabel="label"
+                             bindLabel="name"
                              bindValue="id"
                              formControlName="adviser_id">
                             </ng-select>
                           </div>
-                          <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                          <div class="d-flex flex-column mb-7 fv-row">
                             <!--begin::Label-->
                             <label class="fs-6 fw-bold mb-2">
                               <span>FB статус</span>
                             </label>
                             <ng-select [items]="fb_status"
-                             bindLabel="label"
+                             bindLabel="name"
                              bindValue="id"
                              formControlName="adviser_id">
                             </ng-select>
                           </div>
-                          <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                          <div class="d-flex flex-column mb-7 fv-row">
                             <!--begin::Label-->
                             <label class="fs-6 fw-bold mb-2">
                               <span>Откуда пришел</span>
                             </label>
                             <ng-select [items]="afilate_types"
-                             bindLabel="label"
+                             bindLabel="name"
                              bindValue="id"
                              formControlName="adviser_id">
                             </ng-select>
                           </div>
-                          <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                          <div class="d-flex flex-column mb-7 fv-row">
                             <!--begin::Label-->
                             <label class="fs-6 fw-bold mb-2">
                               <span>С кем возит</span>
                             </label>
                             <ng-select [items]="delivery"
-                             bindLabel="label"
+                             bindLabel="name"
                              bindValue="id"
                              formControlName="adviser_id">
                             </ng-select>
@@ -407,30 +405,31 @@
           <!--begin::Table head-->
           <thead>
           <!--begin::Table row-->
-          <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0"><th class="w-10px pe-2 sorting_disabled" rowspan="1" colspan="1" aria-label="" style="width: 29.25px;">
-            <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-              <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="1">
-            </div>
-          </th>
-            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Customer Name: activate to sort column ascending">{{'CLIENTS.CUSTOMER_NAME' | translate}}</th>
-            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending">{{'CLIENTS.CUSTOMER_PHONE' | translate}}</th>
-            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Company: activate to sort column ascending">{{'CLIENTS.CUSTOMER_EMAIL' | translate}}</th>
-            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Payment Method: activate to sort column ascending">{{'CLIENTS.CUSTOMER_COMPANY' | translate}}</th>
-            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Created Date: activate to sort column ascending">{{'CLIENTS.CUSTOMER_STATUS' | translate}}</th>
+          <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+<!--            <th class="w-10px pe-2 sorting_disabled" rowspan="1" colspan="1" aria-label="" style="width: 29.25px;">-->
+<!--              <div class="form-check form-check-sm form-check-custom form-check-solid me-3">-->
+<!--                <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="1">-->
+<!--              </div>-->
+<!--            </th>-->
+            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1">{{'CLIENTS.CUSTOMER_NAME' | translate}}</th>
+            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1">{{'CLIENTS.CUSTOMER_PHONE' | translate}}</th>
+            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1">{{'CLIENTS.CUSTOMER_EMAIL' | translate}}</th>
+            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1">{{'CLIENTS.CUSTOMER_COMPANY' | translate}}</th>
+            <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1">{{'CLIENTS.CUSTOMER_STATUS' | translate}}</th>
           </tr>
           <!--end::Table row-->
           </thead>
           <!--end::Table head-->
           <!--begin::Table body-->
           <tbody class="fw-bold text-gray-600">
-          <ng-container *ngFor="let client of clients$ | async">
-            <tr class="odd" (click)="openClientCard(client.id)">
+          <ng-container *ngFor="let client of clients">
+            <tr class="odd" (click)="openClientCard(client.user_id)">
               <!--begin::Checkbox-->
-              <td>
-                <div class="form-check form-check-sm form-check-custom form-check-solid">
-                  <input class="form-check-input" type="checkbox" value="1">
-                </div>
-              </td>
+<!--              <td>-->
+<!--                <div class="form-check form-check-sm form-check-custom form-check-solid">-->
+<!--                  <input class="form-check-input" type="checkbox" value="1">-->
+<!--                </div>-->
+<!--              </td>-->
               <!--end::Checkbox-->
               <!--begin::Name=-->
               <td>
@@ -439,14 +438,15 @@
                   <div class="me-5 position-relative">
                     <!--begin::Avatar-->
                     <div class="symbol symbol-35px symbol-circle">
-                      <img alt="Pic" src="{{client.profile_avatar}}">
+                      <img alt="Pic" src="{{client?.profile_avatar ? client?.profile_avatar : getRandProfileImage()}}">
+<!--                      <img alt="Pic" src="{{client?.profile_avatar}}">-->
                     </div>
                     <!--end::Avatar-->
                   </div>
                   <!--end::Wrapper-->
                   <!--begin::Info-->
                   <div class="d-flex flex-column justify-content-center">
-                    {{client.client_name}}
+                    {{client.name}}
                   </div>
                   <!--end::Info-->
                 </div>
@@ -462,7 +462,7 @@
               <!--end::Company=-->
               <!--begin::Payment method=-->
               <td>
-                {{client.company}}
+                {{client?.company}}
               </td>
               <!--end::Payment method=-->
               <!--begin::Date=-->
@@ -613,13 +613,13 @@
                         <div class="fv-plugins-message-container invalid-feedback"></div></div>
                       <!--end::Input group-->
                       <!--begin::Input group-->
-                      <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                      <div class="d-flex flex-column mb-7 fv-row">
                         <!--begin::Label-->
                         <label class="fs-6 fw-bold mb-2 required">
                           <span>Статус сделки</span>
                         </label>
-                        <ng-select [items]="deal_statuses"
-                         bindLabel="label"
+                        <ng-select [items]="getClientOption('deal_statuses')"
+                         bindLabel="name"
                          bindValue="id"
                          formControlName="deal_statuses_id">
                         </ng-select>
@@ -629,87 +629,86 @@
                       <div class="fw-bolder fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_add_deal_info" role="button" aria-expanded="false" aria-controls="kt_deal_details">
                         Детали сделки
                         <span class="ms-2 rotate-180">
-															<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-															<span class="svg-icon svg-icon-3">
-																<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-																	<path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor"></path>
-																</svg>
-															</span>
-                          <!--end::Svg Icon-->
-														</span>
+                          <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                          <span class="svg-icon svg-icon-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                              <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor"></path>
+                            </svg>
+                          </span>
+                      <!--end::Svg Icon-->
+                        </span>
                       </div>
                       <!--end::Deal additional info-->
                       <!--begin::Deal additional collapse-->
                       <div id="kt_modal_add_deal_info" class="collapse">
                         <!--begin::Input group-->
-                        <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                        <div class="d-flex flex-column mb-7 fv-row">
                           <!--begin::Label-->
                           <label class="fs-6 fw-bold mb-2">
                             <span>Менеджер</span>
                           </label>
                           <!--end::Label-->
                           <ng-select [items]="managers"
-                           bindLabel="label"
+                           bindLabel="name"
                            bindValue="id"
                            formControlName="manager_id">
                           </ng-select>
                         </div>
-                        <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                        <div class="d-flex flex-column mb-7 fv-row">
                           <!--begin::Label-->
                           <label class="fs-6 fw-bold mb-2">
                             <span>Ответственный</span>
                           </label>
-                          <!--end::Label-->
-                          <ng-select [items]="managers"
-                           bindLabel="label"
+                          <ng-select [items]="advisers"
+                           bindLabel="name"
                            bindValue="id"
                            formControlName="adviser_id">
                           </ng-select>
                         </div>
-                        <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                        <div class="d-flex flex-column mb-7 fv-row">
                           <!--begin::Label-->
                           <label class="fs-6 fw-bold mb-2">
                             <span>Направление</span>
                           </label>
                           <!--end::Label-->
                           <ng-select [items]="delivery_ways"
-                           bindLabel="label"
+                           bindLabel="name"
                            bindValue="id"
                            formControlName="delivery_ways_id">
                           </ng-select>
                         </div>
-                        <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                        <div class="d-flex flex-column mb-7 fv-row">
                           <!--begin::Label-->
                           <label class="fs-6 fw-bold mb-2">
                             <span>Тип доставки</span>
                           </label>
                           <!--end::Label-->
                           <ng-select [items]="delivery_types"
-                           bindLabel="label"
+                           bindLabel="name"
                            bindValue="id"
                            formControlName="delivery_types_id">
                           </ng-select>
                         </div>
-                        <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                        <div class="d-flex flex-column mb-7 fv-row">
                           <!--begin::Label-->
                           <label class="fs-6 fw-bold mb-2">
                             <span>Забор груза</span>
                           </label>
                           <!--end::Label-->
                           <ng-select [items]="pickup_types"
-                           bindLabel="label"
+                           bindLabel="name"
                            bindValue="id"
                            formControlName="pickup_types_id">
                           </ng-select>
                         </div>
-                        <div class="d-flex flex-column mb-7 fv-row" data-select2-id="select2-data-134-8u2g">
+                        <div class="d-flex flex-column mb-7 fv-row">
                           <!--begin::Label-->
                           <label class="fs-6 fw-bold mb-2">
                             <span>Тип оплаты</span>
                           </label>
                           <!--end::Label-->
                           <ng-select [items]="pay_types"
-                           bindLabel="label"
+                           bindLabel="name"
                            bindValue="id"
                            formControlName="pay_types_id">
                           </ng-select>
@@ -782,7 +781,7 @@
             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" ngbDropdownMenu aria-labelledby="dropdownConfig">
               <!--begin::Menu item-->
               <div class="menu-item px-3" ngbDropdownItem>
-                <a href="" class="menu-link px-3" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer" (click)="editClient(client.id)">{{'GENERAL.EDIT' | translate}}</a>
+                <a href="" class="menu-link px-3" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer" (click)="editClient(client.user_id)">{{'GENERAL.EDIT' | translate}}</a>
               </div>
               <!--end::Menu item-->
               <!--begin::Menu item-->
@@ -804,13 +803,13 @@
         <div class="d-flex gap-7 align-items-center">
           <!--begin::Avatar-->
           <div class="symbol symbol-circle symbol-100px">
-            <img src="{{client.profile_avatar}}" alt="avatar">
+            <img src="{{client?.profile_avatar ? client?.profile_avatar : getRandProfileImage()}}" alt="avatar">
           </div>
           <!--end::Avatar-->
           <!--begin::Contact details-->
           <div class="d-flex flex-column gap-2">
             <!--begin::Name-->
-            <h3 class="mb-0">{{client.client_name}}</h3>
+            <h3 class="mb-0">{{client?.name}}</h3>
             <!--end::Name-->
             <!--begin::Email-->
             <div class="d-flex align-items-center gap-2">
@@ -822,7 +821,7 @@
                 </svg>
               </span>
               <!--end::Svg Icon-->
-              <a href="mailto:anna_lebed@gmail.com" class="text-muted text-hover-primary">{{client.email}}</a>
+              <a href="mailto:anna_lebed@gmail.com" class="text-muted text-hover-primary">{{client?.email}}</a>
             </div>
             <!--end::Email-->
             <!--begin::Phone-->
@@ -835,11 +834,11 @@
                 </svg>
               </span>
               <!--end::Svg Icon-->
-              <a href="tel:{{client.mobile}}" class="text-muted text-hover-primary">{{client.mobile}}</a>
+              <a href="tel:{{client?.mobile}}" class="text-muted text-hover-primary">{{client?.mobile}}</a>
             </div>
             <!--end::Phone-->
             <!--begin::Facebook-->
-            <div class="d-flex align-items-center gap-2" *ngIf="client.fb_link">
+            <div class="d-flex align-items-center gap-2" *ngIf="client?.fb_link">
               <!--begin::Svg Icon | path: assets/media/icons/duotune/social/soc004.svg-->
               <span class="svg-icon svg-icon-2" >
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -848,9 +847,9 @@
                 </svg>
               </span>
               <!--end::Svg Icon-->
-              <a href="{{client.fb_link}}" target="_blank" class="text-muted text-hover-primary">Facebook</a>
+              <a href="{{client?.fb_link}}" target="_blank" class="text-muted text-hover-primary">Facebook</a>
             </div>
-            <div class="d-flex align-items-center gap-2" *ngIf="client.ySell">
+            <div class="d-flex align-items-center gap-2" *ngIf="client?.ySell">
               <!--begin::Svg Icon | path: assets/media/icons/duotune/ecommerce/ecm001.svg-->
               <span class="svg-icon svg-icon-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -861,9 +860,9 @@
                 </svg>
               </span>
               <!--end::Svg Icon-->
-              <a href="{{client.ySell}}" target="_blank" class="text-muted text-hover-primary">YSell</a>
+              <a href="{{client?.ySell}}" target="_blank" class="text-muted text-hover-primary">YSell</a>
             </div>
-            <div class="d-flex align-items-center gap-2" *ngIf="client.google_link">
+            <div class="d-flex align-items-center gap-2" *ngIf="client?.google_link">
               <!--begin::Svg Icon | path: assets/media/icons/duotune/social/soc004.svg-->
               <!--begin::Svg Icon | path: assets/media/icons/duotune/files/fil020.svg-->
               <span class="svg-icon svg-icon-2">
@@ -872,7 +871,7 @@
                 </svg>
               </span>
               <!--end::Svg Icon-->
-              <a href="{{client.google_link}}" target="_blank" class="text-muted text-hover-primary">Google docs</a>
+              <a href="{{client?.google_link}}" target="_blank" class="text-muted text-hover-primary">Google docs</a>
             </div>
             <!--end::Facebook-->
           </div>
@@ -932,17 +931,17 @@
           <!--begin:::Tab pane-->
           <div class="tab-pane fade show active" id="kt_contact_view_general" role="tabpanel">
             <!--begin::Additional details-->
-              <div class="row gap-5 mt-7">
+              <div class="row gap-5 mt-7" *ngIf="users">
                 <!--begin::Company name-->
                 <div class="col gap-1">
                   <div class="text-muted">Ответственный</div>
-                  <div class="fs-5">Евгений</div>
+                  <div class="fs-5">{{getAdviserName(client?.adviser_id) ? getAdviserName(client.adviser_id) : '-'}}</div>
                 </div>
                 <!--end::Company name-->
                 <!--begin::City-->
                 <div class="col gap-1">
                   <div class="text-muted">Менеджер</div>
-                  <div class="fs-5">Евгений</div>
+                  <div class="fs-5">{{getManagerName(client?.manager_id) ? getManagerName(client.manager_id) : '-'}}</div>
                 </div>
                 <!--end::City-->
               </div>
@@ -950,13 +949,15 @@
                 <!--begin::Country-->
                 <div class="col gap-1">
                   <div class="text-muted">Статус работы</div>
-                  <div class="fs-5">Работает с Ardi</div>
+                  <div class="fs-5" *ngIf="client?.work_status_id">{{getClientOption('user_statuses', client.work_status_id)}}</div>
+                  <div class="fs-5" *ngIf="!client?.work_status_id">-</div>
                 </div>
                 <!--end::Country-->
                 <!--begin::Country-->
                 <div class="col gap-1">
                   <div class="text-muted">Откуда пришел</div>
-                  <div class="fs-5">Нашел нас в FB</div>
+                  <div class="fs-5" *ngIf="client?.ref_option_id">{{getClientOption('client_ref_statuses', client.ref_option_id)}}</div>
+                  <div class="fs-5" *ngIf="!client?.ref_option_id">-</div>
                 </div>
                 <!--end::Country-->
               </div>
@@ -964,27 +965,31 @@
                 <!--begin::Country-->
                 <div class="col gap-1">
                   <div class="text-muted">FB статус</div>
-                  <div class="fs-5">Друзья</div>
+                  <div class="fs-5" *ngIf="client?.fb_status_id">{{getClientOption('client_fb_statuses', client.fb_status_id)}}</div>
+                  <div class="fs-5" *ngIf="!client?.fb_status_id">-</div>
                 </div>
                 <!--end::Country-->
                 <!--begin::Country-->
                 <div class="col gap-1">
                   <div class="text-muted">С кем возит</div>
-                  <div class="fs-5">Поставщик</div>
+                  <div class="fs-5" *ngIf="client?.delivery_id">{{getClientOption('client_deliveries', client.delivery_id)}}</div>
+                  <div class="fs-5" *ngIf="!client?.delivery_id">-</div>
                 </div>
                 <!--end::Country-->
               </div>
-            <div class="row gap-5 mt-7">
+              <div class="row gap-5 mt-7">
               <!--begin::Country-->
               <div class="col gap-1">
                 <div class="text-muted">Должность</div>
-                <div class="fs-5">Анна Лебедева</div>
+                <div class="fs-5" *ngIf="client?.position">{{client.position}}</div>
+                <div class="fs-5" *ngIf="!client?.position">-</div>
               </div>
               <!--end::Country-->
               <!--begin::Country-->
               <div class="col gap-1">
                 <div class="text-muted">Партнер FB</div>
-                <div class="fs-5">Да</div>
+                <div class="fs-5" *ngIf="client?.partner_fb">{{client.partner_fb}}</div>
+                <div class="fs-5" *ngIf="!client?.partner_fb">-</div>
               </div>
               <!--end::Country-->
             </div>

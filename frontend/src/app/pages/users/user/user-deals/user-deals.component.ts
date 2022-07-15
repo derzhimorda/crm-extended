@@ -14,7 +14,7 @@ import {FormControl} from "@angular/forms";
 export class UserDealsComponent implements OnInit {
   user$: Observable<UserType>;
   private unsubscribe: Subscription[] = [];
-  DEALS: Deal[];
+  DEALS: any[];
   deals$: Observable<Deal[]>;
   deal_statuses = [
     {

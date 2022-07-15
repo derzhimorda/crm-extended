@@ -4,9 +4,13 @@ import {IContent, ILayout} from "../../_metronic/layout/core/default-layout.conf
 import {TranslationService} from "../../modules/i18n";
 import {NgbDropdownConfig} from "@ng-bootstrap/ng-bootstrap";
 import {FormControl, FormGroup} from "@angular/forms";
-import {Observable, startWith} from "rxjs";
-import {map} from "rxjs/operators";
+import {find, Observable, startWith} from "rxjs";
 import {NgSelectComponent} from "@ng-select/ng-select";
+import {UsersService} from "../../services/users.service";
+import {ActivatedRoute, Route} from "@angular/router";
+import {ISettings} from "../../_metronic/layout/core/default-settings.config";
+import {SettingsService} from "../../_metronic/layout/core/settings.service";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-clients',
@@ -18,8 +22,8 @@ export class ClientsComponent implements OnInit {
   layoutPage: ILayout;
   content: IContent;
   clientForm = new FormGroup({
-    id: new FormControl(),
-    client_name: new FormControl(),
+    used_id: new FormControl(),
+    name: new FormControl(),
     mobile: new FormControl(),
     add_mobile: new FormControl(),
     email: new FormControl(),
@@ -39,24 +43,6 @@ export class ClientsComponent implements OnInit {
   });
   client: Client;
   miscAvatar: string;
-  managers = [
-    {
-      id: 1,
-      label: 'Наталья'
-    },
-    {
-      id: 2,
-      label: 'Евгений'
-    },
-    {
-      id: 3,
-      label: 'Игорь'
-    },
-    {
-      id: 4,
-      label: 'Анастасия'
-    },
-  ];
   statuses = [
     {
       id: 0,
@@ -165,53 +151,11 @@ export class ClientsComponent implements OnInit {
   ]
   cardActive: boolean = false;
   filter = new FormControl('');
-  CLIENTS: Client[] = [
-    {
-      id: 1, client_name: 'Анна Лебедева', mobile: '+380631234567', add_mobile: '+380631234567', email: 'oleg@gmail.com', ySell: 'https://ysell.com/etgde34435kdv324', company: 'ООО "ФИгачеси"',
-      adviser_id: 1, manager_id: 1, work_status_id: 1, fb_status_id: 1, ref_option_id: 1, delivery_id: 1, fb_link: 'https://www.facebook.com/profile.php?id=100007855069368', tg_link: '', vb_link: '',
-      google_link: 'https://docs.google.com/spreadsheets/d/1J1fTxbgjQApOYRhehbhv79m0NRfKs_LiLZ0U7_8tr8I/edit#gid=1147788206', profile_avatar: '/assets/media/avatars/300-2.jpg'
-    },
-    {
-      id: 2, client_name: 'Кирил Чернышович', mobile: '+380992223355', add_mobile: '', email: 'anna@gmail.com', ySell: '', company: 'ИП Кордилон',
-      adviser_id: 1, manager_id: 1, work_status_id: 1, fb_status_id: 1, ref_option_id: 1, delivery_id: 1, fb_link: '', tg_link: '', vb_link: '', google_link: '', profile_avatar: '/assets/media/avatars/300-3.jpg'
-    },
-    {
-      id: 3, client_name: 'Олег Лагойда', mobile: '+380992223355', add_mobile: '+380992223355', email: 'anna@gmail.com', ySell: '', company: 'ФОП Курилка',
-      adviser_id: 1, manager_id: 1, work_status_id: 1, fb_status_id: 1, ref_option_id: 1, delivery_id: 1, fb_link: '', tg_link: '', vb_link: '', google_link: '', profile_avatar: '/assets/media/avatars/300-5.jpg'
-    },
-    {
-      id: 4, client_name: 'Денис Прокопенко', mobile: '+380992223355', add_mobile: '', email: 'anna@gmail.com', ySell: '', company: 'ЧП Мопед+',
-      adviser_id: 1, manager_id: 1, work_status_id: 2, fb_status_id: 1, ref_option_id: 1, delivery_id: 1, fb_link: '', tg_link: '', vb_link: '', google_link: '', profile_avatar: '/assets/media/avatars/300-7.jpg'
-    },
-    {
-      id: 5, client_name: 'Ольга Кириленко', mobile: '+380992223355', add_mobile: '+380992223355', email: 'anna@gmail.com', ySell: '', company: 'ЧПТУП Петраска Медиа',
-      adviser_id: 1, manager_id: 1, work_status_id: 3, fb_status_id: 1, ref_option_id: 1, delivery_id: 1, fb_link: '', tg_link: '', vb_link: '', google_link: '', profile_avatar: '/assets/media/avatars/300-4.jpg'
-    },
-    {
-      id: 6, client_name: 'Инна Груз', mobile: '+380992223355', add_mobile: '', email: 'anna@gmail.com', ySell: '', company: 'ЗАО Кощей и его команда',
-      adviser_id: 1, manager_id: 1, work_status_id: 3, fb_status_id: 1, ref_option_id: 1, delivery_id: 1, fb_link: '', tg_link: '', vb_link: '', google_link: '', profile_avatar: '/assets/media/avatars/300-10.jpg'
-    },
-    {
-      id: 7, client_name: 'Алексей Иванов', mobile: '+380992223355', add_mobile: '', email: 'anna@gmail.com', ySell: '', company: 'LLC ArniPed',
-      adviser_id: 1, manager_id: 1, work_status_id: 4, fb_status_id: 1, ref_option_id: 1, delivery_id: 1, fb_link: '', tg_link: '', vb_link: '', google_link: '', profile_avatar: '/assets/media/avatars/300-9.jpg'
-    },
-    {
-      id: 8, client_name: 'Ганьба Москалям', mobile: '+380992223355', add_mobile: '', email: 'anna@gmail.com', ySell: '', company: 'ФОП Корзюк',
-      adviser_id: 1, manager_id: 1, work_status_id: 1, fb_status_id: 1, ref_option_id: 1, delivery_id: 1, fb_link: '', tg_link: '', vb_link: '', google_link: '', profile_avatar: '/assets/media/avatars/300-27.jpg'
-    },
-    {
-      id: 9, client_name: 'Александр Батька', mobile: '+380992223355', add_mobile: '', email: 'anna33@gmail.com', ySell: '', company: '',
-      adviser_id: 1, manager_id: 1, work_status_id: 1, fb_status_id: 1, ref_option_id: 1, delivery_id: 1, fb_link: '', tg_link: '', vb_link: '', google_link: '', profile_avatar: '/assets/media/avatars/300-19.jpg'
-    },
-    {
-      id: 10, client_name: 'Вольф Мессинг', mobile: '+380992223355', add_mobile: '', email: '12anna@gmail.com', ySell: '', company: '',
-      adviser_id: 1, manager_id: 1, work_status_id: 2, fb_status_id: 1, ref_option_id: 1, delivery_id: 1, fb_link: '', tg_link: '', vb_link: '', google_link: '', profile_avatar: '/assets/media/avatars/300-21.jpg'
-    },
-  ];
+  CLIENTS: Client[];
   clients$: Observable<Client[]>;
   page = 1;
   pageSize = 4;
-  collectionSize = this.CLIENTS.length;
+  // collectionSize = this.CLIENTS.length;
   file: string;
   dealForm = new FormGroup({
     id: new FormControl(),
@@ -351,17 +295,24 @@ export class ClientsComponent implements OnInit {
     },
   ];
   filterStatus = new FormControl('');
+  settingsData: ISettings;
+  users: any;
+  advisers: any;
+  managers: any;
+  clients: Client[];
+  clientAdviser: any;
+  clientManager: any;
 
   @ViewChild('filterClients') filterClientRef: NgSelectComponent
 
-  constructor(private layout: LayoutService, config: NgbDropdownConfig) {
+  constructor(private layout: LayoutService,
+              private config: NgbDropdownConfig,
+              private apiUsers: UsersService,
+              private route: ActivatedRoute,
+              private settings: SettingsService)
+  {
     config.placement = 'bottom-end';
     config.autoClose = 'outside';
-
-    this.clients$ = this.filter.valueChanges.pipe(
-      startWith(''),
-      map(text => this.search(text))
-    );
   }
 
   ngOnInit(): void {
@@ -369,30 +320,53 @@ export class ClientsComponent implements OnInit {
     this.layoutPage.content.width = 'fluid';
     this.layout.setConfig(this.layoutPage);
 
-    this.client = this.CLIENTS.filter(i => i.id == 1)[0];
+    // this.getRandProfileImage();
 
-    this.getRandProfileImage();
+    this.users = this.route.snapshot.data.users ?? [];
+
+    if(this.users){
+      this.users.map((user: any) => {
+        let UserRoles = user.roles ?? null;
+        user.roles = [];
+        UserRoles?.map((roles:any) => {
+          user.roles.push(roles.role_id);
+        });
+      });
+
+      //First role this is Main role, everything after this additional roles
+      this.advisers = this.users.filter((user:any) => user.roles[0] == 3)
+      this.managers = this.users.filter((user:any) => user.roles[0] == 4)
+      this.clients = this.users.filter((user:any) => user.roles[0] == 6)
+
+      // this.clients$ = this.clients;
+      // console.log(this.users)
+    }
+
+    this.settingsData = this.settings.getSettings();
+
+    this.getUsers();
+  }
+
+  getUsers(){
+    this.users = this.apiUsers.getAllUsers();
   }
 
   openClientCard(id: number) {
-    this.client = this.CLIENTS.filter(x => x.id == id)[0];
+    this.clientForm.reset();
+    this.client = this.clients.filter(x => x.user_id == id)[0];
+
+    this.clientAdviser = this.advisers.filter((x:any) => x.user_id == this.client.adviser_id)
     this.cardActive = true;
   }
 
   getRandProfileImage(){
     const rand = Math.floor(Math.random() * 40) + 1;
-    this.miscAvatar = `/assets/media/stock/600x600/img-${rand}.jpg`;
+    // this.miscAvatar = `/assets/media/stock/600x600/img-${rand}.jpg`;
+    return `/assets/media/stock/600x600/img-${rand}.jpg`;
   }
 
   getStatusNameById(id: number){
     return this.work_statuses.filter((x:any) => x.id == id)[0].label;
-  }
-
-  search(text: any): Client[] {
-    return this.CLIENTS.filter(client => {
-      // const term = text.toLowerCase();
-        return client.client_name.includes(text) || client.mobile.includes(text) || client.email.includes(text) || client.company.includes(text);
-    });
   }
 
   newClient():void{
@@ -418,31 +392,65 @@ export class ClientsComponent implements OnInit {
   }
 
   editClient(id: number) {
-    const client = this.CLIENTS.filter(x => x.id = id)[0];
-    this.miscAvatar = client.profile_avatar;
-    this.clientForm.patchValue(client);
+    this.miscAvatar = this.client.profile_avatar;
+    this.clientForm.patchValue(this.client);
   }
 
   removeClient(event: any) {
     event.preventDefault();
   }
 
-  filterOptions($event: any) {
-    console.log($event)
-    this.clients$ = this.clients$.pipe(
-      map(value => this.CLIENTS.filter(x => x.work_status_id == $event.id))
-    );
+  getClientOption(optionName:string, optionId?:number){
+    const options:any = this.settings.getProp(optionName);
+    if(optionId){
+      return options.find((value:any) => value.id == optionId).name;
+    } else {
+      return options;
+    }
+  }
+
+  search(event:any) {
+    console.log(event.value);
+    this.clients = this.clients.filter(client => {
+      return client.name.includes(event);
+    })
+  }
+
+  getManagerName(manager_id:number | undefined){
+    if(manager_id !== undefined) {
+      let filterUsers = this.managers.filter((manager: any) => manager.id == manager_id);
+      if (filterUsers.length > 0) {
+        return filterUsers[0].name;
+      } else {
+        return null;
+      }
+    }
+  }
+
+  getAdviserName(adviser_id:number | undefined){
+    if(adviser_id !== undefined){
+      let filterUsers = this.advisers.filter((adviser:any) => adviser.id == adviser_id);
+      if(filterUsers.length > 0){
+        return filterUsers[0].name;
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
   }
 }
 
 export interface Client{
-  id: number,
-  client_name: string,
+  user_id: number,
+  name: string,
   mobile: string,
   add_mobile: string,
   email: string,
   ySell: string,
   company: string,
+  partner_fb: string,
+  position: string,
   adviser_id: number,
   manager_id: number,
   work_status_id: number,
@@ -453,5 +461,11 @@ export interface Client{
   tg_link: string,
   vb_link: string,
   profile_avatar: string,
-  google_link: string
+  google_link: string,
+  roles: [any]
+}
+
+export interface Role{
+  role_id: number,
+  user_id: number
 }
