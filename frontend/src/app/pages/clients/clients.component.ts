@@ -327,8 +327,8 @@ export class ClientsComponent implements OnInit {
     // this.users = this.route.snapshot.data.users ?? [];
     //
     // this.getUsers();
-
-    // if(this.users){
+    // this.getUsers().then(data => {
+    //
     //   this.users.map((user: any) => {
     //     let UserRoles = user.roles ?? null;
     //     user.roles = [];
@@ -337,26 +337,52 @@ export class ClientsComponent implements OnInit {
     //     });
     //   });
     //
-    //   //First role this is Main role, everything after this additional roles
     //   this.advisers = this.users.filter((user:any) => user.roles[0] == 3)
     //   this.managers = this.users.filter((user:any) => user.roles[0] == 4)
     //   this.clients = this.users.filter((user:any) => user.roles[0] == 6)
     //
-    //   // this.clients$ = this.clients;
     //
-    // }
+    //
+    //   this.dataload = true;
+    //
+    // });
+
+
+
     this.settingsData = this.settings.getSettings();
-    this.getUsers();
+
+    this.clients$ = this.getUsers();
+
 
   }
 
   getUsers(){
-    this.apiUsers.getAllUsers().subscribe(data => {
-      console.log(data);
-    }, error => {
-      console.log(error)
+    let data = this.apiUsers.getAllUsers();
+    this.dataload = true;
+    return data
+  }
+
+  mappingUserRoles(data:any){
+    return data.map((user: any) => {
+      let UserRoles = user.roles ?? null;
+      user.roles = [];
+      UserRoles?.map((roles:any) => {
+        user.roles.push(roles.role_id);
+      });
     });
   }
+
+  // async getUsers(){
+  //   this.users = await this.apiUsers.getAllUsers().toPromise();
+    // console.log(this.users);
+    // this.apiUsers.getAllUsers().toPromise().then(data => {
+    //   this.users = data;
+    //   console.log(data);
+    // }, error => {
+    //   console.log(error)
+    // });
+  //   console.log('ffffff');
+  // }
 
   openClientCard(id: number) {
     this.clientForm.reset();

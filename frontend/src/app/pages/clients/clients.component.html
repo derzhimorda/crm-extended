@@ -422,7 +422,8 @@
           <!--end::Table head-->
           <!--begin::Table body-->
           <tbody class="fw-bold text-gray-600">
-          <ng-container *ngFor="let client of clients">
+          <ng-container *ngFor="let client of clients$ | async">
+
             <tr class="odd" (click)="openClientCard(client.user_id)">
               <!--begin::Checkbox-->
 <!--              <td>-->
