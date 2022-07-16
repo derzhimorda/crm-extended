@@ -324,34 +324,37 @@ export class ClientsComponent implements OnInit {
 
     // this.getRandProfileImage();
 
-    this.users = this.route.snapshot.data.users ?? [];
+    // this.users = this.route.snapshot.data.users ?? [];
     //
     // this.getUsers();
 
-    if(this.users){
-      this.users.map((user: any) => {
-        let UserRoles = user.roles ?? null;
-        user.roles = [];
-        UserRoles?.map((roles:any) => {
-          user.roles.push(roles.role_id);
-        });
-      });
-
-      //First role this is Main role, everything after this additional roles
-      this.advisers = this.users.filter((user:any) => user.roles[0] == 3)
-      this.managers = this.users.filter((user:any) => user.roles[0] == 4)
-      this.clients = this.users.filter((user:any) => user.roles[0] == 6)
-
-      // this.clients$ = this.clients;
-
-    }
+    // if(this.users){
+    //   this.users.map((user: any) => {
+    //     let UserRoles = user.roles ?? null;
+    //     user.roles = [];
+    //     UserRoles?.map((roles:any) => {
+    //       user.roles.push(roles.role_id);
+    //     });
+    //   });
+    //
+    //   //First role this is Main role, everything after this additional roles
+    //   this.advisers = this.users.filter((user:any) => user.roles[0] == 3)
+    //   this.managers = this.users.filter((user:any) => user.roles[0] == 4)
+    //   this.clients = this.users.filter((user:any) => user.roles[0] == 6)
+    //
+    //   // this.clients$ = this.clients;
+    //
+    // }
     this.settingsData = this.settings.getSettings();
+    this.getUsers();
 
   }
 
   getUsers(){
     this.apiUsers.getAllUsers().subscribe(data => {
-      this.users = data;
+      console.log(data);
+    }, error => {
+      console.log(error)
     });
   }
 
