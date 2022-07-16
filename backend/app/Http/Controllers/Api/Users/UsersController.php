@@ -15,9 +15,7 @@ class UsersController extends Controller
 {
     public function all()
     {
-        return User::with(['roles', 'deals'])
-            ->leftJoin('user_profiles', 'users.id', '=', 'user_profiles.user_id')
-            ->get(['user_profiles.*', 'users.*']);
+        return User::with(['roles', 'deals'])->get();
 
     }
 
