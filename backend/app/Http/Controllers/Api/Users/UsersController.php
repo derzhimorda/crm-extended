@@ -15,7 +15,7 @@ class UsersController extends Controller
 {
     public function all()
     {
-        return User::with(['roles', 'deals'])->get();
+        return User::all();
 
     }
 
