@@ -10,6 +10,7 @@ use App\Models\UsersRole;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class UsersController extends Controller
 {
@@ -18,6 +19,10 @@ class UsersController extends Controller
         return User::with(['roles', 'deals'])
             ->leftJoin('user_profiles', 'users.id', '=', 'user_profiles.user_id')
             ->get(['user_profiles.*', 'users.*']);
+
+        Log::info(print_r(User::with(['roles', 'deals'])
+            ->leftJoin('user_profiles', 'users.id', '=', 'user_profiles.user_id')
+            ->get(['user_profiles.*', 'users.*'])));
 
     }
 
