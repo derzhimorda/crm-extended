@@ -11,6 +11,7 @@ import {ActivatedRoute, Route} from "@angular/router";
 import {ISettings} from "../../_metronic/layout/core/default-settings.config";
 import {SettingsService} from "../../_metronic/layout/core/settings.service";
 import {map} from "rxjs/operators";
+import {UserType} from "../../modules/auth";
 
 @Component({
   selector: 'app-clients',
@@ -302,6 +303,7 @@ export class ClientsComponent implements OnInit {
   clients: Client[];
   clientAdviser: any;
   clientManager: any;
+  dataload: boolean = false;
 
   @ViewChild('filterClients') filterClientRef: NgSelectComponent
 
@@ -323,6 +325,8 @@ export class ClientsComponent implements OnInit {
     // this.getRandProfileImage();
 
     this.users = this.route.snapshot.data.users ?? [];
+    //
+    // this.getUsers();
 
     if(this.users){
       this.users.map((user: any) => {
@@ -339,16 +343,16 @@ export class ClientsComponent implements OnInit {
       this.clients = this.users.filter((user:any) => user.roles[0] == 6)
 
       // this.clients$ = this.clients;
-      // console.log(this.users)
-    }
 
+    }
     this.settingsData = this.settings.getSettings();
 
-    this.getUsers();
   }
 
   getUsers(){
-    this.users = this.apiUsers.getAllUsers();
+    this.apiUsers.getAllUsers().subscribe(data => {
+      this.users = data;
+    });
   }
 
   openClientCard(id: number) {
