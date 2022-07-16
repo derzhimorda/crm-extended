@@ -18,8 +18,7 @@ import {UsersResolver} from "../users/users.resolver";
     RouterModule.forChild([
       {
         path: '',
-        component: ClientsComponent,
-        resolve: {users: UsersResolver}
+        component: ClientsComponent
       },
     ]),
     WidgetsModule,
