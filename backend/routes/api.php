@@ -19,7 +19,7 @@ Route::group([
     'middleware' => ['auth:sanctum'],
     'prefix' => 'users'
 ], function ($router) {
-    Route::get('/all', [\App\Http\Controllers\Api\Users\UsersController::class, 'all']);
+    Route::get('/', [\App\Http\Controllers\Api\Users\UsersController::class, 'all']);
     Route::get('/roles/all', [\App\Http\Controllers\Api\Users\UsersController::class, 'getAllRoles']);
     Route::get('/{id}', [\App\Http\Controllers\Api\Users\UsersController::class, 'getUserById']);
     Route::get('/{id}/remove', [\App\Http\Controllers\Api\Users\UsersController::class, 'removeUser']);
@@ -36,7 +36,7 @@ Route::group([
     'middleware' => ['auth:sanctum'],
     'prefix' => 'clients'
 ], function ($router){
-    Route::get('/all', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'getClients']);
+    Route::get('/', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'getClients']);
     Route::get('/{id}', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'client']);
     Route::get('/authUser', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'authUser']);
     Route::post('/update', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'update']);

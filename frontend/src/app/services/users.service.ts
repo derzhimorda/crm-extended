@@ -28,13 +28,13 @@ export class UsersService {
   }
 
   getAllClients(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/clients/all`, {
+    return this.http.get(`${environment.apiUrl}/clients`, {
       headers: this.httpHeaders,
     });
   }
 
   getAllUsers(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/users/all`, {
+    return this.http.get(`${environment.apiUrl}/users`, {
       headers: this.httpHeaders,
     });
   }
