@@ -6,6 +6,7 @@ export class UserModel extends AuthModel {
   id: number;
   name: string;
   password: string;
+  password_confirmation: string;
   fullname: string;
   email: string;
   pic: string;
@@ -53,6 +54,7 @@ export class UserModel extends AuthModel {
     this.id = user.id;
     this.name = user.name || '';
     this.password = user.password || '';
+    this.password_confirmation = user.password_confirmation || '';
     this.fullname = user.fullname || '';
     this.email = user.email || '';
     this.pic = user.pic || './assets/media/users/default.jpg';

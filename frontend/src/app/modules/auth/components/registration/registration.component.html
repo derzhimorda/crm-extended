@@ -53,37 +53,37 @@
     <input
       class="form-control form-control-lg form-control-solid"
       type="text"
-      name="fullname"
-      formControlName="fullname"
+      name="name"
+      formControlName="name"
       placeholder="Имя Фамилия"
       autocomplete="off"
       [ngClass]="{
-        'is-invalid': registrationForm.controls['fullname'].invalid,
-        'is-valid': registrationForm.controls['fullname'].valid
+        'is-invalid': registrationForm.controls['name'].invalid,
+        'is-valid': registrationForm.controls['name'].valid
       }"
     />
     <ng-container
       [ngTemplateOutlet]="formError"
       [ngTemplateOutletContext]="{
         validation: 'required',
-        message: 'Fullname is required',
-        control: registrationForm.controls['fullname']
+        message: 'Имя обязательно',
+        control: registrationForm.controls['name']
       }"
     ></ng-container>
     <ng-container
       [ngTemplateOutlet]="formError"
       [ngTemplateOutletContext]="{
         validation: 'minlength',
-        message: 'Fullname should have at least 3 symbols',
-        control: registrationForm.controls['fullname']
+        message: 'Имя должно содержать не менее 3 символов',
+        control: registrationForm.controls['name']
       }"
     ></ng-container>
     <ng-container
       [ngTemplateOutlet]="formError"
       [ngTemplateOutletContext]="{
         validation: 'maxLength',
-        message: 'Fullname should have maximum 100 symbols',
-        control: registrationForm.controls['fullname']
+        message: 'Имя не должно превышать 100 символов',
+        control: registrationForm.controls['name']
       }"
     ></ng-container>
   </div>
@@ -108,7 +108,7 @@
       [ngTemplateOutlet]="formError"
       [ngTemplateOutletContext]="{
         validation: 'required',
-        message: 'Email is required',
+        message: 'Email обязательно',
         control: registrationForm.controls['email']
       }"
     ></ng-container>
@@ -116,7 +116,7 @@
       [ngTemplateOutlet]="formError"
       [ngTemplateOutletContext]="{
         validation: 'email',
-        message: 'Email is invalid',
+        message: 'Email не корректный',
         control: registrationForm.controls['email']
       }"
     ></ng-container>
@@ -124,7 +124,7 @@
       [ngTemplateOutlet]="formError"
       [ngTemplateOutletContext]="{
         validation: 'minlength',
-        message: 'Email should have at least 3 symbols',
+        message: 'Email должно быть минимум 3 символа',
         control: registrationForm.controls['email']
       }"
     ></ng-container>
@@ -132,7 +132,7 @@
       [ngTemplateOutlet]="formError"
       [ngTemplateOutletContext]="{
         validation: 'maxLength',
-        message: 'Email should have maximum 360 symbols',
+        message: 'Email не должно превышать 360 символов',
         control: registrationForm.controls['email']
       }"
     ></ng-container>
@@ -158,7 +158,7 @@
       [ngTemplateOutlet]="formError"
       [ngTemplateOutletContext]="{
         validation: 'required',
-        message: 'Password is required',
+        message: 'Пароль обязательно',
         control: registrationForm.controls['password']
       }"
     ></ng-container>
@@ -166,7 +166,7 @@
       [ngTemplateOutlet]="formError"
       [ngTemplateOutletContext]="{
         validation: 'minlength',
-        message: 'Password should have at least 3 symbols',
+        message: 'Пароль должен быть минимму 6 символов',
         control: registrationForm.controls['password']
       }"
     ></ng-container>
@@ -174,7 +174,7 @@
       [ngTemplateOutlet]="formError"
       [ngTemplateOutletContext]="{
         validation: 'maxLength',
-        message: 'Password should have maximum 100 symbols',
+        message: 'Пароль не должен превышать 100 символов',
         control: registrationForm.controls['password']
       }"
     ></ng-container>
@@ -188,42 +188,42 @@
       class="form-control form-control-lg form-control-solid"
       type="password"
       placeholder="Подтвердить пароль"
-      name="cPassword"
+      name="password_confirmation"
       autocomplete="off"
-      formControlName="cPassword"
+      formControlName="password_confirmation"
       [ngClass]="{
-        'is-invalid': registrationForm.controls['cPassword'].invalid,
-        'is-valid': registrationForm.controls['cPassword'].valid
+        'is-invalid': registrationForm.controls['password_confirmation'].invalid,
+        'is-valid': registrationForm.controls['password_confirmation'].valid
       }"
     />
     <ng-container
       [ngTemplateOutlet]="formError"
       [ngTemplateOutletContext]="{
         validation: 'required',
-        message: 'Confirm Password is required',
-        control: registrationForm.controls['cPassword']
+        message: 'Подтвердите пароль',
+        control: registrationForm.controls['password_confirmation']
       }"
     ></ng-container>
     <ng-container
       [ngTemplateOutlet]="formError"
       [ngTemplateOutletContext]="{
         validation: 'minlength',
-        message: 'Confirm Password should have at least 3 symbols',
-        control: registrationForm.controls['cPassword']
+        message: 'Подтверждение пароля минимум 6 символов',
+        control: registrationForm.controls['password_confirmation']
       }"
     ></ng-container>
     <ng-container
       [ngTemplateOutlet]="formError"
       [ngTemplateOutletContext]="{
         validation: 'maxLength',
-        message: 'Confirm Password should have maximum 100 symbols',
-        control: registrationForm.controls['cPassword']
+        message: 'Подтверждение пароля максимум 100 символов',
+        control: registrationForm.controls['password_confirmation']
       }"
     ></ng-container>
     <ng-container
       *ngIf="
-        registrationForm.controls['cPassword'].errors &&
-        registrationForm.controls['cPassword'].errors.ConfirmPassword
+        registrationForm.controls['password_confirmation'].errors &&
+        registrationForm.controls['password_confirmation'].errors.ConfirmPassword
       "
     >
       <div class="fv-plugins-message-container">
@@ -267,7 +267,7 @@
       type="submit"
       id="kt_sign_up_submit"
       [disabled]="
-        registrationForm.invalid || !registrationForm.controls['agree'].value
+        registrationForm.invalid
       "
       class="btn btn-lg btn-primary w-100 mb-5"
     >
