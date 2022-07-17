@@ -5,10 +5,11 @@ import { RouterModule } from "@angular/router";
 import { WidgetsModule } from "../../_metronic/partials";
 import {TranslationModule} from "../../modules/i18n";
 import {NgbDropdownModule, NgbTypeaheadModule} from "@ng-bootstrap/ng-bootstrap";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgSelectModule} from "@ng-select/ng-select";
 import {ClientsResolver} from "./clients.resolver";
 import {UsersResolver} from "../users/users.resolver";
+import {Ng2SearchPipeModule} from "ng2-search-filter";
 
 
 @NgModule({
@@ -27,7 +28,9 @@ import {UsersResolver} from "../users/users.resolver";
     NgbDropdownModule,
     ReactiveFormsModule,
     NgbTypeaheadModule,
-    NgSelectModule
+    NgSelectModule,
+    FormsModule,
+    Ng2SearchPipeModule
   ]
 })
 export class ClientsModule { }

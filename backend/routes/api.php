@@ -40,7 +40,7 @@ Route::group([
     Route::get('/{id}', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'client']);
     Route::post('/update', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'update']);
     Route::put('/', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'new']);
-    Route::get('/delete/{id}', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'delete']);
+    Route::delete('/{id}', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'delete']);
 });
 
 //Deal routs

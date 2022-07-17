@@ -16,7 +16,7 @@
               </svg>
             </span>
             <!--end::Svg Icon-->
-            <input type="text" (input)="search($event.target)" class="form-control form-control-solid w-250px ps-15" placeholder="{{'CLIENTS.SEARCH_CUSTOMERS' | translate}}">
+            <input type="text" [(ngModel)]="term" class="form-control form-control-solid w-250px ps-15" placeholder="{{'CLIENTS.SEARCH_CUSTOMERS' | translate}}">
           </div>
           <!--end::Search-->
         </div>
@@ -95,7 +95,7 @@
             <!--end::Export-->
             <!--begin::Add customer-->
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer" (click)="newUserModalTrigger()">{{'CLIENTS.ADD_CUSTOMER' | translate}}</button>
-            <div class="modal fade" id="kt_modal_add_customer" tabindex="-1" aria-hidden="true">
+            <div class="modal fade"  id="kt_modal_add_customer" tabindex="-1" aria-hidden="true">
               <!--begin::Modal dialog-->
               <div class="modal-dialog modal-dialog-centered mw-650px">
                 <!--begin::Modal content-->
@@ -375,7 +375,7 @@
                     <!--begin::Modal footer-->
                     <div class="modal-footer flex-center">
                       <!--begin::Button-->
-                      <button type="reset" id="kt_modal_add_customer_cancel" class="btn btn-light me-3" data-bs-dismiss="modal">Отменить</button>
+                      <button type="reset" id="kt_modal_add_customer_cancel" class="btn btn-light me-3" data-bs-dismiss="modal" #closeModal>Отменить</button>
                       <!--end::Button-->
                       <!--begin::Button-->
                       <button id="kt_modal_add_customer_submit" class="btn btn-primary" (click)="newClient()">
@@ -431,7 +431,7 @@
           <!--end::Table head-->
           <!--begin::Table body-->
           <tbody class="fw-bold text-gray-600">
-          <ng-container *ngFor="let client of clients">
+          <ng-container *ngFor="let client of clients | filter: term">
             <tr class="odd" (click)="openClientCard(client.user_id)">
               <!--begin::Checkbox-->
 <!--              <td>-->
@@ -775,7 +775,7 @@
           <!--end::Deal modal-->
           <div ngbDropdown>
             <!--begin::Action menu-->
-            <a class="btn btn-sm btn-icon btn-light btn-active-light-primary" ngbDropdownToggle id="dropdownConfig">
+            <a class="btn btn-sm btn-icon btn-light btn-active-light-primary" ngbDropdownToggle id="dropdownConfig" #closeRemoveModal>
               <!--begin::Svg Icon | path: icons/duotune/general/gen052.svg-->
               <span class="svg-icon svg-icon-2">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -795,7 +795,7 @@
               <!--end::Menu item-->
               <!--begin::Menu item-->
               <div class="menu-item px-3" ngbDropdownItem>
-                <a class="menu-link px-3" id="kt_contact_delete" (click)="removeClient($event)">{{'GENERAL.DELETE' | translate}}</a>
+                <a class="menu-link px-3" id="kt_contact_delete" (click)="removeClient(client.user_id)">{{'GENERAL.DELETE' | translate}}</a>
               </div>
               <!--end::Menu item-->
             </div>

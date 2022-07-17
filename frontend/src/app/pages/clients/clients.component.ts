@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {LayoutService} from "../../_metronic/layout";
 import {IContent, ILayout} from "../../_metronic/layout/core/default-layout.config";
 import {TranslationService} from "../../modules/i18n";
@@ -7,7 +7,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {find, Observable, startWith, Subject, tap} from "rxjs";
 import {NgSelectComponent} from "@ng-select/ng-select";
 import {UsersService} from "../../services/users.service";
-import {ActivatedRoute, Route} from "@angular/router";
+import {ActivatedRoute, Route, Router} from "@angular/router";
 import {ISettings} from "../../_metronic/layout/core/default-settings.config";
 import {SettingsService} from "../../_metronic/layout/core/settings.service";
 import {map} from "rxjs/operators";
@@ -199,14 +199,21 @@ export class ClientsComponent implements OnInit {
   clientAdviser: any;
   clientManager: any;
   dataload: boolean = false;
+  term = '';
+  searchTerm = '';
 
   @ViewChild('filterClients') filterClientRef: NgSelectComponent
+  @ViewChild('closeModal') closeModal: ElementRef;
+  @ViewChild('closeRemoveModal') closeRemoveModal: ElementRef;
+
 
   constructor(private layout: LayoutService,
               private config: NgbDropdownConfig,
               private apiUsers: UsersService,
               private route: ActivatedRoute,
-              private settings: SettingsService)
+              private settings: SettingsService,
+              private router: Router,
+              private cRef: ChangeDetectorRef)
   {
     config.placement = 'bottom-end';
     config.autoClose = 'outside';
@@ -234,13 +241,13 @@ export class ClientsComponent implements OnInit {
       this.clients = this.users.filter((user:any) => user.roles[0] == 6);
       this.managers = this.users.filter((user:any) => user.roles[0] == 4);
       this.advisers = this.users.filter((user:any) => user.roles[0] == 3);
-
     })
   }
 
   getUsers(){
     this.apiUsers.getAllUsers().subscribe(data => {
-      this.users = data;
+      this.users = [...data];
+      this.cRef.detectChanges();
 
       this.users.map((user: any) => {
         let UserRoles = user.roles ?? null;
@@ -253,6 +260,7 @@ export class ClientsComponent implements OnInit {
       this.clients = this.users.filter((user:any) => user.roles[0] == 6);
       this.managers = this.users.filter((user:any) => user.roles[0] == 4);
       this.advisers = this.users.filter((user:any) => user.roles[0] == 3);
+      console.log(this.clients)
     }, error => {
       console.log(error)
     });
@@ -285,6 +293,7 @@ export class ClientsComponent implements OnInit {
     this.apiUsers.makeNewUser(this.clientForm.value).subscribe(data => {
       console.log(data);
       this.getUsers();
+      this.closeModal.nativeElement.click();
     }, error => {
       console.log(error)
     });
@@ -314,8 +323,13 @@ export class ClientsComponent implements OnInit {
     this.clientForm.patchValue(this.client);
   }
 
-  removeClient(event: any) {
-    event.preventDefault();
+  removeClient(id: number) {
+    this.apiUsers.removeUser(id).subscribe(data => {
+      this.getUsers();
+      this.closeRemoveModal.nativeElement.click();
+      }, error => {
+      console.log(error)
+    });
   }
 
   getClientOption(optionName:string, optionId?:number){
@@ -328,10 +342,17 @@ export class ClientsComponent implements OnInit {
   }
 
   search(event:any) {
-    console.log(event.value);
-    this.clients = this.clients.filter(client => {
+    if(event == ''){
+      return this.clients;
+    }
+    let clients = this.clients;
+
+    this.clients = clients.filter(client => {
       return client.name.includes(event);
     })
+
+
+    console.log(this.clients);
   }
 
   getManagerName(manager_id:number | undefined){

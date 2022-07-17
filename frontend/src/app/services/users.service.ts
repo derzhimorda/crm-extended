@@ -50,7 +50,7 @@ export class UsersService {
   // }
 
   removeUser(id:number){
-    return this.http.get(`${environment.apiUrl}/users/${id}/remove`, {
+    return this.http.delete(`${environment.apiUrl}/clients/${id}`, {
       headers: this.httpHeaders,
     });
   }
