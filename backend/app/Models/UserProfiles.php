@@ -19,6 +19,6 @@ class UserProfiles extends Model
         'fb_link', 'tg_link',
         'vb_link', 'profile_avatar',
         'company', 'partner_fb',
-        'position'
+        'position', 'google_link'
     ];
 }

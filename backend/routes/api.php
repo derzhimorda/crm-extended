@@ -38,7 +38,7 @@ Route::group([
 ], function ($router){
     Route::get('/', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'getClients']);
     Route::get('/{id}', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'client']);
-    Route::post('/update', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'update']);
+    Route::patch('/{id}', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'update']);
     Route::put('/', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'new']);
     Route::delete('/{id}', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'delete']);
 });

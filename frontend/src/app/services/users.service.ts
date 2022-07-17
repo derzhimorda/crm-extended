@@ -45,9 +45,11 @@ export class UsersService {
     });
   }
 
-  // editUser(data:any): Observable<any>{
-  //   return;
-  // }
+  editUser(data:any, id:number): Observable<any>{
+    return this.http.patch(`${environment.apiUrl}/clients/${id}`, data, {
+      headers: this.httpHeaders,
+    })
+  }
 
   removeUser(id:number){
     return this.http.delete(`${environment.apiUrl}/clients/${id}`, {

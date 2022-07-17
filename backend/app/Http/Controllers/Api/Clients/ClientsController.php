@@ -29,9 +29,9 @@ class ClientsController extends Controller
             ->get(['user_profiles.*', 'users.*']);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $client_id)
     {
-        $client = UserProfiles::where('user_id', $request->user_id);
+        $client = UserProfiles::where('user_id', $client_id);
 
         if($client){
             $client->update($request->all());

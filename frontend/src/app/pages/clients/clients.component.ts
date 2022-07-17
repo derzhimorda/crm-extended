@@ -201,10 +201,12 @@ export class ClientsComponent implements OnInit {
   dataload: boolean = false;
   term = '';
   searchTerm = '';
+  clientId: any = null;
 
   @ViewChild('filterClients') filterClientRef: NgSelectComponent
   @ViewChild('closeModal') closeModal: ElementRef;
   @ViewChild('closeRemoveModal') closeRemoveModal: ElementRef;
+
 
 
   constructor(private layout: LayoutService,
@@ -284,19 +286,29 @@ export class ClientsComponent implements OnInit {
       return;
     }
 
-    if(this.miscAvatar){
-      this.clientForm.patchValue({
-        profile_avatar: this.miscAvatar
-      })
-    }
+    if(this.clientId !== null){
+      this.apiUsers.editUser(this.clientForm.value, this.clientId).subscribe(data => {
+        console.log(data);
+        this.getUsers();
+        this.closeModal.nativeElement.click();
+      }, error => {
+        console.log(error)
+      });
+    } else {
+      if(this.miscAvatar){
+        this.clientForm.patchValue({
+          profile_avatar: this.miscAvatar
+        })
+      }
 
-    this.apiUsers.makeNewUser(this.clientForm.value).subscribe(data => {
-      console.log(data);
-      this.getUsers();
-      this.closeModal.nativeElement.click();
-    }, error => {
-      console.log(error)
-    });
+      this.apiUsers.makeNewUser(this.clientForm.value).subscribe(data => {
+        console.log(data);
+        this.getUsers();
+        this.closeModal.nativeElement.click();
+      }, error => {
+        console.log(error)
+      });
+    }
   }
 
   loadFile(event: any) {
@@ -321,6 +333,7 @@ export class ClientsComponent implements OnInit {
   editClient(id: number) {
     this.miscAvatar = this.client.profile_avatar;
     this.clientForm.patchValue(this.client);
+    this.clientId = this.client.user_id;
   }
 
   removeClient(id: number) {
