@@ -56,7 +56,7 @@
                     <label class="form-label fs-5 fw-bold mb-3">Статус:</label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    <ng-select [items]="statuses"
+                    <ng-select [items]="getClientOption('user_statuses')"
                      bindLabel="name"
                      bindValue="id"
                      [formControl]="filterStatus"
@@ -94,7 +94,7 @@
 <!--            </button>-->
             <!--end::Export-->
             <!--begin::Add customer-->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">{{'CLIENTS.ADD_CUSTOMER' | translate}}</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer" (click)="newUserModalTrigger()">{{'CLIENTS.ADD_CUSTOMER' | translate}}</button>
             <div class="modal fade" id="kt_modal_add_customer" tabindex="-1" aria-hidden="true">
               <!--begin::Modal dialog-->
               <div class="modal-dialog modal-dialog-centered mw-650px">
@@ -136,7 +136,7 @@
                             <!--begin::Image input-->
                             <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('/assets/media/svg/avatars/blank.svg')">
                               <!--begin::Preview existing avatar-->
-                              <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{getRandProfileImage()}})"></div>
+                              <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{client?.profile_avatar ? client?.profile_avatar : getRandProfileImage()}})"></div>
                               <!--end::Preview existing avatar-->
                               <!--begin::Edit-->
                               <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="Change avatar">
@@ -264,6 +264,15 @@
                             <div class="fv-plugins-message-container invalid-feedback"></div>
                           </div>
                           <!--end::Input group-->
+                          <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container">
+                            <!--begin::Label-->
+                            <label class="required fs-6 fw-bold mb-2">Должность</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input class="form-control form-control-solid" placeholder="" name="" formControlName="position">
+                            <!--end::Input-->
+                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                          </div>
                           <div class="d-flex flex-column mb-7 fv-row">
                             <!--begin::Label-->
                             <label class="fs-6 fw-bold mb-2">
@@ -286,7 +295,7 @@
                             <ng-select [items]="managers"
                              bindLabel="name"
                              bindValue="id"
-                             formControlName="adviser_id">
+                             formControlName="manager_id">
                             </ng-select>
                           </div>
                           <div class="d-flex flex-column mb-7 fv-row">
@@ -294,10 +303,10 @@
                             <label class="fs-6 fw-bold mb-2">
                               <span>Статус работы</span>
                             </label>
-                            <ng-select [items]="statuses"
+                            <ng-select [items]="getClientOption('user_statuses')"
                              bindLabel="name"
                              bindValue="id"
-                             formControlName="adviser_id">
+                             formControlName="work_status_id">
                             </ng-select>
                           </div>
                           <div class="d-flex flex-column mb-7 fv-row">
@@ -305,10 +314,10 @@
                             <label class="fs-6 fw-bold mb-2">
                               <span>FB статус</span>
                             </label>
-                            <ng-select [items]="fb_status"
+                            <ng-select [items]="getClientOption('client_fb_statuses')"
                              bindLabel="name"
                              bindValue="id"
-                             formControlName="adviser_id">
+                             formControlName="fb_status_id">
                             </ng-select>
                           </div>
                           <div class="d-flex flex-column mb-7 fv-row">
@@ -316,10 +325,10 @@
                             <label class="fs-6 fw-bold mb-2">
                               <span>Откуда пришел</span>
                             </label>
-                            <ng-select [items]="afilate_types"
+                            <ng-select [items]="getClientOption('client_ref_statuses')"
                              bindLabel="name"
                              bindValue="id"
-                             formControlName="adviser_id">
+                             formControlName="ref_option_id">
                             </ng-select>
                           </div>
                           <div class="d-flex flex-column mb-7 fv-row">
@@ -327,10 +336,10 @@
                             <label class="fs-6 fw-bold mb-2">
                               <span>С кем возит</span>
                             </label>
-                            <ng-select [items]="delivery"
+                            <ng-select [items]="getClientOption('client_deliveries')"
                              bindLabel="name"
                              bindValue="id"
-                             formControlName="adviser_id">
+                             formControlName="delivery_id">
                             </ng-select>
                           </div>
                           <div class="fv-row mb-7">
@@ -347,7 +356,7 @@
                               <label class="form-check form-switch form-check-custom form-check-solid">
                                 <span class="form-check-label fw-bold text-muted me-2" for="kt_modal_fb_partner">Нет</span>
                                 <!--begin::Input-->
-                                <input class="form-check-input" name="billing" type="checkbox" value="1" id="kt_modal_fb_partner">
+                                <input class="form-check-input" name="billing" type="checkbox" value="1" id="kt_modal_fb_partner" formControlName="partner_fb">
                                 <!--end::Input-->
                                 <!--begin::Label-->
                                 <span class="form-check-label fw-bold text-muted" for="kt_modal_fb_partner">Да</span>
@@ -369,7 +378,7 @@
                       <button type="reset" id="kt_modal_add_customer_cancel" class="btn btn-light me-3" data-bs-dismiss="modal">Отменить</button>
                       <!--end::Button-->
                       <!--begin::Button-->
-                      <button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary" (click)="newClient()">
+                      <button id="kt_modal_add_customer_submit" class="btn btn-primary" (click)="newClient()">
                         <span class="indicator-label">Сохранить</span>
                         <span class="indicator-progress">Пожалуйста подождите...
 														<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -422,8 +431,7 @@
           <!--end::Table head-->
           <!--begin::Table body-->
           <tbody class="fw-bold text-gray-600">
-          <ng-container *ngFor="let client of clients$ | async">
-
+          <ng-container *ngFor="let client of clients">
             <tr class="odd" (click)="openClientCard(client.user_id)">
               <!--begin::Checkbox-->
 <!--              <td>-->
@@ -468,10 +476,10 @@
               <!--end::Payment method=-->
               <!--begin::Date=-->
               <td data-order="2020-12-14T20:43:00+01:00">
-                <span *ngIf="client.work_status_id == 1" class="badge badge-light-success">{{getStatusNameById(client.work_status_id)}}</span>
-                <span *ngIf="client.work_status_id == 2" class="badge badge-light-primary">{{getStatusNameById(client.work_status_id)}}</span>
-                <span *ngIf="client.work_status_id == 3" class="badge badge-light-info">{{getStatusNameById(client.work_status_id)}}</span>
-                <span *ngIf="client.work_status_id == 4" class="badge badge-light-dark">{{getStatusNameById(client.work_status_id)}}</span>
+                <span *ngIf="client.work_status_id == 1" class="badge badge-light-success">{{getClientOption('user_statuses', client.work_status_id)}}</span>
+                <span *ngIf="client.work_status_id == 2" class="badge badge-light-primary">{{getClientOption('user_statuses', client.work_status_id)}}</span>
+                <span *ngIf="client.work_status_id == 3" class="badge badge-light-info">{{getClientOption('user_statuses', client.work_status_id)}}</span>
+                <span *ngIf="client.work_status_id == 4" class="badge badge-light-dark">{{getClientOption('user_statuses', client.work_status_id)}}</span>
               </td>
               <!--end::Date=-->
             </tr>

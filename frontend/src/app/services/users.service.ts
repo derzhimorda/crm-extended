@@ -40,7 +40,7 @@ export class UsersService {
   }
 
   makeNewUser(data:any): Observable<any>{
-    return this.http.post(`${environment.apiUrl}/users/new`, data, {
+    return this.http.put(`${environment.apiUrl}/clients`, data, {
       headers: this.httpHeaders,
     });
   }

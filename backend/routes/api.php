@@ -38,9 +38,8 @@ Route::group([
 ], function ($router){
     Route::get('/', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'getClients']);
     Route::get('/{id}', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'client']);
-    Route::get('/authUser', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'authUser']);
     Route::post('/update', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'update']);
-    Route::post('/new', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'new']);
+    Route::put('/', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'new']);
     Route::get('/delete/{id}', [\App\Http\Controllers\Api\Clients\ClientsController::class, 'delete']);
 });
 

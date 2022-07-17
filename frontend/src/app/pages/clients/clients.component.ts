@@ -4,14 +4,14 @@ import {IContent, ILayout} from "../../_metronic/layout/core/default-layout.conf
 import {TranslationService} from "../../modules/i18n";
 import {NgbDropdownConfig} from "@ng-bootstrap/ng-bootstrap";
 import {FormControl, FormGroup} from "@angular/forms";
-import {find, Observable, startWith} from "rxjs";
+import {find, Observable, startWith, Subject, tap} from "rxjs";
 import {NgSelectComponent} from "@ng-select/ng-select";
 import {UsersService} from "../../services/users.service";
 import {ActivatedRoute, Route} from "@angular/router";
 import {ISettings} from "../../_metronic/layout/core/default-settings.config";
 import {SettingsService} from "../../_metronic/layout/core/settings.service";
 import {map} from "rxjs/operators";
-import {UserType} from "../../modules/auth";
+
 
 @Component({
   selector: 'app-clients',
@@ -23,7 +23,7 @@ export class ClientsComponent implements OnInit {
   layoutPage: ILayout;
   content: IContent;
   clientForm = new FormGroup({
-    used_id: new FormControl(),
+    // used_id: new FormControl(),
     name: new FormControl(),
     mobile: new FormControl(),
     add_mobile: new FormControl(),
@@ -41,119 +41,14 @@ export class ClientsComponent implements OnInit {
     vb_link: new FormControl(),
     profile_avatar: new FormControl(),
     google_link: new FormControl(),
+    partner_fb: new FormControl(),
+    position: new FormControl()
   });
-  client: Client;
+  client: any;
   miscAvatar: string;
-  statuses = [
-    {
-      id: 0,
-      label: 'Не выбрано'
-    },
-    {
-      id: 1,
-      label: 'Работает с Ardi'
-    },
-    {
-      id: 2,
-      label: 'В процессе запуска'
-    },
-    {
-      id: 3,
-      label: 'Занимается'
-    },
-    {
-      id: 4,
-      label: 'Не занимается'
-    },
-  ]
-  work_statuses = [
-    {
-      id: 1,
-      label: 'Работает с Ardi'
-    },
-    {
-      id: 2,
-      label: 'В процессе запуска'
-    },
-    {
-      id: 3,
-      label: 'Занимается'
-    },
-    {
-      id: 4,
-      label: 'Не занимается'
-    },
-  ];
-  fb_status = [
-    {
-      id: 1,
-      label: 'Не заполнено'
-    },
-    {
-      id: 2,
-      label: 'Жду подтверждения'
-    },
-    {
-      id: 3,
-      label: 'Ведеться общение'
-    },
-    {
-      id: 4,
-      label: 'Друзья'
-    },
-    {
-      id: 5,
-      label: 'Нет FB'
-    },
-  ]
-  afilate_types = [
-    {
-      id: 1,
-      label: 'Нашли мы в FB'
-    },
-    {
-      id: 2,
-      label: 'Нашел нас в FB'
-    },
-    {
-      id: 3,
-      label: 'Чат с Игорем'
-    },
-    {
-      id: 4,
-      label: 'SH Grad'
-    },
-    {
-      id: 5,
-      label: 'Англ. Игорь'
-    },
-  ]
-  delivery = [
-    {
-      id: 1,
-      label: 'Unreal China'
-    },
-    {
-      id: 2,
-      label: 'Partner Trade'
-    },
-    {
-      id: 3,
-      label: 'Unicargo'
-    },
-    {
-      id: 4,
-      label: 'FBA Help'
-    },
-    {
-      id: 5,
-      label: 'Поставищик'
-    },
-  ]
   cardActive: boolean = false;
   filter = new FormControl('');
-  CLIENTS: Client[];
-  clients$: Observable<Client[]>;
+  clients$: Subject<Client[]>;
   page = 1;
   pageSize = 4;
   // collectionSize = this.CLIENTS.length;
@@ -321,89 +216,78 @@ export class ClientsComponent implements OnInit {
     this.layoutPage = this.layout.getConfig();
     this.layoutPage.content.width = 'fluid';
     this.layout.setConfig(this.layoutPage);
-
-    // this.getRandProfileImage();
-
-    // this.users = this.route.snapshot.data.users ?? [];
-    //
-    // this.getUsers();
-    // this.getUsers().then(data => {
-    //
-    //   this.users.map((user: any) => {
-    //     let UserRoles = user.roles ?? null;
-    //     user.roles = [];
-    //     UserRoles?.map((roles:any) => {
-    //       user.roles.push(roles.role_id);
-    //     });
-    //   });
-    //
-    //   this.advisers = this.users.filter((user:any) => user.roles[0] == 3)
-    //   this.managers = this.users.filter((user:any) => user.roles[0] == 4)
-    //   this.clients = this.users.filter((user:any) => user.roles[0] == 6)
-    //
-    //
-    //
-    //   this.dataload = true;
-    //
-    // });
-
-
+    this.layout.initConfig();
 
     this.settingsData = this.settings.getSettings();
 
-    this.clients$ = this.getUsers();
+    this.route.data.subscribe(({users}) => {
+      this.users = users;
 
+      this.users.map((user: any) => {
+        let UserRoles = user.roles ?? null;
+        user.roles = [];
+        UserRoles?.map((roles:any) => {
+          user.roles.push(roles.role_id);
+        });
+      });
 
+      this.clients = this.users.filter((user:any) => user.roles[0] == 6);
+      this.managers = this.users.filter((user:any) => user.roles[0] == 4);
+      this.advisers = this.users.filter((user:any) => user.roles[0] == 3);
+
+    })
   }
 
   getUsers(){
-    let data = this.apiUsers.getAllUsers();
-    this.dataload = true;
-    return data
-  }
+    this.apiUsers.getAllUsers().subscribe(data => {
+      this.users = data;
 
-  mappingUserRoles(data:any){
-    return data.map((user: any) => {
-      let UserRoles = user.roles ?? null;
-      user.roles = [];
-      UserRoles?.map((roles:any) => {
-        user.roles.push(roles.role_id);
+      this.users.map((user: any) => {
+        let UserRoles = user.roles ?? null;
+        user.roles = [];
+        UserRoles?.map((roles:any) => {
+          user.roles.push(roles.role_id);
+        });
       });
+
+      this.clients = this.users.filter((user:any) => user.roles[0] == 6);
+      this.managers = this.users.filter((user:any) => user.roles[0] == 4);
+      this.advisers = this.users.filter((user:any) => user.roles[0] == 3);
+    }, error => {
+      console.log(error)
     });
   }
 
-  // async getUsers(){
-  //   this.users = await this.apiUsers.getAllUsers().toPromise();
-    // console.log(this.users);
-    // this.apiUsers.getAllUsers().toPromise().then(data => {
-    //   this.users = data;
-    //   console.log(data);
-    // }, error => {
-    //   console.log(error)
-    // });
-  //   console.log('ffffff');
-  // }
-
   openClientCard(id: number) {
     this.clientForm.reset();
-    this.client = this.clients.filter(x => x.user_id == id)[0];
-
-    this.clientAdviser = this.advisers.filter((x:any) => x.user_id == this.client.adviser_id)
+    this.client = this.clients.filter(client => client.user_id == id)[0];
     this.cardActive = true;
   }
 
   getRandProfileImage(){
     const rand = Math.floor(Math.random() * 40) + 1;
-    // this.miscAvatar = `/assets/media/stock/600x600/img-${rand}.jpg`;
+    this.miscAvatar = `/assets/media/stock/600x600/img-${rand}.jpg`;
     return `/assets/media/stock/600x600/img-${rand}.jpg`;
   }
 
-  getStatusNameById(id: number){
-    return this.work_statuses.filter((x:any) => x.id == id)[0].label;
-  }
-
   newClient():void{
+    console.log(this.clientForm.value);
+    if(!this.clientForm.valid){
+      return;
+    }
 
+    if(this.miscAvatar){
+      this.clientForm.patchValue({
+        profile_avatar: this.miscAvatar
+      })
+    }
+
+    this.apiUsers.makeNewUser(this.clientForm.value).subscribe(data => {
+      console.log(data);
+      this.getUsers();
+    }, error => {
+      console.log(error)
+    });
   }
 
   loadFile(event: any) {
@@ -416,6 +300,7 @@ export class ClientsComponent implements OnInit {
 
       reader.onload = () => {
         this.miscAvatar = reader.result as string;
+        this.file = reader.result as string;
       };
     }
   }
@@ -471,6 +356,11 @@ export class ClientsComponent implements OnInit {
     } else {
       return null;
     }
+  }
+
+  newUserModalTrigger() {
+    this.clientForm.reset();
+    this.client = null;
   }
 }
 

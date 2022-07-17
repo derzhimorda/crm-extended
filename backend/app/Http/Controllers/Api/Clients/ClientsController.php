@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Clients;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\UserProfiles;
+use App\Models\UsersRole;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,23 +48,31 @@ class ClientsController extends Controller
 
     public function new(Request $request)
     {
-        $new_user = User::create(array('name' => $request->client_name, 'email' => $request->email, 'password' => '123456'));
+        $new_user = User::create(array('name' => $request->name, 'email' => $request->email, 'password' => '123456', 'password_confirmation' => '123456'));
 
-        $user = User::latest()->first();
-        $request->merge(['user_id' => $user->id]);
-        $user_data = $request->all();
+        if($new_user){
+            $user = User::latest()->first();
 
-        $client = UserProfiles::create($user_data);
+            UsersRole::create([
+                'user_id' => $user->id,
+                'role_id' => 6
+            ]);
 
-        if($user){
-            return response()->json([
-                'data' => 'Пользователь сохранен',
-                'user' => $client
-            ], \Symfony\Component\HttpFoundation\Response::HTTP_OK);
-        } else {
-            return response()->json([
-                'error' => 'Ошибка, ошибка создания нового клиента'
-            ], \Symfony\Component\HttpFoundation\Response::HTTP_NO_CONTENT);
+            $request->merge(['user_id' => $user->id]);
+            $user_data = $request->all();
+
+            $client = UserProfiles::create($user_data);
+
+            if($client){
+                return response()->json([
+                    'data' => 'Пользователь сохранен',
+                    'user' => $client
+                ], \Symfony\Component\HttpFoundation\Response::HTTP_OK);
+            } else {
+                return response()->json([
+                    'error' => 'Ошибка, ошибка создания нового клиента'
+                ], \Symfony\Component\HttpFoundation\Response::HTTP_NO_CONTENT);
+            }
         }
     }
 
