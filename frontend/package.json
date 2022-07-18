@@ -43,7 +43,6 @@
     "moment": "^2.29.3",
     "ng-apexcharts": "1.7.0",
     "ng-inline-svg-2": "14.0.1",
-    "ng-pick-datetime-moment": "^1.0.8",
     "ng2-search-filter": "^0.5.1",
     "ngx-clipboard": "15.0.1",
     "nouislider": "15.5.1",
