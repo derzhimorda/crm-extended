@@ -1010,251 +1010,44 @@
               <!--begin::Day-->
               <div id="kt_deals_block" class="" style="max-height:540px; overflow: auto;">
                 <!--begin::Time-->
-                <div class="d-flex flex-stack position-relative">
+                <div class="d-flex flex-stack position-relative mb-8" *ngFor="let deal of clientDeals">
                   <!--begin::Bar-->
-                  <div class="position-absolute h-100 w-4px bg-primary rounded top-0 start-0"></div>
+                  <div *ngIf="deal.deal_statuses_id == 1" class="position-absolute h-100 w-4px bg-primary rounded top-0 start-0"></div>
+                  <div *ngIf="deal.deal_statuses_id == 2" class="position-absolute h-100 w-4px bg-warning-second rounded top-0 start-0"></div>
+                  <div *ngIf="deal.deal_statuses_id == 3" class="position-absolute h-100 w-4px bg-danger rounded top-0 start-0"></div>
+                  <div *ngIf="deal.deal_statuses_id == 4" class="position-absolute h-100 w-4px bg-info rounded top-0 start-0"></div>
+                  <div *ngIf="deal.deal_statuses_id == 5" class="position-absolute h-100 w-4px bg-success-second rounded top-0 start-0"></div>
+                  <div *ngIf="deal.deal_statuses_id == 6" class="position-absolute h-100 w-4px bg-warning rounded top-0 start-0"></div>
+                  <div *ngIf="deal.deal_statuses_id == 7" class="position-absolute h-100 w-4px bg-light-danger rounded top-0 start-0"></div>
+                  <div *ngIf="deal.deal_statuses_id == 8" class="position-absolute h-100 w-4px bg-info-second rounded top-0 start-0"></div>
+                  <div *ngIf="deal.deal_statuses_id == 9" class="position-absolute h-100 w-4px bg-default-gray rounded top-0 start-0"></div>
+                  <div *ngIf="deal.deal_statuses_id == 10" class="position-absolute h-100 w-4px bg-success-super rounded top-0 start-0"></div>
+
                   <!--end::Bar-->
                   <!--begin::Info-->
                   <div class="fw-bold ms-5 text-gray-600">
                     <!--begin::Time-->
                     <div class="fs-5">
-                      <span class="fs-7 text-gray-400 text-uppercase">09 Апрель, 2022</span>
+                      <span class="fs-7 text-gray-400 text-uppercase">{{deal.updated_at | date:'dd.MM.YYYY'}}</span>
                     </div>
                     <!--end::Time-->
                     <!--begin::Title-->
-                    <a routerLink="/deals/1" class="fs-5 fw-bolder text-gray-800 text-hover-primary mb-2">Сделка #235338687</a>
+                    <a routerLink="/deals/{{deal.id}}" class="fs-5 fw-bolder text-gray-800 text-hover-primary mb-2">{{deal.name ? deal.name : 'Сделка #'+ deal.id}}</a>
                     <!--end::Title-->
                     <!--begin::User-->
                     <div class="text-gray-400">
-                      <span class="badge badge-light me-2">Логистика</span>
-                      <span class="text-success">$5600</span>
-                    </div>
-                    <!--end::User-->
-                  </div>
-                  <!--end::Info-->
-                </div>
-                <!--end::Time-->
-                <!--begin::Time-->
-                <div class="d-flex flex-stack position-relative mt-8">
-                  <!--begin::Bar-->
-                  <div class="position-absolute h-100 w-4px bg-warning-second rounded top-0 start-0"></div>
-                  <!--end::Bar-->
-                  <!--begin::Info-->
-                  <div class="fw-bold ms-5 text-gray-600">
-                    <!--begin::Time-->
-                    <div class="fs-5">
-                      <span class="fs-7 text-gray-400 text-uppercase">09 Апрель, 2022</span>
-                    </div>
-                    <!--end::Time-->
-                    <!--begin::Title-->
-                    <a routerLink="/deals/1" class="fs-5 fw-bolder text-gray-800 text-hover-primary mb-2">27 boxesDelivery to Amazon- PHL6</a>
-                    <!--end::Title-->
-                    <!--begin::User-->
-                    <div class="text-gray-400">
-                      <span class="badge badge-light me-2">Логистика</span>
-                      <span class="text-success">$5600</span>
-                    </div>
-                    <!--end::User-->
-                  </div>
-                  <!--end::Info-->
-                </div>
-                <!--end::Time-->
-                <!--begin::Time-->
-                <div class="d-flex flex-stack position-relative mt-8">
-                  <!--begin::Bar-->
-                  <div class="position-absolute h-100 w-4px bg-danger rounded top-0 start-0"></div>
-                  <!--end::Bar-->
-                  <!--begin::Info-->
-                  <div class="fw-bold ms-5 text-gray-600">
-                    <!--begin::Time-->
-                    <div class="fs-5">
-                      <span class="fs-7 text-gray-400 text-uppercase">09 Апрель, 2022</span>
-                    </div>
-                    <!--end::Time-->
-                    <!--begin::Title-->
-                    <a routerLink="/deals/1" class="fs-5 fw-bolder text-gray-800 text-hover-primary mb-2">27 boxesDelivery to Amazon- PHL6
-                      47 boxes-Delivery to Amazon- ICT2
-                      26 boxes-Delivery to Amazon- HSV1</a>
-                    <!--end::Title-->
-                    <!--begin::User-->
-                    <div class="text-gray-400">
-                      <span class="badge badge-light me-2">Склад</span>
-                      <span class="text-success">$5600</span>
-                    </div>
-                    <!--end::User-->
-                  </div>
-                  <!--end::Info-->
-                </div>
-                <!--end::Time-->
-                <!--begin::Time-->
-                <div class="d-flex flex-stack position-relative mt-8">
-                  <!--begin::Bar-->
-                  <div class="position-absolute h-100 w-4px bg-info rounded top-0 start-0"></div>
-                  <!--end::Bar-->
-                  <!--begin::Info-->
-                  <div class="fw-bold ms-5 text-gray-600">
-                    <!--begin::Time-->
-                    <div class="fs-5">
-                      <span class="fs-7 text-gray-400 text-uppercase">09 Апрель, 2022</span>
-                    </div>
-                    <!--end::Time-->
-                    <!--begin::Title-->
-                    <a routerLink="/deals/1" class="fs-5 fw-bolder text-gray-800 text-hover-primary mb-2">Сделка #235338687</a>
-                    <!--end::Title-->
-                    <!--begin::User-->
-                    <div class="text-gray-400">
-                      <span class="badge badge-light me-2">Склад</span>
-                      <span class="text-success">$5600</span>
-                    </div>
-                    <!--end::User-->
-                  </div>
-                  <!--end::Info-->
-                </div>
-                <!--end::Time-->
-                <!--begin::Time-->
-                <div class="d-flex flex-stack position-relative mt-8">
-                  <!--begin::Bar-->
-                  <div class="position-absolute h-100 w-4px bg-success-second rounded top-0 start-0"></div>
-                  <!--end::Bar-->
-                  <!--begin::Info-->
-                  <div class="fw-bold ms-5 text-gray-600">
-                    <!--begin::Time-->
-                    <div class="fs-5">
-                      <span class="fs-7 text-gray-400 text-uppercase">09 Апрель, 2022</span>
-                    </div>
-                    <!--end::Time-->
-                    <!--begin::Title-->
-                    <a routerLink="/deals/1" class="fs-5 fw-bolder text-gray-800 text-hover-primary mb-2">Сделка #235338687</a>
-                    <!--end::Title-->
-                    <!--begin::User-->
-                    <div class="text-gray-400">
-                      <span class="badge badge-light me-2">Склад</span>
-                      <span class="text-success">$5600</span>
-                    </div>
-                    <!--end::User-->
-                  </div>
-                  <!--end::Info-->
-                </div>
-                <!--end::Time-->
-                <!--begin::Time-->
-                <div class="d-flex flex-stack position-relative mt-8">
-                  <!--begin::Bar-->
-                  <div class="position-absolute h-100 w-4px bg-warning rounded top-0 start-0"></div>
-                  <!--end::Bar-->
-                  <!--begin::Info-->
-                  <div class="fw-bold ms-5 text-gray-600">
-                    <!--begin::Time-->
-                    <div class="fs-5">
-                      <span class="fs-7 text-gray-400 text-uppercase">09 Апрель, 2022</span>
-                    </div>
-                    <!--end::Time-->
-                    <!--begin::Title-->
-                    <a routerLink="/deals/1" class="fs-5 fw-bolder text-gray-800 text-hover-primary mb-2">Сделка #235338687</a>
-                    <!--end::Title-->
-                    <!--begin::User-->
-                    <div class="text-gray-400">
-                      <span class="badge badge-light me-2">Склад</span>
-                      <span class="text-success">$5600</span>
-                    </div>
-                    <!--end::User-->
-                  </div>
-                  <!--end::Info-->
-                </div>
-                <!--end::Time-->
-                <!--begin::Time-->
-                <div class="d-flex flex-stack position-relative mt-8">
-                  <!--begin::Bar-->
-                  <div class="position-absolute h-100 w-4px bg-light-danger rounded top-0 start-0"></div>
-                  <!--end::Bar-->
-                  <!--begin::Info-->
-                  <div class="fw-bold ms-5 text-gray-600">
-                    <!--begin::Time-->
-                    <div class="fs-5">
-                      <span class="fs-7 text-gray-400 text-uppercase">09 Апрель, 2022</span>
-                    </div>
-                    <!--end::Time-->
-                    <!--begin::Title-->
-                    <a routerLink="/deals/1" class="fs-5 fw-bolder text-gray-800 text-hover-primary mb-2">Сделка #235338687</a>
-                    <!--end::Title-->
-                    <!--begin::User-->
-                    <div class="text-gray-400">
-                      <span class="badge badge-light me-2">Склад</span>
-                      <span class="text-success">$5600</span>
-                    </div>
-                    <!--end::User-->
-                  </div>
-                  <!--end::Info-->
-                </div>
-                <!--end::Time-->
-                <!--begin::Time-->
-                <div class="d-flex flex-stack position-relative mt-8">
-                  <!--begin::Bar-->
-                  <div class="position-absolute h-100 w-4px bg-info-second rounded top-0 start-0"></div>
-                  <!--end::Bar-->
-                  <!--begin::Info-->
-                  <div class="fw-bold ms-5 text-gray-600">
-                    <!--begin::Time-->
-                    <div class="fs-5">
-                      <span class="fs-7 text-gray-400 text-uppercase">09 Апрель, 2022</span>
-                    </div>
-                    <!--end::Time-->
-                    <!--begin::Title-->
-                    <a routerLink="/deals/1" class="fs-5 fw-bolder text-gray-800 text-hover-primary mb-2">Сделка #235338687</a>
-                    <!--end::Title-->
-                    <!--begin::User-->
-                    <div class="text-gray-400">
-                      <span class="badge badge-light me-2">Склад</span>
-                      <span class="text-success">$5600</span>
-                    </div>
-                    <!--end::User-->
-                  </div>
-                  <!--end::Info-->
-                </div>
-                <!--end::Time-->
-                <!--begin::Time-->
-                <div class="d-flex flex-stack position-relative mt-8">
-                  <!--begin::Bar-->
-                  <div class="position-absolute h-100 w-4px bg-success-super rounded top-0 start-0"></div>
-                  <!--end::Bar-->
-                  <!--begin::Info-->
-                  <div class="fw-bold ms-5 text-gray-600">
-                    <!--begin::Time-->
-                    <div class="fs-5">
-                      <span class="fs-7 text-gray-400 text-uppercase">09 Апрель, 2022</span>
-                    </div>
-                    <!--end::Time-->
-                    <!--begin::Title-->
-                    <a routerLink="/deals/1" class="fs-5 fw-bolder text-gray-800 text-hover-primary mb-2">Сделка #235338687</a>
-                    <!--end::Title-->
-                    <!--begin::User-->
-                    <div class="text-gray-400">
-                      <span class="badge badge-light me-2">Склад</span>
-                      <span class="text-success">$5600</span>
-                    </div>
-                    <!--end::User-->
-                  </div>
-                  <!--end::Info-->
-                </div>
-                <!--end::Time-->
-                <!--begin::Time-->
-                <div class="d-flex flex-stack position-relative mt-8">
-                  <!--begin::Bar-->
-                  <div class="position-absolute h-100 w-4px bg-default-gray rounded top-0 start-0"></div>
-                  <!--end::Bar-->
-                  <!--begin::Info-->
-                  <div class="fw-bold ms-5 text-gray-600">
-                    <!--begin::Time-->
-                    <div class="fs-5">
-                      <span class="fs-7 text-gray-400 text-uppercase">09 Апрель, 2022</span>
-                    </div>
-                    <!--end::Time-->
-                    <!--begin::Title-->
-                    <a routerLink="/deals/1" class="fs-5 fw-bolder text-gray-800 text-hover-primary mb-2">Сделка #235338687</a>
-                    <!--end::Title-->
-                    <!--begin::User-->
-                    <div class="text-gray-400">
-                      <span class="badge badge-light me-2">Склад</span>
-                      <span class="text-success">$5600</span>
+                      <span class="badge badge-light me-2">{{getClientOption('deal_types', deal.deal_types_id)}}</span>
+                      <span *ngIf="deal.deal_statuses_id == 1" class="badge badge-primary me-2">{{getClientOption('deal_statuses', deal.deal_statuses_id)}}</span>
+                      <span *ngIf="deal.deal_statuses_id == 2" class="badge badge-warning-second me-2">{{getClientOption('deal_statuses', deal.deal_statuses_id)}}</span>
+                      <span *ngIf="deal.deal_statuses_id == 3" class="badge badge-danger me-2">{{getClientOption('deal_statuses', deal.deal_statuses_id)}}</span>
+                      <span *ngIf="deal.deal_statuses_id == 4" class="badge badge-info me-2">{{getClientOption('deal_statuses', deal.deal_statuses_id)}}</span>
+                      <span *ngIf="deal.deal_statuses_id == 5" class="badge badge-success-second me-2">{{getClientOption('deal_statuses', deal.deal_statuses_id)}}</span>
+                      <span *ngIf="deal.deal_statuses_id == 6" class="badge badge-warning me-2">{{getClientOption('deal_statuses', deal.deal_statuses_id)}}</span>
+                      <span *ngIf="deal.deal_statuses_id == 7" class="badge badge-light-danger me-2">{{getClientOption('deal_statuses', deal.deal_statuses_id)}}</span>
+                      <span *ngIf="deal.deal_statuses_id == 8" class="badge badge-info-second me-2">{{getClientOption('deal_statuses', deal.deal_statuses_id)}}</span>
+                      <span *ngIf="deal.deal_statuses_id == 9" class="badge badge-default-gray me-2">{{getClientOption('deal_statuses', deal.deal_statuses_id)}}</span>
+                      <span *ngIf="deal.deal_statuses_id == 10" class="badge badge-success-super me-2">{{getClientOption('deal_statuses', deal.deal_statuses_id)}}</span>
+                      <span class="text-success">{{deal.budget}}</span>
                     </div>
                     <!--end::User-->
                   </div>
@@ -1263,7 +1056,6 @@
                 <!--end::Time-->
               </div>
               <!--end::Day-->
-
           </div>
           <!--end:::Tab pane-->
           <!--begin:::Tab pane-->

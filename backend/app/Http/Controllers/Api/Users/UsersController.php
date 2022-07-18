@@ -18,12 +18,7 @@ class UsersController extends Controller
     {
         return User::with(['roles', 'deals'])
             ->leftJoin('user_profiles', 'users.id', '=', 'user_profiles.user_id')
-            ->get(['user_profiles.*', 'users.*']);
-
-        Log::info(print_r(User::with(['roles', 'deals'])
-            ->leftJoin('user_profiles', 'users.id', '=', 'user_profiles.user_id')
-            ->get(['user_profiles.*', 'users.*'])));
-
+            ->get(['user_profiles.*', 'users.id']);
     }
 
     public function getUsers()

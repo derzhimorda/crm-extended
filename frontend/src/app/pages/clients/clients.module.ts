@@ -14,23 +14,23 @@ import {Ng2SearchPipeModule} from "ng2-search-filter";
 
 @NgModule({
   declarations: [ClientsComponent],
-  imports: [
-    CommonModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: ClientsComponent,
-        resolve: {users: UsersResolver}
-      },
-    ]),
-    WidgetsModule,
-    TranslationModule,
-    NgbDropdownModule,
-    ReactiveFormsModule,
-    NgbTypeaheadModule,
-    NgSelectModule,
-    FormsModule,
-    Ng2SearchPipeModule
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild([
+            {
+                path: '',
+                component: ClientsComponent,
+                resolve: {users: UsersResolver}
+            },
+        ]),
+        WidgetsModule,
+        TranslationModule,
+        NgbDropdownModule,
+        ReactiveFormsModule,
+        NgbTypeaheadModule,
+        NgSelectModule,
+        FormsModule,
+        Ng2SearchPipeModule
+    ]
 })
 export class ClientsModule { }

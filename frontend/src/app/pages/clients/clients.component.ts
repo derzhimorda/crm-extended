@@ -4,13 +4,15 @@ import {IContent, ILayout} from "../../_metronic/layout/core/default-layout.conf
 import {TranslationService} from "../../modules/i18n";
 import {NgbDropdownConfig} from "@ng-bootstrap/ng-bootstrap";
 import {FormControl, FormGroup} from "@angular/forms";
-import {find, Observable, startWith, Subject, tap} from "rxjs";
+import {Subject} from "rxjs";
 import {NgSelectComponent} from "@ng-select/ng-select";
 import {UsersService} from "../../services/users.service";
 import {ActivatedRoute, Route, Router} from "@angular/router";
 import {ISettings} from "../../_metronic/layout/core/default-settings.config";
 import {SettingsService} from "../../_metronic/layout/core/settings.service";
 import {map} from "rxjs/operators";
+import {DealsService} from "../../services/deals.service";
+
 
 
 @Component({
@@ -51,7 +53,6 @@ export class ClientsComponent implements OnInit {
   clients$: Subject<Client[]>;
   page = 1;
   pageSize = 4;
-  // collectionSize = this.CLIENTS.length;
   file: string;
   dealForm = new FormGroup({
     id: new FormControl(),
@@ -202,11 +203,11 @@ export class ClientsComponent implements OnInit {
   term = '';
   searchTerm = '';
   clientId: any = null;
+  clientDeals: any;
 
   @ViewChild('filterClients') filterClientRef: NgSelectComponent
   @ViewChild('closeModal') closeModal: ElementRef;
   @ViewChild('closeRemoveModal') closeRemoveModal: ElementRef;
-
 
 
   constructor(private layout: LayoutService,
@@ -214,7 +215,7 @@ export class ClientsComponent implements OnInit {
               private apiUsers: UsersService,
               private route: ActivatedRoute,
               private settings: SettingsService,
-              private router: Router,
+              private dealApi: DealsService,
               private cRef: ChangeDetectorRef)
   {
     config.placement = 'bottom-end';
@@ -229,27 +230,29 @@ export class ClientsComponent implements OnInit {
 
     this.settingsData = this.settings.getSettings();
 
-    this.route.data.subscribe(({users}) => {
-      this.users = users;
+    // this.route.data.subscribe(({users}) => {
+    //   this.users = users;
+    //
+    //   this.users.map((user: any) => {
+    //     let UserRoles = user.roles ?? null;
+    //     user.roles = [];
+    //     UserRoles?.map((roles:any) => {
+    //       user.roles.push(roles.role_id);
+    //     });
+    //   });
+    //
+    //   this.clients = this.users.filter((user:any) => user.roles[0] == 6);
+    //   this.managers = this.users.filter((user:any) => user.roles[0] == 4);
+    //   this.advisers = this.users.filter((user:any) => user.roles[0] == 3);
+    // })
 
-      this.users.map((user: any) => {
-        let UserRoles = user.roles ?? null;
-        user.roles = [];
-        UserRoles?.map((roles:any) => {
-          user.roles.push(roles.role_id);
-        });
-      });
-
-      this.clients = this.users.filter((user:any) => user.roles[0] == 6);
-      this.managers = this.users.filter((user:any) => user.roles[0] == 4);
-      this.advisers = this.users.filter((user:any) => user.roles[0] == 3);
-    })
+    this.getUsers();
   }
 
   getUsers(){
     this.apiUsers.getAllUsers().subscribe(data => {
-      this.users = [...data];
-      this.cRef.detectChanges();
+      this.users = data;
+      // this.cRef.detectChanges();
 
       this.users.map((user: any) => {
         let UserRoles = user.roles ?? null;
@@ -268,9 +271,20 @@ export class ClientsComponent implements OnInit {
     });
   }
 
+  getClientDeals(client_id:number){
+    this.dealApi.getClientDeals(client_id).subscribe(data => {
+     this.clientDeals = data;
+    }, error => {
+      console.log(error)
+    });
+  }
+
   openClientCard(id: number) {
     this.clientForm.reset();
+    // this.clientDeals = [];
     this.client = this.clients.filter(client => client.user_id == id)[0];
+
+    this.getClientDeals(this.client.user_id);
     this.cardActive = true;
   }
 

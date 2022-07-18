@@ -38,6 +38,12 @@ export class DealsService {
     });
   }
 
+  getClientDeals(client_id:number){
+    return this.http.get(`${environment.apiUrl}/deals/client_deals/${client_id}`, {
+      headers: this.httpHeaders,
+    });
+  }
+
   newDeal(data:any){
     return this.http.post(`${environment.apiUrl}/deals/new`, data, {
       headers: this.httpHeaders,
