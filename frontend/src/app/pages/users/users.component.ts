@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {IContent, ILayout} from "../../_metronic/layout/core/default-layout.config";
 import {LayoutService} from "../../_metronic/layout";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {UsersModule} from "./users.module";
 import {UserType} from "../../modules/auth";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -21,12 +21,12 @@ export class UsersComponent implements OnInit {
   content: IContent;
   roles: any[];
   users: any[];
-  userForm = new FormGroup({
-    name: new FormControl([], [Validators.required]),
-    email: new FormControl([], [Validators.required, Validators.email]),
-    password: new FormControl(),
-    mobile: new FormControl(),
-    role: new FormControl([Validators.required])
+  userForm = new UntypedFormGroup({
+    name: new UntypedFormControl([], [Validators.required]),
+    email: new UntypedFormControl([], [Validators.required, Validators.email]),
+    password: new UntypedFormControl(),
+    mobile: new UntypedFormControl(),
+    role: new UntypedFormControl([Validators.required])
   });
   settingsData: ISettings;
   sendDataChecking: boolean = false;

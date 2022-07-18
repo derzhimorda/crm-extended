@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable, Subscription} from "rxjs";
 import {AuthService, UserType} from "../../../../modules/auth";
-import {FormGroup} from "@angular/forms";
+import {UntypedFormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-user-settings',
@@ -11,7 +11,7 @@ import {FormGroup} from "@angular/forms";
 export class UserSettingsComponent implements OnInit {
   user$: Observable<UserType>;
   private unsubscribe: Subscription[] = [];
-  userSettingForm = new FormGroup({
+  userSettingForm = new UntypedFormGroup({
 
   });
 

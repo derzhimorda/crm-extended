@@ -3,7 +3,7 @@ import {LayoutService} from "../../_metronic/layout";
 import {IContent, ILayout} from "../../_metronic/layout/core/default-layout.config";
 import {TranslationService} from "../../modules/i18n";
 import {NgbDropdownConfig} from "@ng-bootstrap/ng-bootstrap";
-import {FormControl, FormGroup} from "@angular/forms";
+import {UntypedFormControl, UntypedFormGroup} from "@angular/forms";
 import {Subject} from "rxjs";
 import {NgSelectComponent} from "@ng-select/ng-select";
 import {UsersService} from "../../services/users.service";
@@ -24,50 +24,50 @@ import {DealsService} from "../../services/deals.service";
 export class ClientsComponent implements OnInit {
   layoutPage: ILayout;
   content: IContent;
-  clientForm = new FormGroup({
+  clientForm = new UntypedFormGroup({
     // used_id: new FormControl(),
-    name: new FormControl(),
-    mobile: new FormControl(),
-    add_mobile: new FormControl(),
-    email: new FormControl(),
-    ySell: new FormControl(),
-    company: new FormControl(),
-    adviser_id: new FormControl(),
-    manager_id: new FormControl(),
-    work_status_id: new FormControl(),
-    fb_status_id: new FormControl(),
-    ref_option_id: new FormControl(),
-    delivery_id: new FormControl(),
-    fb_link: new FormControl(),
-    tg_link: new FormControl(),
-    vb_link: new FormControl(),
-    profile_avatar: new FormControl(),
-    google_link: new FormControl(),
-    partner_fb: new FormControl(),
-    position: new FormControl()
+    name: new UntypedFormControl(),
+    mobile: new UntypedFormControl(),
+    add_mobile: new UntypedFormControl(),
+    email: new UntypedFormControl(),
+    ySell: new UntypedFormControl(),
+    company: new UntypedFormControl(),
+    adviser_id: new UntypedFormControl(),
+    manager_id: new UntypedFormControl(),
+    work_status_id: new UntypedFormControl(),
+    fb_status_id: new UntypedFormControl(),
+    ref_option_id: new UntypedFormControl(),
+    delivery_id: new UntypedFormControl(),
+    fb_link: new UntypedFormControl(),
+    tg_link: new UntypedFormControl(),
+    vb_link: new UntypedFormControl(),
+    profile_avatar: new UntypedFormControl(),
+    google_link: new UntypedFormControl(),
+    partner_fb: new UntypedFormControl(),
+    position: new UntypedFormControl()
   });
   client: any;
   miscAvatar: string;
   cardActive: boolean = false;
-  filter = new FormControl('');
+  filter = new UntypedFormControl('');
   clients$: Subject<Client[]>;
   page = 1;
   pageSize = 4;
   file: string;
-  dealForm = new FormGroup({
-    id: new FormControl(),
-    name: new FormControl(),
-    budget: new FormControl(),
-    deal_statuses_id: new FormControl(),
-    manager_id: new FormControl(),
-    adviser_id: new FormControl(),
-    delivery_ways_id: new FormControl(),
-    delivery_types_id: new FormControl(),
-    pickup_types_id: new FormControl(),
-    pay_types_id: new FormControl(),
-    inspector: new FormControl(),
-    deal_types_id: new FormControl(),
-    client_id: new FormControl()
+  dealForm = new UntypedFormGroup({
+    id: new UntypedFormControl(),
+    name: new UntypedFormControl(),
+    budget: new UntypedFormControl(),
+    deal_statuses_id: new UntypedFormControl(),
+    manager_id: new UntypedFormControl(),
+    adviser_id: new UntypedFormControl(),
+    delivery_ways_id: new UntypedFormControl(),
+    delivery_types_id: new UntypedFormControl(),
+    pickup_types_id: new UntypedFormControl(),
+    pay_types_id: new UntypedFormControl(),
+    inspector: new UntypedFormControl(),
+    deal_types_id: new UntypedFormControl(),
+    client_id: new UntypedFormControl()
   });
   deal_statuses = [
     {
@@ -191,7 +191,7 @@ export class ClientsComponent implements OnInit {
       label: '--'
     },
   ];
-  filterStatus = new FormControl('');
+  filterStatus = new UntypedFormControl('');
   settingsData: ISettings;
   users: any;
   advisers: any;

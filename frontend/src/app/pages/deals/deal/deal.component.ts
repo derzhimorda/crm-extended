@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {IContent, ILayout} from "../../../_metronic/layout/core/default-layout.config";
 import {LayoutService} from "../../../_metronic/layout";
-import {FormControl, FormGroup} from "@angular/forms";
+import {UntypedFormControl, UntypedFormGroup} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DealsService} from "../../../services/deals.service";
 import {Deal} from "../deals.component";
@@ -19,49 +19,49 @@ export class DealComponent implements OnInit {
   layoutPage: ILayout;
   content: IContent;
   DEAL: Deal;
-  dealForm = new FormGroup({
-    id: new FormControl(),
-    name: new FormControl(),
-    deal_types_id: new FormControl(),
-    deal_statuses_id: new FormControl(),
-    manager_id: new FormControl(),
-    adviser_id: new FormControl(),
-    delivery_ways_id: new FormControl(),
-    delivery_types_id: new FormControl(),
-    pickup_types_id: new FormControl(),
-    pay_types_id: new FormControl(),
-    client_id: new FormControl(),
-    inspector: new FormControl(),
-    budget: new FormControl(),
-    created_at: new FormControl(),
-    updated_at: new FormControl(),
+  dealForm = new UntypedFormGroup({
+    id: new UntypedFormControl(),
+    name: new UntypedFormControl(),
+    deal_types_id: new UntypedFormControl(),
+    deal_statuses_id: new UntypedFormControl(),
+    manager_id: new UntypedFormControl(),
+    adviser_id: new UntypedFormControl(),
+    delivery_ways_id: new UntypedFormControl(),
+    delivery_types_id: new UntypedFormControl(),
+    pickup_types_id: new UntypedFormControl(),
+    pay_types_id: new UntypedFormControl(),
+    client_id: new UntypedFormControl(),
+    inspector: new UntypedFormControl(),
+    budget: new UntypedFormControl(),
+    created_at: new UntypedFormControl(),
+    updated_at: new UntypedFormControl(),
   });
-  jobForm = new FormGroup({
-    id: new FormControl(),
-    deal_id: new FormControl(),
-    user_id: new FormControl(),
-    date: new FormControl(),
-    time: new FormControl(),
-    message: new FormControl(),
-    job_type_id: new FormControl(),
-    result_message: new FormControl(),
-    end_time: new FormControl(),
-    status: new FormControl()
+  jobForm = new UntypedFormGroup({
+    id: new UntypedFormControl(),
+    deal_id: new UntypedFormControl(),
+    user_id: new UntypedFormControl(),
+    date: new UntypedFormControl(),
+    time: new UntypedFormControl(),
+    message: new UntypedFormControl(),
+    job_type_id: new UntypedFormControl(),
+    result_message: new UntypedFormControl(),
+    end_time: new UntypedFormControl(),
+    status: new UntypedFormControl()
   });
-  invoiceForm = new FormGroup({
+  invoiceForm = new UntypedFormGroup({
   });
-  tasksForm = new FormGroup({
-    id: new FormControl(),
-    type: new FormControl(),
-    description: new FormControl(),
-    changed_option: new FormControl(),
-    changed_from_id: new FormControl(),
-    changed_to_id: new FormControl(),
-    deal_id: new FormControl(),
-    client_id: new FormControl(),
-    manager_id: new FormControl()
+  tasksForm = new UntypedFormGroup({
+    id: new UntypedFormControl(),
+    type: new UntypedFormControl(),
+    description: new UntypedFormControl(),
+    changed_option: new UntypedFormControl(),
+    changed_from_id: new UntypedFormControl(),
+    changed_to_id: new UntypedFormControl(),
+    deal_id: new UntypedFormControl(),
+    client_id: new UntypedFormControl(),
+    manager_id: new UntypedFormControl()
   });
-  textMessage = new FormControl();
+  textMessage = new UntypedFormControl();
   dealId: any;
   clientDeals: any;
   clientJobs: any;

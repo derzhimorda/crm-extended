@@ -4,7 +4,7 @@ import {AuthService, UserType} from "../../../../modules/auth";
 import {Deal} from "../../../deals/deals.component";
 import {Router} from "@angular/router";
 import {map} from "rxjs/operators";
-import {FormControl} from "@angular/forms";
+import {UntypedFormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-user-deals',
@@ -156,8 +156,8 @@ export class UserDealsComponent implements OnInit {
       label: 'Анастасия'
     },
   ];
-  filter = new FormControl('');
-  filterStatus = new FormControl('');
+  filter = new UntypedFormControl('');
+  filterStatus = new UntypedFormControl('');
 
   constructor( private auth: AuthService, private router: Router) {
     this.deals$ = this.filter.valueChanges.pipe(

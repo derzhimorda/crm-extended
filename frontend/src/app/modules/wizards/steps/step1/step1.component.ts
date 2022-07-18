@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ICreateAccount } from '../../create-account.helper';
 
@@ -12,11 +12,11 @@ export class Step1Component implements OnInit, OnDestroy {
     part: Partial<ICreateAccount>,
     isFormValid: boolean
   ) => void;
-  form: FormGroup;
+  form: UntypedFormGroup;
   @Input() defaultValues: Partial<ICreateAccount>;
   private unsubscribe: Subscription[] = [];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: UntypedFormBuilder) {}
 
   ngOnInit() {
     this.initForm();

@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {LayoutService} from "../../_metronic/layout";
 import {IContent, ILayout} from "../../_metronic/layout/core/default-layout.config";
-import {FormControl, FormGroup, Validator, Validators} from "@angular/forms";
+import {UntypedFormControl, UntypedFormGroup, Validator, Validators} from "@angular/forms";
 import {Observable, startWith} from "rxjs";
 import {map} from "rxjs/operators";
 import {NgSelectComponent} from "@ng-select/ng-select";
@@ -26,24 +26,24 @@ export class DealsComponent implements OnInit {
   USERS: UserType[];
   MANAGERS: UserType[];
   ADVISERS: UserType[];
-  dealForm = new FormGroup({
-    name: new FormControl(),
-    deal_types_id: new FormControl([], [
+  dealForm = new UntypedFormGroup({
+    name: new UntypedFormControl(),
+    deal_types_id: new UntypedFormControl([], [
       Validators.required
     ]),
-    deal_statuses_id: new FormControl(),
-    manager_id: new FormControl(),
-    adviser_id: new FormControl(),
-    delivery_ways_id: new FormControl(),
-    delivery_types_id: new FormControl(),
-    pickup_types_id: new FormControl(),
-    pay_types_id: new FormControl(),
-    client_id: new FormControl(),
-    inspector: new FormControl(),
-    budget: new FormControl(),
+    deal_statuses_id: new UntypedFormControl(),
+    manager_id: new UntypedFormControl(),
+    adviser_id: new UntypedFormControl(),
+    delivery_ways_id: new UntypedFormControl(),
+    delivery_types_id: new UntypedFormControl(),
+    pickup_types_id: new UntypedFormControl(),
+    pay_types_id: new UntypedFormControl(),
+    client_id: new UntypedFormControl(),
+    inspector: new UntypedFormControl(),
+    budget: new UntypedFormControl(),
   })
-  filter = new FormControl('');
-  filterStatus = new FormControl('');
+  filter = new UntypedFormControl('');
+  filterStatus = new UntypedFormControl('');
   deals$: Observable<Deal[]>;
   deal_statuses = [
     {
