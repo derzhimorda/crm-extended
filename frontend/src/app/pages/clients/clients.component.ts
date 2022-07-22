@@ -12,6 +12,7 @@ import {ISettings} from "../../_metronic/layout/core/default-settings.config";
 import {SettingsService} from "../../_metronic/layout/core/settings.service";
 import {map} from "rxjs/operators";
 import {DealsService} from "../../services/deals.service";
+import {Table} from "primeng/table";
 
 
 
@@ -69,128 +70,6 @@ export class ClientsComponent implements OnInit {
     deal_types_id: new UntypedFormControl(),
     client_id: new UntypedFormControl()
   });
-  deal_statuses = [
-    {
-      id: 1,
-      label: 'Запрос данных'
-    },
-    {
-      id: 2,
-      label: 'Просчет логиста'
-    },
-    {
-      id: 3,
-      label: 'Согласование деталей'
-    },
-    {
-      id: 4,
-      label: 'Pickup'
-    },
-    {
-      id: 5,
-      label: 'Выставлен счет'
-    },
-    {
-      id: 6,
-      label: 'Оплачено клиентом'
-    },
-    {
-      id: 7,
-      label: 'Оплата агенту'
-    },
-    {
-      id: 8,
-      label: 'Процент не выплачен'
-    },
-    {
-      id: 9,
-      label: 'Успешно реализована'
-    },
-    {
-      id: 10,
-      label: 'Закрыта'
-    },
-  ]
-  delivery_ways = [
-    {
-      id: 1,
-      label: 'Украина'
-    },
-    {
-      id: 2,
-      label: 'Китай'
-    },
-    {
-      id: 3,
-      label: 'Другое'
-    },
-    {
-      id: 4,
-      label: '--'
-    },
-  ];
-  delivery_types = [
-    {
-      id: 1,
-      label: 'авиа экспресс'
-    },
-    {
-      id: 2,
-      label: 'авиа фрахт'
-    },
-    {
-      id: 3,
-      label: 'море'
-    },
-    {
-      id: 4,
-      label: 'море + авиа'
-    },
-    {
-      id: 5,
-      label: '--'
-    },
-  ];
-  pickup_types = [
-    {
-      id: 1,
-      label: 'EXW мы'
-    },
-    {
-      id: 2,
-      label: 'FOB производ.'
-    },
-    {
-      id: 3,
-      label: '--'
-    },
-  ];
-  pay_types = [
-    {
-      id: 1,
-      label: 'Payoneer'
-    },
-    {
-      id: 2,
-      label: 'Euro Bank'
-    },
-    {
-      id: 3,
-      label: 'Cash'
-    },
-    {
-      id: 4,
-      label: 'USA Bank'
-    },
-    {
-      id: 5,
-      label: 'Приват 24'
-    },
-    {
-      id: 6,
-      label: '--'
-    },
-  ];
   filterStatus = new UntypedFormControl('');
   settingsData: ISettings;
   users: any;
@@ -204,6 +83,7 @@ export class ClientsComponent implements OnInit {
   searchTerm = '';
   clientId: any = null;
   clientDeals: any;
+  loading: boolean = true;
 
   @ViewChild('filterClients') filterClientRef: NgSelectComponent
   @ViewChild('closeModal') closeModal: ElementRef;
@@ -250,21 +130,8 @@ export class ClientsComponent implements OnInit {
   }
 
   getUsers(){
-    this.apiUsers.getAllUsers().subscribe(data => {
-      this.users = data;
-      // this.cRef.detectChanges();
-
-      this.users.map((user: any) => {
-        let UserRoles = user.roles ?? null;
-        user.roles = [];
-        UserRoles?.map((roles:any) => {
-          user.roles.push(roles.role_id);
-        });
-      });
-
-      this.clients = this.users.filter((user:any) => user.roles[0] == 6);
-      this.managers = this.users.filter((user:any) => user.roles[0] == 4);
-      this.advisers = this.users.filter((user:any) => user.roles[0] == 3);
+    this.apiUsers.getAllClients().toPromise().then(data => {
+      this.clients = data;
       console.log(this.clients)
     }, error => {
       console.log(error)
@@ -368,20 +235,6 @@ export class ClientsComponent implements OnInit {
     }
   }
 
-  search(event:any) {
-    if(event == ''){
-      return this.clients;
-    }
-    let clients = this.clients;
-
-    this.clients = clients.filter(client => {
-      return client.name.includes(event);
-    })
-
-
-    console.log(this.clients);
-  }
-
   getManagerName(manager_id:number | undefined){
     if(manager_id !== undefined) {
       let filterUsers = this.managers.filter((manager: any) => manager.id == manager_id);
@@ -409,6 +262,10 @@ export class ClientsComponent implements OnInit {
   newUserModalTrigger() {
     this.clientForm.reset();
     this.client = null;
+  }
+
+  clear(table: Table) {
+    table.clear();
   }
 }
 

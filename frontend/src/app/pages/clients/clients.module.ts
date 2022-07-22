@@ -10,27 +10,28 @@ import {NgSelectModule} from "@ng-select/ng-select";
 import {ClientsResolver} from "./clients.resolver";
 import {UsersResolver} from "../users/users.resolver";
 import {Ng2SearchPipeModule} from "ng2-search-filter";
+import {TableModule} from "primeng/table";
 
 
 @NgModule({
   declarations: [ClientsComponent],
-    imports: [
-        CommonModule,
-        RouterModule.forChild([
-            {
-                path: '',
-                component: ClientsComponent,
-                resolve: {users: UsersResolver}
-            },
-        ]),
-        WidgetsModule,
-        TranslationModule,
-        NgbDropdownModule,
-        ReactiveFormsModule,
-        NgbTypeaheadModule,
-        NgSelectModule,
-        FormsModule,
-        Ng2SearchPipeModule
-    ]
+  imports: [
+    CommonModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: ClientsComponent
+      },
+    ]),
+    WidgetsModule,
+    TranslationModule,
+    NgbDropdownModule,
+    ReactiveFormsModule,
+    NgbTypeaheadModule,
+    NgSelectModule,
+    FormsModule,
+    Ng2SearchPipeModule,
+    TableModule
+  ]
 })
 export class ClientsModule { }

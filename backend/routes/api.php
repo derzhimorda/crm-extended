@@ -14,6 +14,7 @@ Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
 Route::post('send-password-reset-link', [\App\Http\Controllers\ResetPasswordController::class, 'sendEmail']);
 Route::post('reset-password', [\App\Http\Controllers\ChangePasswordController::class, 'process']);
 
+
 //User routs
 Route::group([
     'middleware' => ['auth:sanctum'],
